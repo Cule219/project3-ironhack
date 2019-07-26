@@ -8,7 +8,8 @@ import Protected from "./components/Protected";
 import Home from "./containers/Home";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
-import Dashboard from './containers/Dashboard';
+import Dashboard from "./containers/Dashboard";
+import CardsList from "./components/CardsList";
 
 class App extends React.Component {
   // state = {
@@ -45,6 +46,7 @@ class App extends React.Component {
             component={Login}
           />
         </Switch> */}
+        <CardsList />
       </div>
     );
   }
