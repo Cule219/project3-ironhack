@@ -73,7 +73,9 @@ app.use(session({
 }))
 app.use(flash());
 require('./passport')(app);
-    
+
+const commentRoutes = require('./routes/comments');
+app.use('/api/comments', commentRoutes);
 
 const index = require('./routes/index');
 app.use('/', index);
