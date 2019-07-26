@@ -10,9 +10,9 @@ const noteSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  lesson: {
+  day: {
     type: Schema.Types.ObjectId,
-    ref: "Lesson"
+    ref: "Day"
   }
 }, 
 {

@@ -15,7 +15,7 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/final-project-ironhack', {useNewUrlParser: true})
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/final-project-ironhack', {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
