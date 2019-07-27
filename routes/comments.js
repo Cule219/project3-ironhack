@@ -25,7 +25,7 @@ router.post("/", (req, res)=>{
 });
 
 router.delete("/:commentId", (req, res)=>{
-  Comment.deleteOne(req.params.commentId).then(data => {
+  Comment.findByIdAndDelete(req.params.commentId).then(data => {
     res.json({ message: `Project with id ${id} was successfully deleted` });
   }).catch(err => res.json(err));
 });

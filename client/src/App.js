@@ -12,9 +12,9 @@ import Dashboard from "./containers/Dashboard";
 import CardsList from "./components/CardsList";
 
 class App extends React.Component {
-  // state = {
-  //   user: this.props.user
-  // };
+  state = {
+    user: this.props.user
+  };
 
   setUser = user => {
     this.setState({
@@ -25,7 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <Navbar setUser={this.setUser} user={this.state.user} />
+        <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path='/dashboard' component={Dashboard} />
@@ -45,7 +45,7 @@ class App extends React.Component {
             user={!this.state.user}
             component={Login}
           />
-        </Switch> */}
+        </Switch>
         <CardsList />
       </div>
     );

@@ -11,7 +11,7 @@ const lists = () =>
         let week = parseInt(name.split("Week ")[1]) || null;
         let day =
           parseInt(name.split("Day ")[name.split("Day ").length - 1]) || null;
-        console.log({ name, week, day, id: list.id });
+        // console.log({ name, week, day, id: list.id });
         return { name, week, day, id: list.id };
       });
     })

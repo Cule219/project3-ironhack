@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-const noteSchema = Schema({
-  content: {
-    type: String,
-    min: 8
+const cardSchema = Schema({
+  description: String,
+  urls: [String],
+  completionStatus: {
+    type: Boolean,
+    default: false
   },
+  technology: [String],
+  TrelloId: String,
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
@@ -14,10 +18,7 @@ const noteSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: "Day"
   },
-  card: {
-    type: Schema.Types.ObjectId,
-    ref: "Card"
-  }
+  tags: [String]
 }, 
 {
   timestamps: {
@@ -26,4 +27,4 @@ const noteSchema = Schema({
   }
 });
 
-module.exports = mongoose.model('Note', noteSchema);
+module.exports = mongoose.model('Card', cardSchema);

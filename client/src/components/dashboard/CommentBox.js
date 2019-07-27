@@ -20,6 +20,13 @@ export default class CommentBox extends Component {
     });
   }
 
+  deleteComment = async e => {
+    await axios.delete(`/api/comments/${e}`).then(response => {
+      console.log(response);
+      this.getComments();
+    });
+  }
+
   componentDidMount() {
     this.getComments();
   }
@@ -27,12 +34,12 @@ export default class CommentBox extends Component {
   postComment = event => {
     // event.targ
   }
-
+  
   render() {
     return (
       <div>
         {this.state.comments.map(x => {
-          return <Comment key={x._id} data={x}/>
+          return <Comment key={x._id} deleteClickHandler={this.deleteComment.bind(this, x._id)} data={x}/>
         })}
       </div>
     )

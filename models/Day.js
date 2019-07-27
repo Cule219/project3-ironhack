@@ -1,17 +1,25 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
-const lessonSchema = Schema({
-  content: {
-    type: Object,
-  },
+const daySchema = Schema({
+  cards: [{
+    type: Schema.Types.ObjectId,
+    ref: "Card"
+  }],
+  githubRepo: [],
   module: {
     type: String
   },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  comments: [{
+    type: Schema.Types.ObjectId,
+    ref: "Comment"
+  }],
+  module: String,
+  notes: String
 }, 
 {
   timestamps: {
@@ -20,4 +28,4 @@ const lessonSchema = Schema({
   }
 });
 
-module.exports = mongoose.model('Lesson', lessonSchema);
+module.exports = mongoose.model('Day', daySchema);
