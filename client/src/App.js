@@ -1,15 +1,15 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+// import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
-import Navbar from "./components/Navbar";
-import Protected from "./components/Protected";
-import Home from "./containers/Home";
-import Signup from "./containers/Signup";
-import Login from "./containers/Login";
-import Dashboard from "./containers/Dashboard";
-import CardsList from "./components/CardsList";
+// import Navbar from "./components/Navbar";
+// import Protected from "./components/Protected";
+// import Home from "./containers/Home";
+// import Signup from "./containers/Signup";
+// import Login from "./containers/Login";
+// import Dashboard from "./containers/Dashboard";
+import LessonsList from "./components/coursework/LessonsList";
 
 class App extends React.Component {
   // state = {
@@ -46,7 +46,7 @@ class App extends React.Component {
             component={Login}
           />
         </Switch> */}
-        <CardsList />
+        <LessonsList />
       </div>
     );
   }

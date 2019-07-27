@@ -1,5 +1,15 @@
 import axios from "axios";
 
+const technologies = [
+  "REACT",
+  "EXPRESS",
+  "JS",
+  "CSS",
+  "HTML",
+  "MONGODB",
+  "NODE"
+];
+
 const lists = () =>
   axios
     .get(
@@ -11,7 +21,6 @@ const lists = () =>
         let week = parseInt(name.split("Week ")[1]) || null;
         let day =
           parseInt(name.split("Day ")[name.split("Day ").length - 1]) || null;
-        console.log({ name, week, day, id: list.id });
         return { name, week, day, id: list.id };
       });
     })
@@ -31,12 +40,28 @@ const getCards = () =>
 
 function populateCard(card) {
   let name = card.name;
+  let labels = card.labels.map(el => ({ name: el.name, color: el.color }));
   let category =
     name.indexOf("|") !== -1 ? name.substr(0, name.indexOf("|")).trim() : null;
+  let tech = null;
+  if (category) {
+    if (technologies.indexOf(category.toUpperCase()) !== -1) {
+      tech = category;
+    } else {
+      labels.push({ name: category, color: "#874bc4" });
+    }
+  }
   let desc = card.desc;
-  let labels = card.labels.map(el => el.name);
+
   return getUrlsFromCard(card.id).then(urls => {
-    return { name, category, desc, labels, id: card.id, attachments: urls };
+    return {
+      name,
+      desc,
+      labels,
+      id: card.id,
+      attachments: urls,
+      technology: tech
+    };
   });
 }
 
@@ -48,14 +73,14 @@ function getUrlsFromCard(cardId) {
     .then(resp => resp.data.map(el => el.url));
 }
 
-function getCategoriesFromCards() {
-  getCards().then(cards => {
-    let categories = cards
-      .map(el => el.name)
-      .filter(el => el.indexOf("|") !== -1)
-      .map(el => el.substr(0, el.indexOf("|")).trim());
-    console.log(categories);
-  });
-}
+// function getCategoriesFromCards() {
+//   getCards().then(cards => {
+//     let categories = cards
+//       .map(el => el.name)
+//       .filter(el => el.indexOf("|") !== -1)
+//       .map(el => el.substr(0, el.indexOf("|")).trim());
+//     console.log(categories);
+//   });
+// }
 
-export { lists, getCards /* , dayCards */ };
+export { lists, getCards };
