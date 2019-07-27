@@ -10,9 +10,9 @@ const noteSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  day: {
+  list: {
     type: Schema.Types.ObjectId,
-    ref: "Day"
+    ref: "List"
   },
   card: {
     type: Schema.Types.ObjectId,
@@ -27,3 +27,4 @@ const noteSchema = Schema({
 });
 
 module.exports = mongoose.model('Note', noteSchema);
+

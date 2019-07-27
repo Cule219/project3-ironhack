@@ -10,9 +10,9 @@ const commentSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  day: {
+  list: {
     type: Schema.Types.ObjectId,
-    ref: "Day"
+    ref: "List"
   }
 }, 
 {

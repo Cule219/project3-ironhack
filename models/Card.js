@@ -2,22 +2,27 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const cardSchema = Schema({
-  description: String,
-  urls: [String],
+  id: String,//Trello ID
+  name: String,
+  dateLastActivity: Date,
+  desc: String,
+  descData: Object,
+  idBoard: {
+    type: Schema.Types.ObjectId,
+    ref: 'Board'
+  },
+  idList: {
+    type: Schema.Types.ObjectId,
+    ref: "List"
+  },
+  idLabels: [String],//this needs to change
+  shortUrl: String,
+  url: String,
   completionStatus: {
     type: Boolean,
     default: false
   },
   technology: [String],
-  TrelloId: String,
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  day: {
-    type: Schema.Types.ObjectId,
-    ref: "Day"
-  },
   tags: [String]
 }, 
 {
@@ -28,3 +33,4 @@ const cardSchema = Schema({
 });
 
 module.exports = mongoose.model('Card', cardSchema);
+
