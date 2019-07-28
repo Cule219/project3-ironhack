@@ -19,6 +19,7 @@ mongoose
 let modules = [
   {
     name: "Module I",
+    number: 1,
     description: `
   <ul>
     <li>Recap the learning outcomes of the Module 0 (prework)</li>
@@ -204,12 +205,47 @@ let modules = [
     ]
   },
   {
-    name: "Module II"
+    name: "Module II",
+    number: 2,
+    description: `
+    <ul>
+      <li>Learn the Backend Framework:
+        <ul>
+          <li>how the Model-View-Controller works, </li>
+          <li>how to create a database, </li>
+          <li>how to connect your DB with the server, </li>
+          <li>how to display data on the views, </li>
+          <li>how to be able to pick up data users fill in the form and save them in the database, </li>
+          <li>how to be able to create users in your apps, </li>
+          <li>how to be able to authenticate users in your apps, </li>
+          <li>how to be able to secure your apps (using middlewares, roles, etc)</li>
+        </ul>
+      </li>
+      <li>Get ready to create and present full stack app having users and all CRUD operations</li>
+    </ul>`
   },
   {
-    name: "Module III"
+    name: "Module III", 
+    number: 3,
+    description: 
+    `<ul>
+      <li>Learn Frontend Framework - ReactJS:
+      <ul>
+        <li>get familiar with the concept of Single Page Applications and what are the reasons to build them,</li>
+        <li>learn how to build components,</li>
+        <li>learn how to manipulate with data in the components (to display the data or pick up data from the form),</li>
+        <li>learn how to pass data from parent component to child components,</li>
+        <li>learn how to pass data from child components to the parent component,</li>
+        <li>learn how to maintain the state in the app,</li>
+        <li>learn how to be able to have multiple routes in your app,</li>
+        <li>learn how to connect the server (API) and client (React app)</li>
+        <li>learn how to deploy MERN app to Heroku</li>
+      </ul>
+    </li>
+    <li>Get ready to create and present full stack MERN app having users and all CRUD functions and being deployed to Heroku</li>
+  </ul>`
   }
-];
+]
 
 Module.create(modules)
   .then(ms => {
