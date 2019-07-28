@@ -37,10 +37,7 @@ const lists = board =>
           week,
           day
         })
-          .then(data => 
-
-            cards(data.id)
-          )
+          .then(data => cards(data.id))
           .catch(err => console.log(err));
       });
     })
@@ -112,20 +109,19 @@ const cards = list =>
           shortUrl,
           url
         })
-        .then(card => 
-          List.findOneAndUpdate({ id: list}, {$push: {cards: card._id}})
-        ).catch(err => console.log(err));
+          .then(card =>
+            List.findOneAndUpdate({ id: list }, { $push: { cards: card._id } })
+          )
+          .catch(err => console.log(err));
       });
     })
     .catch(err => console.log(err));
 
-module.exports = board, lists;
+(module.exports = board), lists;
 
 board("JIVynIm1");
 
 lists("JIVynIm1");
-
-
 
 // .then(() => {
 //   // Close properly the connection to Mongoose

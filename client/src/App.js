@@ -11,7 +11,7 @@ import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
 import LessonsList from "./components/coursework/LessonsList";
 import About from "./components/coursework/About";
-import WeeksList from "./components/coursework/WeeksList";
+import DaysList from "./components/coursework/DaysList";
 
 class App extends React.Component {
   state = {
@@ -29,8 +29,8 @@ class App extends React.Component {
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
-          <Route exact path="/weeks/:id" component={LessonsList} />
-          <Route exact path="/weeks" component={WeeksList} />
+          <Route exact path="/days/:id" component={LessonsList} />
+          <Route exact path="/days" component={DaysList} />
           <Route exact path="/" component={Home} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Protected
@@ -51,7 +51,7 @@ class App extends React.Component {
           />
         </Switch>
         <About />
-        <WeeksList />
+        <DaysList />
       </div>
     );
   }

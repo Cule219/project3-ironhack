@@ -11,6 +11,7 @@ const listSchema = Schema(
     },
     name: String,
     day: String,
+    week: String,
     cards: [
       {
         type: Schema.Types.ObjectId,

@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { getWeeks } from "../../services/trelloService";
+import { getDays } from "../../services/trelloService";
 import { Link } from "react-router-dom";
 
-class WeeksList extends Component {
+class DaysList extends Component {
   constructor(props) {
     super(props);
-    this.state = { weeks: [] };
+    this.state = { days: [] };
   }
 
   componentDidMount() {
-    getWeeks()
+    getDays()
       .then(response => {
-        this.setState({ weeks: response });
+        this.setState({ days: response });
       })
       .catch(err => {
         console.log(err);
@@ -22,9 +22,9 @@ class WeeksList extends Component {
     return (
       <div className="list-container">
         <ul className="list-primary">
-          {this.state.weeks.map((el, index) => (
+          {this.state.days.map((el, index) => (
             <div key={index} className="list-item">
-              <Link to={`/weeks/${el.id}`}>{el.name}</Link>
+              <Link to={`/days/${el.id}`}>{el.name}</Link>
             </div>
           ))}
         </ul>
@@ -33,4 +33,4 @@ class WeeksList extends Component {
   }
 }
 
-export default WeeksList;
+export default DaysList;

@@ -15,10 +15,10 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.get("/weeks", (req, res, next) => {
+router.get("/days", (req, res, next) => {
   List.find({})
-    .then(weeks => {
-      res.json(weeks);
+    .then(days => {
+      res.json(days);
     })
     .catch(err => {
       console.log(err);
@@ -35,11 +35,11 @@ router.get("/lessons", (req, res, next) => {
     });
 });
 
-router.get("/weeks/:id", (req, res, next) => {
+router.get("/days/:id", (req, res, next) => {
   List.findOne({ id: req.params.id })
-    .populate("cards") //struggling here, I can't get it to populate. will look more in the morning
-    .then(week => {
-      res.json(week);
+    .populate("cards")
+    .then(day => {
+      res.json(day);
     })
     .catch(err => {
       console.log(err);
