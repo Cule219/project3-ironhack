@@ -11,9 +11,7 @@ class CourseTree extends Component {
   componentDidMount() {
     getWeeks()
       .then(response => {
-        console.log(response);
-        let unsorted = response;
-        let sorted = unsorted.map(el => {
+        let sorted = response.map(el => {
           return el.sort((a, b) => {
             return parseInt(a.day) - parseInt(b.day);
           });
@@ -33,7 +31,11 @@ class CourseTree extends Component {
             <div key={index}>
               <h5>Week {index + 1}</h5>
               {el.map(element => (
-                <h6 key={element.id}>{element.name}</h6>
+                <p key={element.id}>
+                  <Link to={`/days/${element.id}`}>
+                    {element.day ? `Day ${element.day}` : element.name}
+                  </Link>
+                </p>
               ))}
             </div>
           ))}
