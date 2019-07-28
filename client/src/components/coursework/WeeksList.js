@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getWeeks } from "../../services/trelloService";
+import { getWeeks } from "../../services/courseworkService";
 import { Link } from "react-router-dom";
 
 class WeeksList extends Component {

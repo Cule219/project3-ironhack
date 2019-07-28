@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { getBoard } from "../../services/trelloService";
+import { getBoard } from "../../services/courseworkService";
 import { Link } from "react-router-dom";
 import WeeksList from "./WeeksList";
+import ModulesList from "./ModulesList";
 
 class About extends Component {
   constructor() {
@@ -23,6 +24,7 @@ class About extends Component {
         </h1>
         {this.state.board && <h2>{this.state.board.name}</h2>}
         <WeeksList />
+        <ModulesList />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getDay, getCards } from "../../services/trelloService";
+import { getDay, getCards } from "../../services/courseworkService";
 import { Form } from "react-bootstrap";
 
 class LessonsList extends Component {

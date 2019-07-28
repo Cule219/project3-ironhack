@@ -4,6 +4,7 @@ const Card = require("../models/Card");
 const List = require("../models/List");
 const Note = require("../models/Note");
 const Board = require("../models/Board");
+const Module = require("../models/Module");
 
 router.get("/", (req, res, next) => {
   Board.findOne({ name: "ftwd-june-berlin" })
@@ -68,6 +69,14 @@ router.get("/weeks", (req, res, next) => {
       }
       res.json(weeks);
     })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+router.get("/modules", (req, res, next) => {
+  Module.find({})
+    .then(modules => res.json(modules))
     .catch(err => {
       console.log(err);
     });
