@@ -84,7 +84,6 @@ const cards = list =>
     )
     .then(response => {
       response.data.map(card => {
-        // console.log(populateCard(card))
         const {
           id,
           name,
@@ -129,9 +128,9 @@ let removeAll = () => {
 }
 // removeAll();
 
-board("JIVynIm1");
+// board("JIVynIm1");
 
-lists("JIVynIm1");
+// lists("JIVynIm1");
 
 
 
@@ -171,114 +170,3 @@ function getCategoriesFromCards(cards) {
       .map(el => el.substr(0, el.indexOf("|")).trim());
 }
 
-
-// {
-//   "id": "560bf4298b3dda300c18d09c",
-//   "name": "US National Parks",
-//   "desc": "",
-//   "descData": null,
-//   "closed": false,
-//   "idOrganization": "577eb8850b41e08c3034aae2",
-//   "invited": false,
-//   "pinned": false,
-//   "starred": true,
-//   "url": "https://trello.com/b/tBmYPSYe/us-national-parks",
-//   "prefs": {
-//     "permissionLevel": "public",
-//     "voting": "disabled",
-//     "comments": "members",
-//     "invitations": "members",
-//     "selfJoin": true,
-//     "cardCovers": true,
-//     "cardAging": "regular",
-//     "calendarFeedEnabled": false,
-//     "background": "560bfbb5176d070c67adc2b9",
-//     "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/1920x1080/b5ab43954a54880e455d3b4e5109644c/Bryce_Canyon.jpg",
-//     "backgroundImageScaled": [
-//       {
-//         "width": 140,
-//         "height": 100,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/140x100/cf6ffdfac5ecf934ec324bf028b82686/Bryce_Canyon.jpg"
-//       },
-//       {
-//         "width": 256,
-//         "height": 192,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/256x192/2189d1f2d6c159c7de210412cc0e971f/Bryce_Canyon.jpg"
-//       },
-//       {
-//         "width": 480,
-//         "height": 480,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/480x480/62bde347e629774a83378caf61f0fdb7/Bryce_Canyon.jpg"
-//       },
-//       {
-//         "width": 960,
-//         "height": 960,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/960x960/3102fa79837dfd37834cfaee02d1921c/Bryce_Canyon.jpg"
-//       },
-//       {
-//         "width": 1024,
-//         "height": 1024,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/1024x1024/53a50ede7425af0b02a7b9bde783fe94/Bryce_Canyon.jpg"
-//       },
-//       {
-//         "width": 1280,
-//         "height": 1280,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/1280x1280/491f54004976a4a81706caae613acf7f/Bryce_Canyon.jpg"
-//       },
-//       {
-//         "width": 1920,
-//         "height": 1080,
-//         "url": "https://trello-backgrounds.s3.amazonaws.com/556c8537a1928ba745504dd8/1920x1080/b5ab43954a54880e455d3b4e5109644c/Bryce_Canyon.jpg"
-//       }
-//     ],
-//     "backgroundTile": false,
-//     "backgroundBrightness": "light",
-//     "canBePublic": false,
-//     "canBeOrg": false,
-//     "canBePrivate": false,
-//     "canInvite": true
-//   },
-//   "invitations": [
-    
-//   ],
-//   "memberships": [
-//     {
-//       "id": "560bf4298b3dda300c18d09d",
-//       "idMember": "556c8537a1928ba745504dd8",
-//       "memberType": "admin",
-//       "unconfirmed": false,
-//       "deactivated": false
-//     },
-//     {
-//       "id": "58ebc5d5abcedaf34a60800e",
-//       "idMember": "56fd3de8ba3cbeb22737fd55",
-//       "memberType": "normal",
-//       "unconfirmed": false,
-//       "deactivated": false
-//     }
-//   ],
-//   "shortLink": "tBmYPSYe",
-//   "subscribed": false,
-//   "labelNames": {
-//     "green": "Visited",
-//     "yellow": "",
-//     "orange": "",
-//     "red": "",
-//     "purple": "",
-//     "blue": "",
-//     "sky": "",
-//     "lime": "",
-//     "pink": "",
-//     "black": ""
-//   },
-//   "powerUps": [
-    
-//   ],
-//   "dateLastActivity": "2017-06-26T17:39:49.583Z",
-//   "dateLastView": "2017-06-26T17:43:56.319Z",
-//   "shortUrl": "https://trello.com/b/tBmYPSYe",
-//   "idTags": [
-    
-//   ],
-//   "datePluginDisable": null
-// }
