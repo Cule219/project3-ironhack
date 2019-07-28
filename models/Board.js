@@ -1,16 +1,17 @@
-const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 //rather than having lists here we should q db later on
-const boardSchema = Schema({
-  name: String,
-  id: String,
-  desc: String,
-  descData: String,
-  closed: Boolean,
-  url: String,
-  shortUrl: String,
-  labelNames: {
+const boardSchema = Schema(
+  {
+    name: String,
+    id: String,
+    desc: String,
+    descData: String,
+    closed: Boolean,
+    url: String,
+    shortUrl: String,
+    labelNames: {
       green: String,
       yellow: String,
       orange: String,
@@ -21,16 +22,17 @@ const boardSchema = Schema({
       lime: String,
       pink: String,
       black: String
+    }
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at"
+    }
   }
-},
-{
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+);
 
-module.exports = mongoose.model('Board', boardSchema);
+module.exports = mongoose.model("Board", boardSchema);
 
 // {
 
