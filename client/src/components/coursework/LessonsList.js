@@ -8,10 +8,9 @@ class LessonsList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.id)
     let id = this.props.match.params.id;
-    getWeek(id).then( async response => {
-      await this.setState({ lessons: response });
+    getWeek(id).then( response => {
+      this.setState({ lessons: response.cards });
     });
   }
 
@@ -20,8 +19,8 @@ class LessonsList extends Component {
       <div className="list-container">
         <p>{this.state.lessons.name}</p>
             <ul className="list-primary">
-            {this.state.lessons.cards &&
-            this.state.lessons.cards.map(element => {
+            {this.state.lessons &&
+            this.state.lessons.map(element => {
               return (<li key={element._id}>{element.name}</li>)
             })
             }

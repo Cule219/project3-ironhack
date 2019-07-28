@@ -10,7 +10,8 @@ const listSchema = Schema(
       ref: "Board"
     },
     name: String,
-    day: String,
+    day: Number,
+    week: Number,
     cards: [
       {
         type: Schema.Types.ObjectId,

@@ -16,11 +16,12 @@ const cardSchema = Schema(
     idLabels: [String], //this needs to change
     shortUrl: String,
     url: String,
+    attachments: [String],
     completionStatus: {
       type: Boolean,
       default: false
     },
-    technology: [String],
+    category: [String],
     tags: [String]
   },
   {
