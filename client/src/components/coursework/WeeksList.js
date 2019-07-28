@@ -25,7 +25,7 @@ class WeeksList extends Component {
         <ul className="list-primary">
           {this.state.weeks.map((el, index) => (
             <div key={index} className="list-item">
-              <Link to={`/weeks/${el.id}`}>{el.name}</Link>
+              <Link to={`/weeks/${index + 1}`}>Week {index + 1}</Link>
             </div>
           ))}
         </ul>

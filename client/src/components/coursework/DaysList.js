@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getDays } from "../../services/trelloService";
+import { getDays, getWeek } from "../../services/trelloService";
 import { Link } from "react-router-dom";
 
 class DaysList extends Component {
@@ -9,13 +9,24 @@ class DaysList extends Component {
   }
 
   componentDidMount() {
-    getDays()
-      .then(response => {
-        this.setState({ days: response });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    let num = this.props.match.params.num || null;
+    if (num) {
+      getWeek(num)
+        .then(response => {
+          this.setState({ days: response });
+        })
+        .catch(err => {
+          console.log("error getting days in week. ", err);
+        });
+    } else {
+      getDays()
+        .then(response => {
+          this.setState({ days: response });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 
   render() {

@@ -67,6 +67,9 @@ router.get("/weeks", (req, res, next) => {
         weeks.push(week);
       }
       res.json(weeks);
+    })
+    .catch(err => {
+      console.log(err);
     });
 });
 

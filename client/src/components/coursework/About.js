@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { getBoard } from "../../services/trelloService";
+import { Link } from "react-router-dom";
+import WeeksList from "./WeeksList";
 
 class About extends Component {
   constructor() {
@@ -14,7 +16,15 @@ class About extends Component {
   }
 
   render() {
-    return <div>{this.state.board && <h2>{this.state.board.name}</h2>}</div>;
+    return (
+      <div>
+        <h1>
+          <Link to="/dashboard">Dashboard</Link>
+        </h1>
+        {this.state.board && <h2>{this.state.board.name}</h2>}
+        <WeeksList />
+      </div>
+    );
   }
 }
 

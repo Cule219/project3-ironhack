@@ -32,7 +32,9 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/days/:id" component={LessonsList} />
           <Route exact path="/days" component={DaysList} />
-          <Route exact path="/" component={Home} />
+          <Route expact path="/weeks/:num" component={DaysList} />
+          <Route exact path="/weeks" component={WeeksList} />
+          <Route exact path="/" component={About} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Protected
             exact
@@ -51,9 +53,8 @@ class App extends React.Component {
             component={Login}
           />
         </Switch>
-        <About />
         {/* <DaysList /> */}
-        <WeeksList />
+        {/* <WeeksList /> */}
       </div>
     );
   }
