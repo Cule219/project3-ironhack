@@ -12,6 +12,7 @@ import Dashboard from "./containers/Dashboard";
 import LessonsList from "./components/coursework/LessonsList";
 import About from "./components/coursework/About";
 import DaysList from "./components/coursework/DaysList";
+import WeeksList from "./components/coursework/WeeksList";
 
 class App extends React.Component {
   state = {
@@ -51,7 +52,8 @@ class App extends React.Component {
           />
         </Switch>
         <About />
-        <DaysList />
+        {/* <DaysList /> */}
+        <WeeksList />
       </div>
     );
   }

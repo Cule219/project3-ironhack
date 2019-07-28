@@ -17,6 +17,12 @@ const getDays = () =>
 const getDay = id =>
   axios.get(`/api/coursework/days/${id}`).then(response => response.data);
 
+const getWeeks = () =>
+  axios.get("/api/coursework/weeks").then(response => response.data);
+
+const getWeek = num =>
+  axios.get(`/api/coursework/weeks/${num}`).then(response => response.data);
+
 //obsolete i think
 const lists = () =>
   axios
@@ -63,4 +69,13 @@ function getUrlsFromCard(cardId) {
     .then(resp => resp.data.map(el => el.url));
 }
 
-export { lists, getCards, getLessons, getBoard, getDays, getDay };
+export {
+  lists,
+  getCards,
+  getLessons,
+  getBoard,
+  getDays,
+  getDay,
+  getWeeks,
+  getWeek
+};

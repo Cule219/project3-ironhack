@@ -46,4 +46,28 @@ router.get("/days/:id", (req, res, next) => {
     });
 });
 
+router.get("/weeks/:number", (req, res, next) => {
+  List.find({ week: req.params.number.toString() })
+    .populate("cards")
+    .then(week => {
+      res.json(week);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+router.get("/weeks", (req, res, next) => {
+  List.find({})
+    .populate("cards")
+    .then(days => {
+      let weeks = [];
+      for (var i = 1; i < 10; i++) {
+        let week = days.filter(el => el.week === i.toString());
+        weeks.push(week);
+      }
+      res.json(weeks);
+    });
+});
+
 module.exports = router;
