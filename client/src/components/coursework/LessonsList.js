@@ -3,29 +3,33 @@ import { getWeek } from "../../services/trelloService";
 import { Form } from "react-bootstrap";
 
 class LessonsList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { lessons: [] };
+  state = {
+    lessons: []
   }
 
   componentDidMount() {
-    // console.log(this.props);
     let id = this.props.match.params.id;
-
-    getWeek(id).then(response => {
-      console.log(response); 
-      this.setState({ lessons: response });
+    getWeek(id).then( async response => {
+      await this.setState({ lessons: response });
     });
-    
   }
 
   render() {
     return (
       <div className="list-container">
-        <ul className="list-primary">
+        <p>{this.state.lessons.name}</p>
+            <ul className="list-primary">
+            {this.state.lessons.cards &&
+            this.state.lessons.cards.map(element => {
+              return (<li key={element._id}>{element.name}</li>)
+            })
+            }
+            </ul>
+        {/* <ul className="list-primary">
           {this.state.lessons.length > 0 &&
             this.state.lessons.map((el, index) => (
               <div key={index} className="list-item">
+                <div>{el}</div>
                 <a href={el.attachments[0]}>{el.name}</a>
                 <div className="tags">
                   {el.labels.map(label => (
@@ -44,7 +48,7 @@ class LessonsList extends Component {
                 </Form>
               </div>
             ))}
-        </ul>
+        </ul> */}
       </div>
     );
   }

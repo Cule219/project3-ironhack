@@ -29,7 +29,7 @@ class App extends React.Component {
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
-          <Route path="/weeks/:id" component={LessonsList} />
+          <Route exact path="/weeks/:id" component={LessonsList} />
           <Route exact path="/weeks" component={WeeksList} />
           <Route exact path="/" component={Home} />
           <Route exact path="/dashboard" component={Dashboard} />
