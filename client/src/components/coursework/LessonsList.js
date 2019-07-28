@@ -34,8 +34,11 @@ class LessonsList extends Component {
               <div key={el.id} className="list-item">
                 <a href={el.attachments[0]}>{el.name}</a>
                 <div className="tags">
-                  {el.labels.map(label => (
-                    <span style={{ backgroundColor: `${label.color}` }}>
+                  {el.labels.map((label, index) => (
+                    <span
+                      key={index}
+                      style={{ backgroundColor: `${label.color}` }}
+                    >
                       {label.name}
                     </span>
                   ))}

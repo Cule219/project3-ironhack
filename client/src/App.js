@@ -5,7 +5,7 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
-import Home from "./containers/Home";
+//import Home from "./containers/Home";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
