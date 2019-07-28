@@ -222,13 +222,184 @@ let modules = [
         </ul>
       </li>
       <li>Get ready to create and present full stack app having users and all CRUD operations</li>
-    </ul>`
+    </ul>`,
+    technicalSkills: [
+      {
+        skill: "MongoDB",
+        goals: `
+      <div>Teach students
+        <ul>
+          <li>what is a database, </li>
+          <li>why we need databases, </li>
+          <li>how to setup environment (install, configure, launch/stop), </li>
+          <li>how to use Compass,</li>
+          <li>how to import and create database, </li>
+          <li>how to add collections, </li>
+          <li>how to use query operators when querying documents,</li>
+          <li>how to structure your documents and collections using data models</li>
+        </ul>
+      </div>`
+      },
+      {
+        skill: "Node",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is runtime, </li>
+            <li>set up node environment, </li>
+            <li>get familiar with npm packages, </li>
+            <li>what are asynchronous code and event loop</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Mongoose",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is Model-View-Controller (MVC) Pattern, </li>
+            <li>what is Object Document Mapper (ODM) and that Mongoose is ODM for Node, </li>
+            <li>how to install mongoose, </li>
+            <li>how to implement schema in the data models, </li>
+            <li>how to:
+              <ul>
+                <li>create, </li>
+                <li>read, </li>
+                <li>update and </li>
+                <li>delete documents using Mongoose</li>
+              </ul>
+            </li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "ExpressJS",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is Express, </li>
+            <li>what are the benefits of using this Nodejs framework,</li>
+            <li>how the GET method works,</li>
+            <li>how route params works, </li>
+            <li>how query string works, </li>
+            <li>what is the difference between the two above, </li>
+            <li>how the POST method works, </li>
+            <li>how to retrieve data from a form using req.body, </li>
+            <li>get familiar with middlewares, </li>
+            <li>be able to create your own middlewares, </li>
+            <li>how to install and use Irongenerator (or Express generator) to create your own apps</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "How the Internet works",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>about history and evolution of the Internet, </li>
+            <li>how to properly explain how the Internet works, </li>
+            <li>what is the difference between the Internet and the Web, </li>
+            <li>what is Server, </li>
+            <li>what is Client, </li>
+            <li>how the two above communicate, </li>
+            <li>what is Request, </li>
+            <li>what is Response, </li>
+            <li>what happens when a request-response cycle is over</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "HTTP",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is HTTP, </li>
+            <li>which are HTTP (request) verbs:
+              <ul>
+                <li>GET, </li>
+                <li>POST, </li>
+                <li>PUT, </li>
+                <li>DELETE (as the most used), </li>
+              </ul>
+            </li>
+            <li>how to create "first server program" using HTTP npm package</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "API",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is Application Programming Interface (API), </li>
+            <li>why do we need APIs,</li>
+            <li>what is JSON, </li>
+            <li>how to build API, </li>
+            <li>how to use other public APIs    </li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Authorization",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is authorization, </li>
+            <li>why it is necessary to have it in nowadays apps, </li>
+            <li>how to protect their apps using security measurements,</li>
+            <li>how to create user accounts using username/email and password</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "AXIOS",
+        goals: `
+        <div>Teach students
+          <ul>          
+            <li>what is AXIOS, </li>
+            <li>how to use them in the frontend and in the backend,</li>
+            <li>how to use it to get the data, </li>
+            <li>how to use it to post the data</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Authentication",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is authentication, </li>
+            <li>how authentication is related to authorization, </li>
+            <li>what is a session, </li>
+            <li>what are cookies, </li>
+            <li>how to authenticate users in the app (provide credentials and send them to the server), </li>
+            <li>how to use social logins, </li>
+            <li>how to secure your app using user roles</li>
+          </ul>
+        </div>`
+      },
+      {
+        skills: "Deployment",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what are environment variables, </li>
+            <li>how to use them, </li>
+            <li>why not expose them, </li>
+            <li>how to configure an environment to be able to deploy the app, </li>
+            <li>what is Heroku, </li>
+            <li>what is MongoLab, </li>
+            <li>how to deploy your app on Heroku</li>
+          </ul>
+        </div>`
+      }
+    ]
   },
   {
-    name: "Module III", 
+    name: "Module III",
     number: 3,
-    description: 
-    `<ul>
+    description: `
+    <ul>
       <li>Learn Frontend Framework - ReactJS:
       <ul>
         <li>get familiar with the concept of Single Page Applications and what are the reasons to build them,</li>
@@ -243,9 +414,148 @@ let modules = [
       </ul>
     </li>
     <li>Get ready to create and present full stack MERN app having users and all CRUD functions and being deployed to Heroku</li>
-  </ul>`
+  </ul>`,
+    technicalSkills: [
+      {
+        skill: "React Intro",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what are frameworks,</li>
+            <li>what are libraries,</li>
+            <li>what are Single Page Applications (SPA),</li>
+            <li>about React features</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "JSX",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is JSX (JS eXtension), </li>
+            <li>how to use JSX to create elements and </li>
+            <li>how to use them in the React app          </li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Components",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what are components, </li>
+            <li>how to work with components, </li>
+            <li>what kind of components there are</li>          
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Props",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what are props (short for properties), </li>
+            <li>why they are important for React apps, </li>
+            <li>when to use them, </li>
+            <li>how to use them          </li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "State & Lifting State Up",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>what is a state, </li>
+            <li>how to use it, </li>
+            <li>how to define it, </li>
+            <li>how to update it, </li>
+            <li>how to pass data back to parent component (from child component), </li>
+            <li>why is it important to have state available in the whole app but keep it as "unique source of truth"</li>          
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Dispalying data - list, keys, conditionals",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>how to manipulate a different kind of data to be able to display it, </li>
+            <li>how to display a list, </li>
+            <li>get familiar with "key" prop, </li>
+            <li>implement conditional rendering in React </li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Forms",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>how to create forms, </li>
+            <li>how to handle inputs, </li>
+            <li>how to submit the form and process the data</li>          
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Lifecycle Methods",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>how each component lifecycle works, </li>
+            <li>understand the most used ones, </li>
+            <li>get familiar with the less used ones</li>          
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Routing",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>how to create routes, </li>
+            <li>how to use react-router-dom, </li>
+            <li>how to set dynamic routes depending on passed params</li>          
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Integration of server & client",
+        goals: `
+        <div>
+          <ul>
+            <li>Recap how to create a server (API), </li>
+            <li>understand how to work with res.json(), </li>
+            <li>understand how to use AXIOS to get or pass data between the two apps (server and client), </li>
+            <li>understand how to integrate parts of these two apps</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Authentication",
+        goals: `
+        <div>Teach students
+          <ul>
+            <li>how to create full MERN app with signup, login, and logout features</li>
+          </ul>
+        </div>`
+      },
+      {
+        skill: "Deployment",
+        goals: `
+        <div>Teach students 
+          <ul>        
+            <li>how to bundle the React app, </li>
+            <li>how to integrate the two apps before deployment, </li>
+            <li>how to deploy a full stack MERN app on Heroku</li>
+          </ul>
+        </div>`
+      }
+    ]
   }
-]
+];
 
 Module.create(modules)
   .then(ms => {

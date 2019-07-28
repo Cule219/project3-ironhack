@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const moduleSchema = new Schema({
   name: String,
+  number: Number,
   description: String,
   technicalSkills: [
     {
