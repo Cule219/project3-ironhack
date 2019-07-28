@@ -89,4 +89,7 @@ app.use("/", index);
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
+const courseworkRoutes = require("./routes/coursework");
+app.use("/api/coursework", courseworkRoutes);
+
 module.exports = app;
