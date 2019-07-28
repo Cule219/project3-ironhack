@@ -18,20 +18,6 @@ const lists = () =>
     })
     .catch(err => console.log(err));
 
-// closed: false
-// ​​​
-// id: "5cf11e44887a4b72fbd87899"
-// ​​​
-// idBoard: "5cf11e44887a4b72fbd8787b"
-// ​​​
-// name: "Week 7 - Day 1"
-// ​​​
-// pos: 2162687
-// ​​​
-// softLimit: null
-// ​​​
-// subscribed: false
-
 const getCards = () =>
   axios
     .get(

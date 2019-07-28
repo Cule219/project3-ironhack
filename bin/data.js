@@ -61,6 +61,8 @@ board('JIVynIm1');
 lists('JIVynIm1');
 
 
+module.exports = board, lists;
+
 
 // .then(() => {
 //   // Close properly the connection to Mongoose
