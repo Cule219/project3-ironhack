@@ -9,12 +9,14 @@ class LessonsList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     let id = this.props.match.params.id;
+
     getWeek(id).then(response => {
-      console.log(response);
+      console.log(response); 
       this.setState({ lessons: response });
     });
+    
   }
 
   render() {

@@ -17,8 +17,6 @@ const lists = () =>
     })
     .catch(err => console.log(err));
 
-<<<<<<< HEAD
-=======
 // closed: false
 // ​​​
 // id: "5cf11e44887a4b72fbd87899"
@@ -44,11 +42,10 @@ const getWeeks = () =>
 
 const getWeek = id =>
   axios.get(`/api/coursework/weeks/${id}`).then(response => {
-    console.log(response);
+    console.log(response.data);
     return response.data;
   });
 
->>>>>>> f8f7266be8853df5601dc7f6919d103c84d0c7a0
 const getCards = () =>
   axios
     .get(

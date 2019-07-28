@@ -12,10 +12,7 @@ const cardSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: "Board"
     },
-    idList: {
-      type: Schema.Types.ObjectId,
-      ref: "List"
-    },
+    idList: String,
     idLabels: [String], //this needs to change
     shortUrl: String,
     url: String,
