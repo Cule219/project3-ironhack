@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getWeek } from "../../services/trelloService";
-import { Form } from "react-bootstrap";
+// import { Form } from "react-bootstrap";
 
 class LessonsList extends Component {
   state = {
@@ -8,6 +8,7 @@ class LessonsList extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.match.params.id)
     let id = this.props.match.params.id;
     getWeek(id).then( async response => {
       await this.setState({ lessons: response });
