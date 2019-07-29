@@ -40,7 +40,7 @@ class LessonsList extends Component {
                   {/* // need to fix later, should be el.attachments[0] */}
                   <Form>
                     <Form.Group controlId="statusCheckbox">
-                      <Form.Check type="checkbox" label="" />
+                      <Form.Check className="check" type="checkbox" label="" />
                     </Form.Group>
                   </Form>
                 </div>

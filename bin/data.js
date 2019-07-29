@@ -135,11 +135,8 @@ const cards = list =>
           url
         })
           .then(card => {
-            console.log(card);
             List.findOneAndUpdate({ id: list }, { $push: { cards: card._id } })
-              .then(list => {
-                console.log(list);
-              })
+              .then()
               .catch(err => {
                 console.log("error finding and updating list ", err);
               });
