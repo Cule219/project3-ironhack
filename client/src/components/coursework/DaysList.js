@@ -13,7 +13,10 @@ class DaysList extends Component {
     if (num) {
       getWeek(num)
         .then(response => {
-          this.setState({ days: response });
+          let sorted = response.sort((a, b) => {
+            return a.day - b.day;
+          });
+          this.setState({ days: sorted });
         })
         .catch(err => {
           console.log("error getting days in week. ", err);

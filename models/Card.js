@@ -21,8 +21,8 @@ const cardSchema = Schema(
       type: Boolean,
       default: false
     },
-    category: [String],
-    tags: [String]
+    tech: [String],
+    tags: [{ name: String, color: String }]
   },
   {
     timestamps: {

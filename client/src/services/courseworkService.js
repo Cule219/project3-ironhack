@@ -61,7 +61,7 @@ const getCards = () =>
     )
     .then(response => {
       let firstBatch = response.data
-        .slice(98, 120)
+        .slice(98, 104)
         .map(card => populateCard(card));
       return Promise.all([...firstBatch]);
     });

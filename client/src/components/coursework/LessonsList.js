@@ -3,7 +3,7 @@ import { getDay, getCards } from "../../services/courseworkService";
 import { Form } from "react-bootstrap";
 
 // this is for testing purposes only
-import CommentBox from '../comments/CommentBox';
+import CommentBox from "../comments/CommentBox";
 
 class LessonsList extends Component {
   state = {
@@ -15,6 +15,7 @@ class LessonsList extends Component {
     let id = this.props.match.params.id;
     getDay(id)
       .then(response => {
+        // console.log("these are the day's lessons from DB: ", response);
         this.setState({ lessons: response.cards, name: response.name });
       })
       .catch(err => {
@@ -31,33 +32,38 @@ class LessonsList extends Component {
       <div className="list-container">
         <p>{this.state.name}</p>
         <ul className="list-primary">
-          {this.state.templessons.length > 0 &&
-            this.state.templessons.map(el => (
+          {this.state.lessons.length > 0 &&
+            this.state.lessons.map(el => (
               <div key={el.id} className="list-item">
-                <a href={el.attachments[0]}>{el.name}</a>
+                <div className="title-status">
+                  <a href={el.url}>{el.name}</a>
+                  {/* // need to fix later, should be el.attachments[0] */}
+                  <Form>
+                    <Form.Group controlId="statusCheckbox">
+                      <Form.Check type="checkbox" label="" />
+                    </Form.Group>
+                  </Form>
+                </div>
                 <div className="tags">
-                  {el.labels.map((label, index) => (
+                  {el.tags.map((tag, index) => (
                     <span
                       key={index}
-                      style={{ backgroundColor: `${label.color}` }}
+                      style={{ backgroundColor: `${tag.color}` }}
                     >
-                      {label.name}
+                      {tag.name}
                     </span>
                   ))}
-                  {el.technology && (
-                    <span className="technology">{el.technology}</span>
-                  )}
+                  {el.tech.map((e, i) => (
+                    <span key={i} className="technology">
+                      {e}
+                    </span>
+                  ))}
                 </div>
-                <Form>
-                  <Form.Group controlId="statusCheckbox">
-                    <Form.Check type="checkbox" label="" />
-                  </Form.Group>
-                </Form>
               </div>
             ))}
         </ul>
         {/* this is for testing purposes only */}
-        <CommentBox user={this.props.user}/>
+        <CommentBox data={this.props} user={this.props.user}/>
       </div>
     );
   }

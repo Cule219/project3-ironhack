@@ -3,23 +3,25 @@ import axios from "axios";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { islogged } from "../../services/api";
-import { withRouter } from "react-router-dom";
-
-//need get post delete
 
 export default class CommentBox extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+    this.state = {
     comments: [],
-    user: null
+    user: ''
   };
+}
 
   getComments = () => {
     axios
-      .get("/api/comments/")
+      .get(`/api/comments/${this.props.data.match.params.id}`)
       .then(response => {
+        if(response.data){
         this.setState({
           comments: response.data
         });
+      }
       })
       .catch(err => {
         console.log(err);
@@ -33,14 +35,14 @@ export default class CommentBox extends Component {
   };
 
   postComment = e => {
-    axios.post(`/api/comments/`, 
+    axios.post(`/api/comments/`,
     {
       content: e, 
       user: this.state.user._id,
-      list: null
+      list: this.props.data.match.params.id
     }).then(response => {
+      this.getComments();
     });
-    console.log(this.props.history)
   };
 
   async componentDidMount() {

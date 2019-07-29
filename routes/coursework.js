@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Card = require("../models/Card");
 const List = require("../models/List");
-const Note = require("../models/Note");
 const Board = require("../models/Board");
 const Module = require("../models/Module");
 
@@ -27,10 +26,12 @@ router.get("/days", (req, res, next) => {
 });
 
 //get weeks/:id ----- > id will be number of the week
-router.get('/weeks/:id', (req, res) => {
-  List.find({week: req.params.id}).then(week => {
-    res.json(week)
-  }).catch(err=>console.log(err))
+router.get("/weeks/:id", (req, res) => {
+  List.find({ week: req.params.id })
+    .then(week => {
+      res.json(week);
+    })
+    .catch(err => console.log(err));
 });
 
 router.get("/lessons", (req, res) => {

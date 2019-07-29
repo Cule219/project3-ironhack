@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const axios = require("axios");
 const List = require("../models/List");
 const Card = require("../models/Card");
-const axiosRetry = require('axios-retry')
-const request     = require('superagent')
-const Throttle    = require('superagent-throttle')
+//const axiosRetry = require('axios-retry')
+//const request     = require('superagent')
+//const Throttle    = require('superagent-throttle')
 
 mongoose
   .connect("mongodb://127.0.0.1/final-project-ironhack", {
@@ -20,16 +20,16 @@ mongoose
   });
 // axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
-let cards; 
+let cards;
 Card.find({}).then(cards => {
   cards = cards.map(x => {
-  // let attachments = getUrlsFromCard(x.id);
-    x.id
-  // Card.findByIdAndUpdate(x._id, {attachments});s
-  })
+    // let attachments = getUrlsFromCard(x.id);
+    x.id;
+    // Card.findByIdAndUpdate(x._id, {attachments});s
+  });
 });
 
-console.log(cards)
+console.log(cards);
 // let i=0
 // setInterval(() => {
 //   console.log(cards[i])
@@ -59,10 +59,6 @@ console.log(cards)
 // .use(throttle.plugin())
 // .end((err, res) => res.data.map(el => el.url))
 // }
-
-
-
-
 
 // .then(() => {
 //   // Close properly the connection to Mongoose
