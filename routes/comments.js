@@ -16,12 +16,12 @@ router.get("/:commentId", (req, res)=>{
 });
 
 router.post("/", (req, res)=>{
-  const {content: content, user} = req.body;
-  Comment.create(
-    {content, user}//lesson
-    ).then(project => {
-    res.status(200).json(project);
-  }).catch(err => res.json(err));
+  const {content, user} = req.body;
+  // Comment.create(
+  //   {content, user, list}
+  //   ).then(project => {
+  //   res.status(200).json(project);
+  // }).catch(err => res.json(err));
 });
 
 router.delete("/:commentId", (req, res)=>{

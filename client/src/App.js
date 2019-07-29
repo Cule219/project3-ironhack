@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
+
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
 //import Home from "./containers/Home";
@@ -33,7 +34,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/days/:id" component={LessonsList} />
             <Route exact path="/days" component={DaysList} />
-            <Route expact path="/weeks/:num" component={DaysList} />
+            <Route exact path="/weeks/:num" component={DaysList} />
             <Route exact path="/weeks" component={WeeksList} />
             <Route exact path="/" component={About} />
             <Route exact path="/dashboard" component={Dashboard} />

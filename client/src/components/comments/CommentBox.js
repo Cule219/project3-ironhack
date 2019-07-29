@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Comment from "./Comment";
+import CommentForm from "./CommentForm";
+import { islogged } from "../../services/api";
+import { withRouter } from "react-router-dom";
 
 //need get post delete
 
 export default class CommentBox extends Component {
   state = {
-    comments: []
+    comments: [],
+    user: null
   };
 
   getComments = () => {
@@ -22,20 +26,30 @@ export default class CommentBox extends Component {
       });
   };
 
-  deleteComment = async e => {
-    await axios.delete(`/api/comments/${e}`).then(response => {
-      console.log(response);
+  deleteComment = e => {
+    axios.delete(`/api/comments/${e}`).then(response => {
       this.getComments();
     });
   };
 
-  componentDidMount() {
-    this.getComments();
-  }
-
-  postComment = event => {
-    // event.targ
+  postComment = e => {
+    axios.post(`/api/comments/`, 
+    {
+      content: e, 
+      user: this.state.user._id,
+      list: null
+    }).then(response => {
+    });
+    console.log(this.props.history)
   };
+
+  async componentDidMount() {
+    this.getComments();
+    let user = await islogged();
+    this.setState({
+      user: user
+    });
+  }
 
   render() {
     return (
@@ -49,17 +63,23 @@ export default class CommentBox extends Component {
   </div>
   <table className="table table-stripped">
     <thead className="thear-inverse">
-
     </thead>
     <tbody>
       {this.state.comments.map(x => {
-        return (<tr key={x._id}>
+        return (
+        <tr key={x._id}>
           <Comment
-            deleteClickHandler={this.deleteComment.bind(this, x._id)}
-            data={x}
+          deleteClickHandler={this.deleteComment.bind(this, x._id)}
+          data={x}
           />
         </tr>)
       })}
+      <tr>
+        <CommentForm 
+        postCommentHandler={this.postComment}
+        user={this.state.user} 
+        />
+      </tr>
     </tbody>
   </table>
   </div>

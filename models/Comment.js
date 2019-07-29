@@ -14,6 +14,10 @@ const commentSchema = Schema(
     list: {
       type: Schema.Types.ObjectId,
       ref: "List"
+    },
+    module: {
+      type: Schema.Types.ObjectId,
+      ref: "Module"
     }
   },
   {

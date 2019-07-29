@@ -44,15 +44,3 @@ const listSchema = Schema(
 );
 
 module.exports = mongoose.model("List", listSchema);
-
-// {
-
-//   "id": "5cf11e44887a4b72fbd8787c",
-//   "name": "Guidelines",
-//   "closed": false,
-//   "idBoard": "5cf11e44887a4b72fbd8787b",
-//   "pos": 65535,
-//   "subscribed": null,
-//   "softLimit": null
-
-// },

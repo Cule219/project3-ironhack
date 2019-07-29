@@ -12,11 +12,9 @@ class LessonsList extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     let id = this.props.match.params.id;
     getDay(id)
       .then(response => {
-        console.log(response);
         this.setState({ lessons: response.cards, name: response.name });
       })
       .catch(err => {
@@ -25,6 +23,7 @@ class LessonsList extends Component {
     getCards().then(response => {
       this.setState({ templessons: response });
     });
+
   }
 
   render() {
@@ -58,7 +57,7 @@ class LessonsList extends Component {
             ))}
         </ul>
         {/* this is for testing purposes only */}
-        <CommentBox />
+        <CommentBox user={this.props.user}/>
       </div>
     );
   }
