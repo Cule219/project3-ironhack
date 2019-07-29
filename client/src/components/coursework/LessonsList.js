@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getDay } from "../../services/courseworkService";
 import { Form } from "react-bootstrap";
+import NotesBox from "../notes/NotesBox";
 
 // this is for testing purposes only
 import CommentBox from "../comments/CommentBox";
@@ -93,7 +94,8 @@ class LessonsList extends Component {
             ))}
         </ul>
         {/* this is for testing purposes only */}
-        <CommentBox />
+        <NotesBox data={this.props} user={this.props.user} />
+        <CommentBox data={this.props} user={this.props.user} />
       </div>
     );
   }

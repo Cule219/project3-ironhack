@@ -26,7 +26,7 @@ const CustomNavbar = props => {
         </li>
       </ul>
     </div>
-    <div className="justify-content-end ">
+    <div className="">
       <Navbar.Brand to="/">
       <Link className="text-white" to="/">Home</Link>
       </Navbar.Brand>

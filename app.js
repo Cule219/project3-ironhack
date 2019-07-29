@@ -92,4 +92,7 @@ app.use("/api/auth", authRoutes);
 const courseworkRoutes = require("./routes/coursework");
 app.use("/api/coursework", courseworkRoutes);
 
+const notesRoutes = require('./routes/notes');
+app.use('/api/notes', notesRoutes);
+
 module.exports = app;

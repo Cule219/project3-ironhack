@@ -5,7 +5,7 @@ const noteSchema = Schema(
   {
     content: {
       type: String,
-      min: 8
+      default: ''
     },
     user: {
       type: Schema.Types.ObjectId,

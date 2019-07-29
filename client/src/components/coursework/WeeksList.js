@@ -11,7 +11,7 @@ class WeeksList extends Component {
   componentDidMount() {
     getWeeks()
       .then(response => {
-        console.log(response);
+        // console.log(response);
         this.setState({ weeks: response });
       })
       .catch(err => {

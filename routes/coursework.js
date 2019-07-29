@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Card = require("../models/Card");
 const List = require("../models/List");
-const Note = require("../models/Note");
 const Board = require("../models/Board");
 const Module = require("../models/Module");
 
@@ -49,7 +48,6 @@ router.get("/days/:id", (req, res, next) => {
   List.findOne({ id: req.params.id })
     .populate("cards")
     .then(day => {
-      console.log(day);
       res.json(day);
     })
     .catch(err => {

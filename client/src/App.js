@@ -60,18 +60,40 @@ class App extends React.Component {
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
-          <CourseTree weeks={this.state.weeks} /* setView={this.setView} */ />
+          <CourseTree weeks={this.state.weeks} />
           <Switch>
             <Route
               exact
               path="/days/:id"
               render={props => <LessonsList {...props} />}
+              user={this.state.user}
             />
-            <Route exact path="/days" component={DaysList} />
-            <Route expact path="/weeks/:num" component={DaysList} />
-            <Route exact path="/weeks" component={WeeksList} />
-            <Route exact path="/" component={About} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Route
+              exact
+              path="/days"
+              component={DaysList}
+              user={this.state.user}
+            />
+            <Route
+              exact
+              path="/weeks/:num"
+              component={DaysList}
+              user={this.state.user}
+            />
+            <Route
+              exact
+              path="/weeks"
+              component={WeeksList}
+              user={this.state.user}
+            />
+            <Route exact path="/" component={About} user={this.state.user} />
+            <Route
+              exact
+              path="/dashboard"
+              component={Dashboard}
+              user={this.state.user}
+            />
+
             <Protected
               exact
               path="/signup"

@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Comment = require("../models/Comment");
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+// /api/lists/${this.props.data.match.params.id}/comments
 
-router.get("/", (req, res)=>{
-  //this needs to be changed to look for comments for specific lesson 
-  Comment.find({}).populate('user').then(data => {
+
+router.get("/:id", (req, res)=>{
+  Comment.find({list: req.params.id}).populate('user').then(data => {
     res.json(data);
   }).catch(err => res.json(err));
 });
@@ -16,9 +19,9 @@ router.get("/:commentId", (req, res)=>{
 });
 
 router.post("/", (req, res)=>{
-  const {content: content, user} = req.body;
+  const {content, user, list} = req.body;
   Comment.create(
-    {content, user}//lesson
+    {content, user, list}
     ).then(project => {
     res.status(200).json(project);
   }).catch(err => res.json(err));

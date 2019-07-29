@@ -66,7 +66,7 @@ router.post("/signup", (req, res) => {
 
 router.post("/logout", (req, res) => {
   req.logout();
-  res.statusCode(200).json();
+  res.statusCode(200).json("");
 });
 
 router.get("/loggedin", (req, res) => {
