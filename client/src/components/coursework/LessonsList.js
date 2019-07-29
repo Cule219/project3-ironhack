@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { getDay, getCards } from "../../services/courseworkService";
 import { Form } from "react-bootstrap";
 
+// this is for testing purposes only
+import CommentBox from '../comments/CommentBox';
+
 class LessonsList extends Component {
   state = {
     lessons: [],
@@ -54,6 +57,8 @@ class LessonsList extends Component {
               </div>
             ))}
         </ul>
+        {/* this is for testing purposes only */}
+        <CommentBox />
       </div>
     );
   }

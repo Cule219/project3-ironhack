@@ -18,37 +18,47 @@ mongoose
   .catch(err => {
     console.error("Error connecting to mongo", err);
   });
-axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
+// axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
-let i = 0;
+let cards; 
 Card.find({}).then(cards => {
-  cards.map(x => {
-  let attachments = getUrlsFromCard(x.id);
-  console.log(attachments)
-  Card.findByIdAndUpdate(x._id, {attachments});
+  cards = cards.map(x => {
+  // let attachments = getUrlsFromCard(x.id);
+    x.id
+  // Card.findByIdAndUpdate(x._id, {attachments});s
   })
-  i++;
 });
 
-let throttle = new Throttle({
-  active: true,     // set false to pause queue
-  rate: 98,          // how many requests can be sent every `ratePer`
-  ratePer: 3000,   // number of ms in which `rate` requests may be sent
-  concurrent: 1     // how many requests can be sent concurrently
-})
+console.log(cards)
+// let i=0
+// setInterval(() => {
+//   console.log(cards[i])
+//   let attachments = getUrlsFromCard(cards[i]);
+//   // console.log(attachments)
+//   i++
+// }, 500);
 
-function getUrlsFromCard(cardId) {
+// Card.findByIdAndUpdate(cards[i], {attachments})
+
+// let throttle = new Throttle({
+//   active: true,     // set false to pause queue
+//   rate: 98,          // how many requests can be sent every `ratePer`
+//   ratePer: 3000,   // number of ms in which `rate` requests may be sent
+//   concurrent: 1     // how many requests can be sent concurrently
+// })
+
+// function getUrlsFromCard(cardId) {
 // return axios
 //   .get(
 //     `https://api.trello.com/1/cards/${cardId}/attachments`
 //   )
 //   .then(resp => resp.data.map(el => el.url));
 
-request
-.get(`https://api.trello.com/1/cards/${cardId}/attachments`)
-.use(throttle.plugin())
-.end((err, res) => res.data.map(el => el.url))
-}
+// request
+// .get(`https://api.trello.com/1/cards/${cardId}/attachments`)
+// .use(throttle.plugin())
+// .end((err, res) => res.data.map(el => el.url))
+// }
 
 
 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import CommentBox from "../components/comments/CommentBox";
+import CommentBox           from "../components/comments/CommentBox";
+import Sidebar              from "../components/Sidebar";
 
 export default class Dashboard extends Component {
   state = {
@@ -7,19 +8,13 @@ export default class Dashboard extends Component {
   };
   render() {
     return (
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        <div style={{ height: "40vh", width: "50%", backgroundColor: "#FF0" }}>
+      <div className="row">
+        <div className="col-md-10">
           <CommentBox />
         </div>
-        <div
-          style={{ height: "40vh", width: "50%", backgroundColor: "#F00" }}
-        />
-        <div
-          style={{ height: "40vh", width: "50%", backgroundColor: "#CC0" }}
-        />
-        <div
-          style={{ height: "40vh", width: "50%", backgroundColor: "#2C2" }}
-        />
+        <div className="col-md-2">
+          <Sidebar />
+        </div>
       </div>
     );
   }

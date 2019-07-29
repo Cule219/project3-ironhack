@@ -29,30 +29,32 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
-        <Switch>
-          <Route exact path="/days/:id" component={LessonsList} />
-          <Route exact path="/days" component={DaysList} />
-          <Route expact path="/weeks/:num" component={DaysList} />
-          <Route exact path="/weeks" component={WeeksList} />
-          <Route exact path="/" component={About} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Protected
-            exact
-            path="/signup"
-            redirectPath="/"
-            setUser={this.setUser}
-            user={!this.state.user}
-            component={Signup}
-          />
-          <Protected
-            exact
-            path="/login"
-            redirectPath="/"
-            setUser={this.setUser}
-            user={!this.state.user}
-            component={Login}
-          />
-        </Switch>
+        <div className="container">
+          <Switch>
+            <Route exact path="/days/:id" component={LessonsList} />
+            <Route exact path="/days" component={DaysList} />
+            <Route expact path="/weeks/:num" component={DaysList} />
+            <Route exact path="/weeks" component={WeeksList} />
+            <Route exact path="/" component={About} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Protected
+              exact
+              path="/signup"
+              redirectPath="/"
+              setUser={this.setUser}
+              user={!this.state.user}
+              component={Signup}
+            />
+            <Protected
+              exact
+              path="/login"
+              redirectPath="/"
+              setUser={this.setUser}
+              user={!this.state.user}
+              component={Login}
+            />
+          </Switch>
+        </div>
         {/* <DaysList /> */}
         {/* <WeeksList /> */}
       </div>

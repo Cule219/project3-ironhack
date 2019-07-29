@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Linkify from 'react-linkify';
-
+import { Link } from 'react-router-dom';
+ 
 
 export default class Comment extends Component {
   state = {
@@ -19,25 +20,30 @@ export default class Comment extends Component {
   }
   render() {
     const { showComment } = this.state;
+
     return (
-      <div className='article-comment'>
-        <img src={this.props.data.user.profileImg} height='100px' alt="Users profile img" />
-        <div className='article-comment-content'>
-          <h3>{this.props.data.username}
+      <>
+        <td>
+          {showComment&&<img src={this.props.data.user.profileImg} height='100px' alt="Users profile img" />}
+        </td>
+        <td colSpan="2">
+          {/* change this so it's to the users profile */}
+          <Link to="/"><h3>
+            {this.props.data.user.username}
+            {/* <i className="fas fa-arrow-circle-right"/> */}
+          </h3></Link>
           <i 
             onClick={this.onShowClick}
             className={this.state.className}
             style={{cursor: 'pointer'}}
           />
-          <i className="fas fa-times"
+          {showComment && (<><i className="fas fa-times"
           style={{cursor: 'pointer', float: 'right', color: 'red'}}
           onClick={this.onClickDelete}
           />
-          </h3>
-          {showComment &&
-          (<p><Linkify>{this.props.data.content}</Linkify></p>)}
-        </div>
-      </div>
+          <p><Linkify>{this.props.data.content}</Linkify></p></>)}
+        </td>
+      </>
     )
   }
 }

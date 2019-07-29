@@ -39,17 +39,31 @@ export default class CommentBox extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.comments.map(x => {
-          return (
-            <Comment
-              key={x._id}
-              deleteClickHandler={this.deleteComment.bind(this, x._id)}
-              data={x}
-            />
-          );
-        })}
-      </div>
+<>
+<div className="row">
+  <div className="col-md-6">
+    <h2><i className="fas fa-users"/>Comments:</h2>
+  </div>
+  <div className="col-md-6">
+
+  </div>
+  <table className="table table-stripped">
+    <thead className="thear-inverse">
+
+    </thead>
+    <tbody>
+      {this.state.comments.map(x => {
+        return (<tr key={x._id}>
+          <Comment
+            deleteClickHandler={this.deleteComment.bind(this, x._id)}
+            data={x}
+          />
+        </tr>)
+      })}
+    </tbody>
+  </table>
+  </div>
+</>
     );
   }
 }
