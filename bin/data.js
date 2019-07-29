@@ -37,13 +37,10 @@ const lists = board =>
           week,
           day
         })
-          .then(async data => 
-            cards(data.id)
-          )
-          .catch(err => console.log(err));
+          .then(data => cards(data.id))
+          
       });
     })
-    .catch(err => console.log(err));
 
 const board = board => {
   //JIVynIm1 id for our cohort
@@ -62,7 +59,6 @@ const board = board => {
         shortUrl,
         labelNames
       } = response.data;
-      // if(Board.findOne({id: id}))console.log('Board exists');
       Board.create({
         id,
         name,
@@ -83,7 +79,7 @@ const cards = list =>
       `https://api.trello.com/1/lists/${list}/cards`
     )
     .then(response => {
-      response.data.map(card => {
+      response.data.map(async card => {
         const {
           id,
           name,
@@ -106,67 +102,24 @@ const cards = list =>
           idBoard,
           idList,
           idLabels,
-          // attachments,
           shortUrl,
           category,
           url
         })
-        .then(card => 
-          List.findOneAndUpdate({ id: list}, {$push: {cards: card._id}})
-          
-        ).catch(err => console.log(err));
+          .then(card =>
+            List.findOneAndUpdate({ id: list }, { $push: { cards: card._id } })
+          )
+          .catch(err => console.log(err));
       });
     })
     .catch(err => console.log(err));
 
-module.exports = board, lists;
+(module.exports = board), lists;
 
-let removeAll = () => {
-  List.deleteMany();
-  Card.deleteMany();
-  Board.deleteMany();
-}
-// removeAll();
+board("JIVynIm1");
 
-// board("JIVynIm1");
+lists("JIVynIm1");
 
-// lists("JIVynIm1");
+    
 
-
-
-// .then(() => {
-//   // Close properly the connection to Mongoose
-//   mongoose.disconnect()
-// })
-// .catch(err => {
-//   mongoose.disconnect()
-//   throw err
-// })
-
-function populateCard(card) {
-  let name = card.name;
-  let category =
-    name.indexOf("|") !== -1 ? name.substr(0, name.indexOf("|")).trim() : null;
-    console.log(card, category)
-  if(card.labels){
-  let labels = card.labels.map(el => el.name);
-  return getUrlsFromCard(card.id).then(urls => {
-    return { name, category, labels, id: card.id, attachments: urls };
-  });}
-}
-
-function getUrlsFromCard(cardId) {
-  return axios
-    .get(
-      `https://api.trello.com/1/cards/${cardId}/attachments`
-    )
-    .then(resp => resp.data.map(el => el.url));
-}
-
-function getCategoriesFromCards(cards) {
-    return cards
-      .map(el => el.name)
-      .filter(el => el.indexOf("|") !== -1)
-      .map(el => el.substr(0, el.indexOf("|")).trim());
-}
 

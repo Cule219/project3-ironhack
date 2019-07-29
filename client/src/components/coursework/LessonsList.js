@@ -1,39 +1,44 @@
 import React, { Component } from "react";
-import { getWeek } from "../../services/trelloService";
-// import { Form } from "react-bootstrap";
+import { getDay, getCards } from "../../services/courseworkService";
+import { Form } from "react-bootstrap";
 
 class LessonsList extends Component {
   state = {
-    lessons: []
-  }
+    lessons: [],
+    templessons: []
+  };
 
   componentDidMount() {
+    console.log(this.props.match.params.id);
     let id = this.props.match.params.id;
-    getWeek(id).then( response => {
-      this.setState({ lessons: response.cards });
+    getDay(id)
+      .then(response => {
+        console.log(response);
+        this.setState({ lessons: response.cards, name: response.name });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    getCards().then(response => {
+      this.setState({ templessons: response });
     });
   }
 
   render() {
     return (
       <div className="list-container">
-        <p>{this.state.lessons.name}</p>
-            <ul className="list-primary">
-            {this.state.lessons &&
-            this.state.lessons.map(element => {
-              return (<li key={element._id}>{element.name}</li>)
-            })
-            }
-            </ul>
-        {/* <ul className="list-primary">
-          {this.state.lessons.length > 0 &&
-            this.state.lessons.map((el, index) => (
-              <div key={index} className="list-item">
-                <div>{el}</div>
+        <p>{this.state.name}</p>
+        <ul className="list-primary">
+          {this.state.templessons.length > 0 &&
+            this.state.templessons.map(el => (
+              <div key={el.id} className="list-item">
                 <a href={el.attachments[0]}>{el.name}</a>
                 <div className="tags">
-                  {el.labels.map(label => (
-                    <span style={{ backgroundColor: `${label.color}` }}>
+                  {el.labels.map((label, index) => (
+                    <span
+                      key={index}
+                      style={{ backgroundColor: `${label.color}` }}
+                    >
                       {label.name}
                     </span>
                   ))}
@@ -48,7 +53,7 @@ class LessonsList extends Component {
                 </Form>
               </div>
             ))}
-        </ul> */}
+        </ul>
       </div>
     );
   }

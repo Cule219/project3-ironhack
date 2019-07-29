@@ -5,12 +5,13 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
-import Home from "./containers/Home";
+//import Home from "./containers/Home";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
 import LessonsList from "./components/coursework/LessonsList";
 import About from "./components/coursework/About";
+import DaysList from "./components/coursework/DaysList";
 import WeeksList from "./components/coursework/WeeksList";
 
 class App extends React.Component {
@@ -29,9 +30,11 @@ class App extends React.Component {
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <Switch>
-          <Route exact path="/weeks/:id" component={LessonsList} />
+          <Route exact path="/days/:id" component={LessonsList} />
+          <Route exact path="/days" component={DaysList} />
+          <Route expact path="/weeks/:num" component={DaysList} />
           <Route exact path="/weeks" component={WeeksList} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={About} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Protected
             exact
@@ -50,8 +53,8 @@ class App extends React.Component {
             component={Login}
           />
         </Switch>
-        <About />
-        <WeeksList />
+        {/* <DaysList /> */}
+        {/* <WeeksList /> */}
       </div>
     );
   }
