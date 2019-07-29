@@ -63,6 +63,7 @@ function getUrlsFromCard(cardId) {
 }
 
 updateCardsWithAttachments();
+
 // let i=0
 // setInterval(() => {
 //   console.log(cards[i])

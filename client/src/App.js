@@ -9,14 +9,18 @@ import Protected from "./components/Protected";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
-import LessonsList from "./components/coursework/LessonsList";
+import Day from "./containers/Day";
 import About from "./components/coursework/About";
 import DaysList from "./components/coursework/DaysList";
 import WeeksList from "./components/coursework/WeeksList";
+import CourseTree from "./components/coursework/CourseTree";
+import { getWeeks, getDay } from "./services/courseworkService";
+import LessonsList from "./components/coursework/LessonsList";
 
 class App extends React.Component {
   state = {
-    user: this.props.user
+    user: this.props.user,
+    weeks: []
   };
 
   setUser = user => {
@@ -25,13 +29,44 @@ class App extends React.Component {
     });
   };
 
+  componentDidMount() {
+    getWeeks()
+      .then(response => {
+        let sorted = response.map(el => {
+          return el.sort((a, b) => {
+            return parseInt(a.day) - parseInt(b.day);
+          });
+        });
+        this.setState({ weeks: sorted });
+      })
+      .catch(err => {
+        console.log("error getting weeks: ", err);
+      });
+  }
+
+  // setView = id => {
+  //   getDay(id)
+  //     .then(response => {
+  //       console.log(response);
+  //       this.setState({ day: response });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
+
   render() {
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
+          <CourseTree weeks={this.state.weeks} /* setView={this.setView} */ />
           <Switch>
-            <Route exact path="/days/:id" component={LessonsList} />
+            <Route
+              exact
+              path="/days/:id"
+              render={props => <LessonsList {...props} />}
+            />
             <Route exact path="/days" component={DaysList} />
             <Route expact path="/weeks/:num" component={DaysList} />
             <Route exact path="/weeks" component={WeeksList} />
