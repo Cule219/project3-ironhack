@@ -1,25 +1,31 @@
-const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const noteSchema = Schema({
-  content: {
-    type: String,
-    min: 8
+const noteSchema = Schema(
+  {
+    content: {
+      type: String,
+      default: ''
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    },
+    list: {
+      type: Schema.Types.ObjectId,
+      ref: "List"
+    },
+    card: {
+      type: Schema.Types.ObjectId,
+      ref: "Card"
+    }
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  day: {
-    type: Schema.Types.ObjectId,
-    ref: "Day"
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at"
+    }
   }
-}, 
-{
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+);
 
-module.exports = mongoose.model('Note', noteSchema);
+module.exports = mongoose.model("Note", noteSchema);

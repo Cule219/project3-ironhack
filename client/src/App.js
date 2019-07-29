@@ -3,18 +3,22 @@ import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 
+
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
-import Home from "./containers/Home";
+//import Home from "./containers/Home";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
-import CardsList from "./components/CardsList";
+import LessonsList from "./components/coursework/LessonsList";
+import About from "./components/coursework/About";
+import DaysList from "./components/coursework/DaysList";
+import WeeksList from "./components/coursework/WeeksList";
 
 class App extends React.Component {
-  // state = {
-  //   user: this.props.user
-  // };
+  state = {
+    user: this.props.user
+  };
 
   setUser = user => {
     this.setState({
@@ -25,28 +29,35 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <Navbar setUser={this.setUser} user={this.state.user} />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Protected
-            exact
-            path="/signup"
-            redirectPath="/"
-            setUser={this.setUser}
-            user={!this.state.user}
-            component={Signup}
-          />
-          <Protected
-            exact
-            path="/login"
-            redirectPath="/"
-            setUser={this.setUser}
-            user={!this.state.user}
-            component={Login}
-          />
-        </Switch> */}
-        <CardsList />
+        <Navbar setUser={this.setUser} user={this.state.user} />
+        <div className="container">
+          <Switch>
+            <Route exact path="/days/:id" component={LessonsList} user={this.state.user}/>
+            <Route exact path="/days" component={DaysList} user={this.state.user}/>
+            <Route exact path="/weeks/:num" component={DaysList} user={this.state.user}/>
+            <Route exact path="/weeks" component={WeeksList} user={this.state.user}/>
+            <Route exact path="/" component={About} user={this.state.user}/>
+            <Route exact path="/dashboard" component={Dashboard} user={this.state.user}/>
+            <Protected
+              exact
+              path="/signup"
+              redirectPath="/"
+              setUser={this.setUser}
+              user={!this.state.user}
+              component={Signup}
+            />
+            <Protected
+              exact
+              path="/login"
+              redirectPath="/"
+              setUser={this.setUser}
+              user={!this.state.user}
+              component={Login}
+            />
+          </Switch>
+        </div>
+        {/* <DaysList /> */}
+        {/* <WeeksList /> */}
       </div>
     );
   }

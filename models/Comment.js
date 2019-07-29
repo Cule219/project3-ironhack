@@ -1,25 +1,31 @@
-const mongoose = require('mongoose');
-const Schema   = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const commentSchema = Schema({
-  content: {
-    type: String,
-    min: 8
+const commentSchema = Schema(
+  {
+    content: {
+      type: String,
+      min: 8
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    },
+    list: {
+      type: Schema.Types.ObjectId,
+      ref: "List"
+    },
+    module: {
+      type: Schema.Types.ObjectId,
+      ref: "Module"
+    }
   },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  day: {
-    type: Schema.Types.ObjectId,
-    ref: "Day"
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at"
+    }
   }
-}, 
-{
-  timestamps: {
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  }
-});
+);
 
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model("Comment", commentSchema);
