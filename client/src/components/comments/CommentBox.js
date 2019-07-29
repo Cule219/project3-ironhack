@@ -56,10 +56,16 @@ export default class CommentBox extends Component {
   render() {
     return (
 <>
-<div className="row">
+<div className="row justify-content-between">
   <div className="col-md-6">
-    <h2><i className="fas fa-users"/>Comments:</h2>
+
+    <h2><i className="fas fa-users"/>Comments:
+    <button className="btn btn-success" style={{float: 'right'}}>
+      <a href="#comment-form"><i className="fas fa-plus"/>New </a>
+    </button>
+    </h2>
   </div>
+  
   <div className="col-md-6">
 
   </div>
@@ -80,6 +86,7 @@ export default class CommentBox extends Component {
         <CommentForm 
         postCommentHandler={this.postComment}
         user={this.state.user} 
+        id="comment-form"
         />
       </tr>
     </tbody>

@@ -32,12 +32,12 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <Switch>
-            <Route exact path="/days/:id" component={LessonsList} />
-            <Route exact path="/days" component={DaysList} />
-            <Route exact path="/weeks/:num" component={DaysList} />
-            <Route exact path="/weeks" component={WeeksList} />
-            <Route exact path="/" component={About} />
-            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/days/:id" component={LessonsList} user={this.state.user}/>
+            <Route exact path="/days" component={DaysList} user={this.state.user}/>
+            <Route exact path="/weeks/:num" component={DaysList} user={this.state.user}/>
+            <Route exact path="/weeks" component={WeeksList} user={this.state.user}/>
+            <Route exact path="/" component={About} user={this.state.user}/>
+            <Route exact path="/dashboard" component={Dashboard} user={this.state.user}/>
             <Protected
               exact
               path="/signup"
