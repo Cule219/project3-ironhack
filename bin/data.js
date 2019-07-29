@@ -5,6 +5,27 @@ const Board = require("../models/Board");
 const List = require("../models/List");
 const Card = require("../models/Card");
 
+const technologies = [
+  "React",
+  "Express",
+  "JS",
+  "CSS",
+  "HTML",
+  "MongoDB",
+  "Node",
+  "SG",
+  "DOM",
+  "P5",
+  "jQuery",
+  "ES6",
+  "Mongoose",
+  "Passport",
+  "AJAX",
+  "Axios",
+  "JSON",
+  "Google Maps"
+];
+
 mongoose
   .connect("mongodb://127.0.0.1/final-project-ironhack", {
     useNewUrlParser: true
@@ -36,11 +57,9 @@ const lists = board =>
           idBoard,
           week,
           day
-        })
-          .then(data => cards(data.id))
-          
+        }).then(data => cards(data.id));
       });
-    })
+    });
 
 const board = board => {
   //JIVynIm1 id for our cohort
@@ -75,9 +94,7 @@ const board = board => {
 
 const cards = list =>
   axios
-    .get(
-      `https://api.trello.com/1/lists/${list}/cards`
-    )
+    .get(`https://api.trello.com/1/lists/${list}/cards`)
     .then(response => {
       response.data.map(async card => {
         const {
@@ -90,9 +107,19 @@ const cards = list =>
           idList,
           idLabels,
           shortUrl,
-          url
+          url,
+          labels
         } = card;
-        let category = name.indexOf("|") !== -1 ? name.substr(0, name.indexOf("|")).trim() : null;
+        let tech = [];
+        let tags = labels.map(el => ({
+          name: el.name,
+          color: el.color === "yellow" ? "darkgoldenrod" : el.color
+        }));
+        if (name.match(new RegExp("lab", "i")))
+          tags.push({ name: "LAB", color: "indigo" });
+        technologies.forEach(el => {
+          if (name.match(new RegExp(el, "i"))) tech.push(el);
+        });
         Card.create({
           id,
           name,
@@ -103,12 +130,20 @@ const cards = list =>
           idList,
           idLabels,
           shortUrl,
-          category,
+          tech,
+          tags,
           url
         })
-          .then(card =>
+          .then(card => {
+            console.log(card);
             List.findOneAndUpdate({ id: list }, { $push: { cards: card._id } })
-          )
+              .then(list => {
+                console.log(list);
+              })
+              .catch(err => {
+                console.log("error finding and updating list ", err);
+              });
+          })
           .catch(err => console.log(err));
       });
     })
@@ -119,7 +154,3 @@ const cards = list =>
 board("JIVynIm1");
 
 lists("JIVynIm1");
-
-    
-
-

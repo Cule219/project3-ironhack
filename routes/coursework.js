@@ -27,10 +27,12 @@ router.get("/days", (req, res, next) => {
 });
 
 //get weeks/:id ----- > id will be number of the week
-router.get('/weeks/:id', (req, res) => {
-  List.find({week: req.params.id}).then(week => {
-    res.json(week)
-  }).catch(err=>console.log(err))
+router.get("/weeks/:id", (req, res) => {
+  List.find({ week: req.params.id })
+    .then(week => {
+      res.json(week);
+    })
+    .catch(err => console.log(err));
 });
 
 router.get("/lessons", (req, res) => {
@@ -47,6 +49,7 @@ router.get("/days/:id", (req, res, next) => {
   List.findOne({ id: req.params.id })
     .populate("cards")
     .then(day => {
+      console.log(day);
       res.json(day);
     })
     .catch(err => {
