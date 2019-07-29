@@ -5,13 +5,11 @@ import CommentForm from "./CommentForm";
 import { islogged } from "../../services/api";
 
 export default class CommentBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
     comments: [],
-    user: ''
+    user: '',
+    commentForm: false
   };
-}
 
   getComments = () => {
     axios
@@ -27,6 +25,10 @@ export default class CommentBox extends Component {
         console.log(err);
       });
   };
+
+  onShowComments= e => {
+    
+  }
 
   deleteComment = e => {
     axios.delete(`/api/comments/${e}`).then(response => {
