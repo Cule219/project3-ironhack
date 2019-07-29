@@ -11,6 +11,7 @@
 
 .list-container {
   margin: 20px 0;
+  width: 100%;
 }
 
 .list-item {
@@ -31,6 +32,7 @@
   justify-content: space-between;
   align-items: baseline;
   margin: 2px 0;
+  width: 100%;
 }
 
 .tags span {
@@ -46,4 +48,8 @@
 span.technology {
   background-color: navy;
   color: white;
+}
+
+.check {
+  margin: 0px 10px;
 }
