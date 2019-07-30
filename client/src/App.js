@@ -15,6 +15,7 @@ import WeeksList from "./components/coursework/WeeksList";
 import CourseTree from "./components/coursework/CourseTree";
 import { getWeeks } from "./services/courseworkService";
 import LessonsList from "./components/coursework/LessonsList";
+import SearchFilter from "./components/SearchFilter";
 
 class App extends React.Component {
   state = {
