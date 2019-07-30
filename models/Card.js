@@ -13,10 +13,11 @@ const cardSchema = Schema(
       ref: "Board"
     },
     idList: String,
-    idLabels: [String], //this needs to change
+    idLabels: [String], //tags 
     shortUrl: String,
     url: String,
     attachments: [String],
+    attachmentName: String,
     completionStatus: {
       type: Boolean,
       default: false

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const trelloResponseSchema = Schema(
   {
-    response: Object
+    action: Object
   },
   {
     timestamps: {
