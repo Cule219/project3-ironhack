@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { getBoard } from "../../services/courseworkService";
 import { Link } from "react-router-dom";
-import WeeksList from "./WeeksList";
 import ModulesList from "./ModulesList";
-import CourseTree from "./CourseTree";
+
 
 class About extends Component {
   constructor() {
