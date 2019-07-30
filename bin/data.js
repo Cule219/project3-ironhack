@@ -26,7 +26,7 @@ const technologies = [
   "Google Maps"
 ];
 
-mongoose
+mongoose//mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865
   .connect("mongodb://127.0.0.1/final-project-ironhack", {
     useNewUrlParser: true
   })
