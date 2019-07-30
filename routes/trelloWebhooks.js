@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const Card = require("../models/Card");
+//these should probably be targeted at one point
 const List = require("../models/List");
 const Board = require("../models/Board");
 const Module = require("../models/Module");
+
 const TrelloResponse = require("../models/TrelloResponse");
 
 router.post('/trelloCallback', (req, res) => {
-  TrelloResponse.update({'response.action.id': req.body.action.id},{response: req.body}, {upsert: true})//action: req.body.action
+  TrelloResponse.create({action: req.body.action})//action: req.body.action
   
   // action.type = createCard
   if(req.body.action.display.translationKey === "action_create_card") {
@@ -22,8 +24,8 @@ router.post('/trelloCallback', (req, res) => {
   }
   // action.type = updateCard
   else if(req.body.action.display.translationKey === "action_archived_card") {
-    Card.findOneAndDelete({id: req.body.action.data.card.id}).then(data => 
-        console.log(data.length));
+    Card.deleteMany({id: req.body.action.data.card.id}).then(data => 
+        console.log(data));
   }
   // action.type = addAttachmentToCard
   else if(req.body.action.display.translationKey === "action_add_attachment_to_card") {
