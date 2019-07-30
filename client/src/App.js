@@ -13,14 +13,20 @@ import About from "./components/coursework/About";
 import DaysList from "./components/coursework/DaysList";
 import WeeksList from "./components/coursework/WeeksList";
 import CourseTree from "./components/coursework/CourseTree";
-import { getWeeks } from "./services/courseworkService";
+import { getWeeks, getLessons } from "./services/courseworkService";
 import LessonsList from "./components/coursework/LessonsList";
+import SearchFilter from "./components/SearchFilter";
+import SearchResults from "./components/coursework/SearchResults";
 
 class App extends React.Component {
-  state = {
-    user: this.props.user,
-    weeks: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: this.props.user,
+      weeks: [],
+      filteredResults: []
+    };
+  }
 
   setUser = user => {
     this.setState({
@@ -54,14 +60,36 @@ class App extends React.Component {
   //     });
   // };
 
+  handleSearchFilter = state => {
+    getLessons().then(lessons => {
+      const filteredLessons = lessons.filter(el =>
+        state.incompleteOnly ? el.completionStatus === false : el
+      );
+      console.log(filteredLessons);
+      this.setState({ filteredResults: filteredLessons });
+      this.props.history.push("/results");
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <CourseTree weeks={this.state.weeks} />
-          <SearchFilter weeks={this.state.weeks} />
+          <SearchFilter searchAndFilter={this.handleSearchFilter} />
           <Switch>
+            <Route
+              exact
+              path="/results"
+              render={props => (
+                <SearchResults
+                  {...props}
+                  results={this.state.filteredResults}
+                />
+              )}
+              user={this.state.user}
+            />
             <Route
               exact
               path="/days/:id"

@@ -4,12 +4,7 @@ const getBoard = () =>
   axios.get("/api/coursework/").then(response => response.data);
 
 const getLessons = () =>
-  axios.get("/api/coursework/lessons").then(response => {
-    return response.data.map(el => {
-      console.log(el);
-      return el;
-    });
-  });
+  axios.get("/api/coursework/lessons").then(response => response.data);
 
 const getDays = () =>
   axios.get("/api/coursework/days").then(response => response.data);

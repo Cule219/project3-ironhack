@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ axios
   .then(response => {
     ReactDOM.render(
       <BrowserRouter>
-        <App user={response.data} />
+        <Route component={App} user={response.data} />
       </BrowserRouter>,
       document.getElementById("root")
     );
