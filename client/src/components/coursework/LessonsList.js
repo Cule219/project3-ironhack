@@ -8,23 +8,18 @@ import CommentBox from "../comments/CommentBox";
 import Collapsible from "./Collapsible";
 
 class LessonsList extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     dayId: this.props.match.params.id,
-  //     lessons: [],
-  //     name: ""
-  //   };
-  // }
+  // Should be obsolete, added back because we had conflicts
+  // state = {
+  //   lessons: []
+  // };
 
-  // setDay(id) {
+  // componentDidMount() {
+  //   console.log(this.props.match.params.id);
+  //   let id = this.props.match.params.id;
   //   getDay(id)
   //     .then(response => {
-  //       this.setState({
-  //         dayId: id,
-  //         lessons: response.cards,
-  //         name: response.name
-  //       });
+  //       console.log("these are the day's lessons from DB: ", response);
+  //       this.setState({ lessons: response.cards, name: response.name });
   //     })
   //     .catch(err => {
   //       console.log(err);
@@ -62,7 +57,7 @@ class LessonsList extends Component {
                     </Form.Group>
                   </Form>
                 </div>
-                <Collapsible open={el.desc ? true : false}>
+                {el.desc && (
                   <div
                     className="lesson-description"
                     dangerouslySetInnerHTML={{
@@ -74,7 +69,7 @@ class LessonsList extends Component {
                         .join(" ")
                     }}
                   />
-                </Collapsible>
+                )}
                 <div className="tags">
                   {el.tags.map((tag, index) => (
                     <span
