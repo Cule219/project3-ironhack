@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CompletionStatus from "./CompletionStatus";
 import Collapsible from "./Collapsible";
 import { Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class SearchResults extends Component {
   state = { tagsOpen: true };
@@ -13,19 +14,22 @@ class SearchResults extends Component {
   render() {
     return (
       <div className="list-container">
-        <Form.Check
+        {/* <Form.Check
           type="checkbox"
           className="check"
           label="Show tags"
           checked={this.state.tagsOpen}
           onChange={this.toggleTags}
-        />
+        /> */}
         <ul className="list-primary">
           {this.props.results &&
             this.props.results.map(el => (
               <div key={el.id} className="list-item">
                 <div className="title-status">
                   <a href={el.attachments[0]}>{el.name}</a>
+                  <Link to={`/days/${el.idList}`}>Go to day</Link>
+                  {/* ADD THIS ONCE THERE'S A WEEK VIEW
+                   <Link to={`/weeks/1`}>Go to week</Link> */}
                   <CompletionStatus {...el} />
                 </div>
                 <Collapsible open={this.state.tagsOpen}>

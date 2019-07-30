@@ -13,7 +13,6 @@ class CompletionStatus extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Form>
         <Form.Group controlId="statusCheckbox">

@@ -38,7 +38,8 @@ class SearchFilter extends React.Component {
         // { label: "Axios", value: "Axios" },
         // { label: "DOM", value: "DOM" }
       ],
-      incompleteOnly: false
+      incompleteOnly: false,
+      selectedTags: []
     };
   }
 
@@ -53,6 +54,21 @@ class SearchFilter extends React.Component {
         [name]: state
       },
       () => this.props.searchAndFilter(this.state)
+    );
+  };
+
+  filterByTags = e => {
+    let options = e.target.options;
+    let values = [];
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        console.log(options[i]);
+        values.push(options[i].value);
+      }
+    }
+    console.log(values);
+    this.setState({ selectedTags: values }, () =>
+      this.props.searchAndFilter(this.state)
     );
   };
 
@@ -79,7 +95,7 @@ class SearchFilter extends React.Component {
           onChange={this.handleChange}
         />
         <label>Incomplete</label>
-        {this.state.tags.length > 0 && (
+        {/* {this.state.tags.length > 0 && (
           <MultiSelect
             placeholder="Filter by tags"
             options={this.state.tags.map(tag => ({
@@ -87,23 +103,28 @@ class SearchFilter extends React.Component {
               value: tag.name
             }))}
             // options={this.state.tags}
-            onValuesChange={value => alert(value)}
+            onValuesChange={value => this.filterByTags}
           />
-        )}
-        {/* <div class="container">
+        )} */}
+        <div class="container">
           <label className="label">Tags</label>
-          <p className="control">
+          <p className="control is-multiple">
             {this.state.tags.length > 0 && (
-              <select multiple size={this.state.tags.length}>
+              <select
+                multiple
+                size={this.state.tags.length}
+                value={this.state.selectedTags}
+                onChange={this.filterByTags}
+              >
                 {this.state.tags.map((tag, index) => (
-                  <option key={index} value={tag}>
+                  <option key={index} value={tag.name}>
                     {tag.name}
                   </option>
                 ))}
               </select>
             )}
           </p>
-        </div> */}
+        </div>
       </div>
     );
   }
