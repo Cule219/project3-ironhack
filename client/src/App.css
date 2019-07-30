@@ -53,3 +53,17 @@ span.technology {
 .check {
   margin: 0px 10px;
 }
+
+.course-tree {
+  text-align: left;
+}
+
+.lesson-description {
+  font-size: 0.8em;
+  word-wrap: break-word;
+}
+
+.small {
+  font-size: 0.8em;
+  margin-left: 10px;
+}

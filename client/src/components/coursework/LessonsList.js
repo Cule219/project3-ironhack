@@ -1,50 +1,80 @@
 import React, { Component } from "react";
-import { getDay, getCards } from "../../services/courseworkService";
+import { getDay } from "../../services/courseworkService";
 import { Form } from "react-bootstrap";
 import NotesBox from "../notes/NotesBox";
 
 // this is for testing purposes only
 import CommentBox from "../comments/CommentBox";
+import Collapsible from "./Collapsible";
 
 class LessonsList extends Component {
-  state = {
-    lessons: [],
-    templessons: []
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     dayId: this.props.match.params.id,
+  //     lessons: [],
+  //     name: ""
+  //   };
+  // }
 
-  componentDidMount() {
-    let id = this.props.match.params.id;
-    getDay(id)
-      .then(response => {
-        // console.log("these are the day's lessons from DB: ", response);
-        this.setState({ lessons: response.cards, name: response.name });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    getCards().then(response => {
-      this.setState({ templessons: response });
-    });
+  // setDay(id) {
+  //   getDay(id)
+  //     .then(response => {
+  //       this.setState({
+  //         dayId: id,
+  //         lessons: response.cards,
+  //         name: response.name
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
 
+  validURL(str) {
+    var pattern = new RegExp(
+      "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+        "(\\#[-a-z\\d_]*)?$",
+      "i"
+    ); // fragment locator
+    return !!pattern.test(str);
   }
 
   render() {
+    let day = this.props.location.state.day;
+
     return (
       <div className="list-container">
-        <p>{this.state.name}</p>
+        <p>{day.name}</p>
         <ul className="list-primary">
-          {this.state.lessons.length > 0 &&
-            this.state.lessons.map(el => (
+          {day.cards.length > 0 &&
+            day.cards.map(el => (
               <div key={el.id} className="list-item">
                 <div className="title-status">
-                  <a href={el.url}>{el.name}</a>
-                  {/* // need to fix later, should be el.attachments[0] */}
+                  <a href={el.attachments[0]}>{el.name}</a>
                   <Form>
                     <Form.Group controlId="statusCheckbox">
                       <Form.Check className="check" type="checkbox" label="" />
                     </Form.Group>
                   </Form>
                 </div>
+                <Collapsible open={el.desc ? true : false}>
+                  <div
+                    className="lesson-description"
+                    dangerouslySetInnerHTML={{
+                      __html: el.desc
+                        .split(/\n|\s/)
+                        .map(str =>
+                          this.validURL(str) ? `<a href=${str}>Link</a>` : str
+                        )
+                        .join(" ")
+                    }}
+                  />
+                </Collapsible>
                 <div className="tags">
                   {el.tags.map((tag, index) => (
                     <span
@@ -65,7 +95,7 @@ class LessonsList extends Component {
         </ul>
         {/* this is for testing purposes only */}
         <NotesBox data={this.props} user={this.props.user} />
-        <CommentBox data={this.props} user={this.props.user}/>
+        <CommentBox data={this.props} user={this.props.user} />
       </div>
     );
   }
