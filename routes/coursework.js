@@ -90,4 +90,24 @@ router.get("/modules", (req, res, next) => {
     });
 });
 
+router.post("/lessons/:id", (req, res, next) => {
+  console.log(
+    "here I am in the routes: ",
+    req.params.id,
+    req.body.completionStatus
+  );
+  Card.findOneAndUpdate(
+    { id: req.params.id },
+    { completionStatus: req.body.completionStatus },
+    { new: true }
+  )
+    .then(card => {
+      console.log(card);
+      res.json(card);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 module.exports = router;

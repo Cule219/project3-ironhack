@@ -9,12 +9,11 @@ import Protected from "./components/Protected";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
-import Day from "./containers/Day";
 import About from "./components/coursework/About";
 import DaysList from "./components/coursework/DaysList";
 import WeeksList from "./components/coursework/WeeksList";
 import CourseTree from "./components/coursework/CourseTree";
-import { getWeeks, getDay } from "./services/courseworkService";
+import { getWeeks } from "./services/courseworkService";
 import LessonsList from "./components/coursework/LessonsList";
 
 class App extends React.Component {
@@ -62,6 +61,7 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <CourseTree weeks={this.state.weeks} />
+          <SearchFilter weeks={this.state.weeks} />
           <Switch>
             <Route
               exact
