@@ -10,13 +10,13 @@ export default class NotesBox extends Component {
     listNote: null
   }
 
-  getNotes = async () => {
-    await axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
+  getNotes = () => {
+    axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
       this.setState({
         listNote: response.data
       });
     })
-    await axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
+    axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
       this.setState({
         userNote: response.data
       });
@@ -29,17 +29,22 @@ export default class NotesBox extends Component {
     });
   }
 
-  async componentDidMount(){
-    let user = await islogged();
+  componentDidMount(){
+    let user = islogged();
     this.setState({
       user: user
     });
-
     this.getNotes();
   };
+  
+  componentDidUpdate(prevProps){
+    console.log(prevProps.data.location.pathname, this.props.data.location.pathname);
+    if(prevProps.data.location.pathname !==this.props.data.location.pathname) {
+        this.setState({})
+      }
+  }
 
   render() {
-    // console.log(this.state)
     return (
       <>
         <Note user={this.state.user} label={'Your Notes'} data={this.state.userNote} 
