@@ -41,7 +41,6 @@ class LessonsList extends Component {
 
   render() {
     let day = this.props.location.state.day;
-
     return (
       <div className="list-container">
         <p>{day.name}</p>

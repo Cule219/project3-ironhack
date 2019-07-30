@@ -18,22 +18,12 @@ mongoose
   .catch(err => {
     console.error("Error connecting to mongo", err);
   });
-// axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
-
-// let cards;
-// Card.find({}).then(cards => {
-//   cards = cards.map(x => {
-//     // let attachments = getUrlsFromCard(x.id);
-//     x.id;
-//     // Card.findByIdAndUpdate(x._id, {attachments});s
-//   });
-// });
 
 function updateCardsWithAttachments() {
   return Card.find({})
     .then(cards => {
-      console.log(cards);
-      return cards.slice(191, 234).map(card => {
+      console.log(cards);//234
+      return cards.slice(100, 199).map(card => {
         getUrlsFromCard(card.id)
           .then(urls => {
             Card.findByIdAndUpdate(card._id, { attachments: urls })

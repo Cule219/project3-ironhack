@@ -1,53 +1,54 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Note from './Note';
+import { islogged } from "../../services/api";
 
 export default class NotesBox extends Component {
   state = {
     user: null,
-    userNote: '',
-    listNote: ''
-  }
-  getNotes = () => {
-    this.getUsersNote();
-    this.getListNote();
+    userNote: null,
+    listNote: null
   }
 
-  getUsersNote = () => {
-    axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
-      console.log(response.data)
-      this.setState = {
-        userNote: response.data
-      }
+  getNotes = async () => {
+    await axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
+      this.setState({
+        listNote: response.data
+      });
     })
-  }
-
-  getListNote = () => {
-    axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
-      return response.data
+    await axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
+      this.setState({
+        userNote: response.data
+      });
     })
   }
   
-  updateNote = e => {
-    axios.post(`/api/notes`, e.content).then(
-      this.getNotes()
-    )
-  }
-
-  async componentDidMount(){
-    this.getUsersNote();
-    let getList = await this.getListNote();
-    this.setState({
-      listNote: getList
+  updateNote = (content, id) => {
+    axios.put(`/api/notes`, {content: content,id: id }).then(response => {
+      this.getNotes();
     });
   }
 
+  async componentDidMount(){
+    let user = await islogged();
+    this.setState({
+      user: user
+    });
+
+    this.getNotes();
+  };
+
   render() {
+    // console.log(this.state)
     return (
       <>
-        <Note data={this.state.userNote} />
+        <Note user={this.state.user} label={'Your Notes'} data={this.state.userNote} 
+        postNoteHandler = { this.updateNote }
+        />
         {/* This needs to check for user role to allow modification */}
-        <Note data={this.state.listNote} />
+        <Note user={this.state.user} label={'Lists Notes'} data={this.state.listNote} 
+        postNoteHandler = { this.updateNote }
+        />
       </>
     )
   }
