@@ -6,8 +6,8 @@ const Card = require("../models/Card");
 //const request     = require('superagent')
 //const Throttle    = require('superagent-throttle')
 
-mongoose
-  .connect("mongodb://127.0.0.1/final-project-ironhack", {
+mongoose//mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865
+  .connect("mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865", {
     useNewUrlParser: true
   })
   .then(x => {
@@ -22,8 +22,10 @@ mongoose
 function updateCardsWithAttachments() {
   return Card.find({})
     .then(cards => {
-      console.log(cards);//234
-      return cards.slice(100, 199).map(card => {
+      // return cards.slice(0, 99)
+      // return cards.slice(100, 199)
+      return cards.slice(200, 234)
+      .map(card => {
         getUrlsFromCard(card.id)
           .then(urls => {
             Card.findByIdAndUpdate(card._id, { attachments: urls })
