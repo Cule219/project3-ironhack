@@ -12,10 +12,10 @@ router.post('/trelloCallback', (req, res) => {
   // action.type = createCard
   if(req.body.action.display.translationKey === "action_create_card") {
     Card.create({
-        id = req.body.action.data.card.id, 
-        name = req.body.action.data.card.name, 
-        shortLink = req.body.action.data.card.shortLink,
-        idList = req.body.action.data.list.id
+        id: req.body.action.data.card.id, 
+        name: req.body.action.data.card.name, 
+        shortLink: req.body.action.data.card.shortLink,
+        idList: req.body.action.data.list.id
     }).then(card => {
         console.log(card);
     }) 
