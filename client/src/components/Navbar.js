@@ -7,6 +7,7 @@ const handleLogout = props => {
   logout().then(() => {
     props.setUser(null);
   });
+  this.forceUpdate();
 };
 
 const CustomNavbar = props => {

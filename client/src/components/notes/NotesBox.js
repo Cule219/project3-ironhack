@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Note from './Note';
+import { islogged } from "../../services/api";
 
 export default class NotesBox extends Component {
   state = {
+    user: null,
     userNote: null,
     listNote: null
   }
@@ -21,22 +23,32 @@ export default class NotesBox extends Component {
     })
   }
   
-  updateNote = e => {
-    axios.post(`/api/notes`, e.content).then(
-      this.getNotes()
-    )
+  updateNote = (content, id) => {
+    axios.put(`/api/notes`, {content: content,id: id }).then(response => {
+      this.getNotes();
+    });
   }
 
-  componentDidMount(){
+  async componentDidMount(){
+    let user = await islogged();
+    this.setState({
+      user: user
+    });
+
     this.getNotes();
   };
 
   render() {
+    // console.log(this.state)
     return (
       <>
-        <Note label={'Your Notes:'} data={this.state.userNote} />
+        <Note user={this.state.user} label={'Your Notes'} data={this.state.userNote} 
+        postNoteHandler = { this.updateNote }
+        />
         {/* This needs to check for user role to allow modification */}
-        <Note label={'Lists Notes:'}data={this.state.listNote} />
+        <Note user={this.state.user} label={'Lists Notes'} data={this.state.listNote} 
+        postNoteHandler = { this.updateNote }
+        />
       </>
     )
   }

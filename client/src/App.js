@@ -112,8 +112,6 @@ class App extends React.Component {
             />
           </Switch>
         </div>
-        {/* <DaysList /> */}
-        {/* <WeeksList /> */}
       </div>
     );
   }

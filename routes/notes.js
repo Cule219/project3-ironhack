@@ -17,17 +17,11 @@ router.get("/prot/:id", (req, res)=> {
 })
 
 router.put("/", (req, res)=>{
-  Note.findByIdAndUpdate(req.params.noteId).then(data => {
+  Note.findByIdAndUpdate(req.body.id, {content: req.body.content}).then(data => {
     res.json({ message: `Project with id ${req.params.noteId} was successfully updated` });
   }).catch(err => res.json(err));
 });
 
-//not sure if needed
-router.get("/:noteId", (req, res)=>{
-  Note.findById(req.params.noteId).then(data => {
-    res.status(200).json(data);
-  }).catch(err => res.json(err));
-});
 
 //post cannot be deleted? maybe hidden/archived
 

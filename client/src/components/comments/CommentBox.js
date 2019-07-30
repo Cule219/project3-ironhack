@@ -28,8 +28,7 @@ export default class CommentBox extends Component {
       });
   };
 
-  onShowComments= e => {
-
+  onShowComments = e => {
     let button = this.state.commentForm? 'New':'Hide';
     let buttonClass  = this.state.commentForm? "fas fa-plus": "fas fa-minus"
     this.setState({
@@ -73,7 +72,7 @@ export default class CommentBox extends Component {
 
     <h2><i className="fas fa-users"/>Comments:
     <button onClick={this.onShowComments} className="btn btn-success" style={{float: 'right'}}>
-      <a href="#comment-form"><i className={this.state.classButton}/>{this.state.commentButton} </a>
+     <i className={this.state.classButton}/>{this.state.commentButton}
     </button>
     </h2>
   </div>
