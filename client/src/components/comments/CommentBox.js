@@ -5,13 +5,13 @@ import CommentForm from "./CommentForm";
 import { islogged } from "../../services/api";
 
 export default class CommentBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  state = {
     comments: [],
-    user: ''
+    user: '',
+    commentForm: false,
+    commentButton: 'New',
+    classButton: "fas fa-plus"
   };
-}
 
   getComments = () => {
     axios
@@ -28,6 +28,16 @@ export default class CommentBox extends Component {
       });
   };
 
+  onShowComments = e => {
+    let button = this.state.commentForm? 'New':'Hide';
+    let buttonClass  = this.state.commentForm? "fas fa-plus": "fas fa-minus"
+    this.setState({
+      commentForm: !this.state.commentForm,
+      commentButton: button,
+      classButton: buttonClass
+    })
+  }
+
   deleteComment = e => {
     axios.delete(`/api/comments/${e}`).then(response => {
       this.getComments();
@@ -42,6 +52,7 @@ export default class CommentBox extends Component {
       list: this.props.data.match.params.id
     }).then(response => {
       this.getComments();
+      this.onShowComments();
     });
   };
 
@@ -60,8 +71,8 @@ export default class CommentBox extends Component {
   <div className="col-md-6">
 
     <h2><i className="fas fa-users"/>Comments:
-    <button className="btn btn-success" style={{float: 'right'}}>
-      <a href="#comment-form"><i className="fas fa-plus"/>New </a>
+    <button onClick={this.onShowComments} className="btn btn-success" style={{float: 'right'}}>
+     <i className={this.state.classButton}/>{this.state.commentButton}
     </button>
     </h2>
   </div>
@@ -79,16 +90,17 @@ export default class CommentBox extends Component {
           <Comment
           deleteClickHandler={this.deleteComment.bind(this, x._id)}
           data={x}
+          user={this.state.user}
           />
         </tr>)
       })}
-      <tr>
+      {this.state.commentForm&&<tr>
         <CommentForm 
         postCommentHandler={this.postComment}
         user={this.state.user} 
         id="comment-form"
         />
-      </tr>
+      </tr>}
     </tbody>
   </table>
   </div>

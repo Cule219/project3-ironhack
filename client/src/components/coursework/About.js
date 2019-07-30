@@ -24,9 +24,7 @@ class About extends Component {
           <Link to="/dashboard">Dashboard</Link>
         </h1>
         {this.state.board && <h2>{this.state.board.name}</h2>}
-        <WeeksList />
         <ModulesList />
-        <CourseTree />
       </div>
     );
   }
