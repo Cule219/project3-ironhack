@@ -11,3 +11,5 @@ router.post('/trelloCallback', (req, res) => {
   TrelloResponse.create({response: req.body});
   res.status(200);
 })
+
+module.exports = router;
