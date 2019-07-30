@@ -28,7 +28,7 @@ class LessonsList extends Component {
   }
 
   componentDidUpdate(prevprops) {
-    if (this.props.match.params.id != prevprops.match.params.id) {
+    if (this.props.match.params.id !== prevprops.match.params.id) {
       let id = this.props.match.params.id;
       getDay(id)
         .then(response => {

@@ -19,10 +19,12 @@ const getWeek = num =>
   axios.get(`/api/coursework/weeks/${num}`).then(response => response.data);
 
 const getModules = () =>
-  axios.get("api/coursework/modules").then(response => response.data);
+  axios.get("/api/coursework/modules").then(response => response.data);
+
+const getTags = () =>
+  axios.get("/api/coursework/tags").then(response => response.data);
 
 const setCompletion = (id, status) => {
-  console.log("here I'm in the coursework service: ", id, status);
   return axios
     .post(`/api/coursework/lessons/${id}`, {
       completionStatus: status
@@ -72,5 +74,6 @@ export {
   getWeeks,
   getWeek,
   getModules,
-  setCompletion
+  setCompletion,
+  getTags
 };

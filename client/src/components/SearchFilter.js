@@ -1,5 +1,6 @@
 import React from "react";
-import { getTags } from "../services/courseworkService"; 
+import { getTags } from "../services/courseworkService";
+import { MultiSelect } from "react-selectize";
 
 class SearchFilter extends React.Component {
   constructor() {
@@ -25,9 +26,19 @@ class SearchFilter extends React.Component {
     );
   };
 
-
+  componentDidMount() {
+    getTags().then(tags => {
+      this.setState({ tags: tags });
+    });
+  }
 
   render() {
+    console.log(
+      this.state.tags.map(tag => ({
+        label: tag.name,
+        value: tag.name
+      }))
+    );
     return (
       <div>
         <input
@@ -43,6 +54,29 @@ class SearchFilter extends React.Component {
           onChange={this.handleChange}
         />
         <label>Incomplete</label>
+        {this.state.tags.length > 0 && (
+          <MultiSelect
+            placeholder="Filter by tags"
+            options={this.state.tags.map(tag => ({
+              label: tag.name,
+              value: tag.name
+            }))}
+          />
+        )}
+        {/* <div class="container">
+          <label className="label">Tags</label>
+          <p className="control">
+            {this.state.tags.length > 0 && (
+              <select multiple size={this.state.tags.length}>
+                {this.state.tags.map((tag, index) => (
+                  <option key={index} value={tag}>
+                    {tag.name}
+                  </option>
+                ))}
+              </select>
+            )}
+          </p>
+        </div> */}
       </div>
     );
   }
