@@ -60,6 +60,7 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <CourseTree weeks={this.state.weeks} />
+          <SearchFilter weeks={this.state.weeks} />
           <Switch>
             <Route
               exact
