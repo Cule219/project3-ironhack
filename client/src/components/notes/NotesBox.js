@@ -4,20 +4,20 @@ import Note from './Note';
 
 export default class NotesBox extends Component {
   state = {
-    userNote: '',
-    listNote: ''
+    userNote: null,
+    listNote: null
   }
-  
-  getNotes = () => {
-    axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
-      this.setState = {
-        userNote: response.data
-      }
-    })
-    axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
-      this.setState = {
+
+  getNotes = async () => {
+    await axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
+      this.setState({
         listNote: response.data
-      }
+      });
+    })
+    await axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
+      this.setState({
+        userNote: response.data
+      });
     })
   }
   
@@ -34,10 +34,9 @@ export default class NotesBox extends Component {
   render() {
     return (
       <>
-        <Note data={this.state.userNote} />
+        <Note label={'Your Notes:'} data={this.state.userNote} />
         {/* This needs to check for user role to allow modification */}
-        <Note data={this.state.listNote} />
-        {console.log(this.state)}
+        <Note label={'Lists Notes:'}data={this.state.listNote} />
       </>
     )
   }

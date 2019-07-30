@@ -2,29 +2,35 @@ import React, { Component } from 'react'
 
 export default class Note extends Component {
   state = {
-    content: this.props.data.content
+    content: ''
   }
 
   onChangeHandler = e => {
     this.setState({
       content: e.target.value
-    })
+    });
+  }
+
+  onDoubleClickHandler = e => {
+    e.target.setAttribute("disabled", "false")
+    console.log('bla')
   }
 
   onClickHandler = e => {
     this.props.postNoteHandler(this.state.content);
   }
- // <label>Make your own notes:</label><br/>
   render() {
     return (
-      <>
-        {console.log(this.props)}
+      <div>
+       <label>{this.props.label}</label><br/>
         <textarea id="story" name="story"
         rows="5" cols="33" className="block"
         value = {this.state.content}
         onChange={this.onChangeHandler}
+        // onDoubleClick={this.onDoubleClickHandler}
+        disabled
         />
-      </>
+      </div>
     )
   }
 }

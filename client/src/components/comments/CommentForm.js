@@ -27,7 +27,8 @@ export default class CommentForm extends Component {
         </td>
         <td colSpan="2">
           <br/>
-          <input type="text" value={this.state.comment} onKeyDown={this.onKeyComment} onChange={this.onChangeHandler}/>
+          <textarea id="story" name="story"
+          rows="5" cols="33" value={this.state.comment} onKeyDown={this.onKeyComment} onChange={this.onChangeHandler}/>
         </td>
       </>
     )

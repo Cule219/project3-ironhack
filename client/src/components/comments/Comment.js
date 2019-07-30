@@ -35,7 +35,7 @@ export default class Comment extends Component {
         <td colSpan="2">
           <div>
             <i onClick={this.onShowClick} className={this.state.className} style={{cursor: 'pointer'}}/>
-            {showComment && <i className="fas fa-times" style={{cursor: 'pointer', float: 'right', color: 'red'}} onClick={this.onClickDelete} />}
+            {showComment && this.props.user.role==='TA' && <i className="fas fa-times" style={{cursor: 'pointer', float: 'right', color: 'red'}} onClick={this.onClickDelete} />}
           </div>
           {showComment && (<p><Linkify>{this.props.data.content}</Linkify></p>)}
         </td>
