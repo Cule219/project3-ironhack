@@ -56,6 +56,7 @@ class App extends React.Component {
   // };
 
   render() {
+    console.log('got to the App.js')
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
@@ -86,14 +87,18 @@ class App extends React.Component {
               component={WeeksList}
               user={this.state.user}
             />
-            <Route exact path="/" component={About} user={this.state.user} />
+            <Route 
+              exact
+              path="/" 
+              component={About} 
+              user={this.state.user} 
+            />
             <Route
               exact
               path="/dashboard"
               component={Dashboard}
               user={this.state.user}
             />
-
             <Protected
               exact
               path="/signup"
