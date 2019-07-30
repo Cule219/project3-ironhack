@@ -10,13 +10,13 @@ export default class NotesBox extends Component {
     listNote: null
   }
 
-  getNotes = () => {
-    axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
+  getNotes = async () => {
+    await axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
       this.setState({
         listNote: response.data
       });
     })
-    axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
+    await axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
       this.setState({
         userNote: response.data
       });
@@ -29,18 +29,17 @@ export default class NotesBox extends Component {
     });
   }
 
-  componentDidMount(){
-    let user = islogged();
+  async componentDidMount(){
+    let user = await islogged();
     this.setState({
       user: user
     });
+
     this.getNotes();
   };
-  
   componentDidUpdate(prevProps){
-    console.log(prevProps.data.location.pathname, this.props.data.location.pathname);
-    if(prevProps.data.location.pathname !==this.props.data.location.pathname) {
-        this.setState({})
+    if(prevProps.data.location.pathname!==this.props.data.location.pathname) {
+        this.getNotes()
       }
   }
 
