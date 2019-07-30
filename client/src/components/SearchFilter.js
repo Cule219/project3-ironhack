@@ -1,13 +1,43 @@
 import React from "react";
 import { getTags } from "../services/courseworkService";
-import { MultiSelect } from "react-selectize";
+import { ReactSelectize, MultiSelect } from "react-selectize";
 
 class SearchFilter extends React.Component {
   constructor() {
     super();
     this.state = {
       searchStr: "",
-      tags: [],
+      tags: [
+        // { label: "Exercise", value: "Exercise" },
+        // { label: "Kata", value: "Kata" },
+        // { label: "LAB", value: "LAB" },
+        // { label: "Extra Content", value: "Extra Content" },
+        // { label: "Additional info", value: "Additional info" },
+        // { label: "Lesson", value: "Lesson" },
+        // { label: "Events", value: "Events" },
+        // { label: "Review", value: "Review" },
+        // { label: "Enhancement", value: "Enhancement" },
+        // { label: "Career Services", value: "Career Services" },
+        // { label: "Recap", value: "Recap" },
+        // { label: "Express", value: "Express" },
+        // { label: "Mongoose", value: "Mongoose" },
+        // { label: "CSS", value: "CSS" },
+        // { label: "JS", value: "JS" },
+        // { label: "React", value: "React" },
+        // { label: "SG", value: "SG" },
+        // { label: "jQuery", value: "jQuery" },
+        // { label: "ES6", value: "ES6" },
+        // { label: "Node", value: "Node" },
+        // { label: "JSON", value: "JSON" },
+        // { label: "HTML", value: "HTML" },
+        // { label: "Google Maps", value: "Google Maps" },
+        // { label: "P5", value: "P5" },
+        // { label: "MongoDB", value: "MongoDB" },
+        // { label: "Passport", value: "Passport" },
+        // { label: "AJAX", value: "AJAX" },
+        // { label: "Axios", value: "Axios" },
+        // { label: "DOM", value: "DOM" }
+      ],
       incompleteOnly: false
     };
   }
@@ -33,12 +63,7 @@ class SearchFilter extends React.Component {
   }
 
   render() {
-    console.log(
-      this.state.tags.map(tag => ({
-        label: tag.name,
-        value: tag.name
-      }))
-    );
+    console.log(this.state.tags);
     return (
       <div>
         <input
@@ -61,6 +86,8 @@ class SearchFilter extends React.Component {
               label: tag.name,
               value: tag.name
             }))}
+            // options={this.state.tags}
+            onValuesChange={value => alert(value)}
           />
         )}
         {/* <div class="container">
