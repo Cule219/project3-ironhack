@@ -9,7 +9,7 @@ const Module = require("../models/Module");
 const TrelloResponse = require("../models/TrelloResponse");
 
 router.post('/trelloCallback', (req, res) => {
-  TrelloResponse.create({action: req.body.action})//action: req.body.action
+  TrelloResponse.create({'response.action.id': req.body.action.id},{action: req.body.action}, {upsert: true})//action: req.body.action
   
   // action.type = createCard
   if(req.body.action.display.translationKey === "action_create_card") {
