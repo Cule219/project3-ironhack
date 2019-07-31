@@ -1,6 +1,6 @@
 import React from "react";
 import { getTags } from "../services/courseworkService";
-import { ReactSelectize, MultiSelect } from "react-selectize";
+import Select from "react-select";
 
 class SearchFilter extends React.Component {
   constructor() {
@@ -72,6 +72,13 @@ class SearchFilter extends React.Component {
     );
   };
 
+  filterByTagsSelect = () => {
+    console.log([...document.getElementsByName("tags")].map(el => el.value));
+    // this.setState({ selectedTags: values }, () =>
+    //   this.props.searchAndFilter(this.state)
+    // );
+  };
+
   componentDidMount() {
     getTags().then(tags => {
       this.setState({ tags: tags });
@@ -95,18 +102,19 @@ class SearchFilter extends React.Component {
           onChange={this.handleChange}
         />
         <label>Incomplete</label>
-        {/* {this.state.tags.length > 0 && (
-          <MultiSelect
+        {this.state.tags.length > 0 && (
+          <Select
+            isMulti
+            name="tags"
             placeholder="Filter by tags"
             options={this.state.tags.map(tag => ({
               label: tag.name,
               value: tag.name
             }))}
-            // options={this.state.tags}
-            onValuesChange={value => this.filterByTags}
+            onChange={this.filterByTagsSelect}
           />
-        )} */}
-        <div class="container">
+        )}
+        <div className="container">
           <label className="label">Tags</label>
           <p className="control is-multiple">
             {this.state.tags.length > 0 && (
