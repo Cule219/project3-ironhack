@@ -5,6 +5,10 @@
   margin-left: 0px;
 }
 
+.menu {
+  margin-top: 30px;
+}
+
 .list-container {
   margin: 20px 0;
   width: 100%;
@@ -33,6 +37,14 @@
   align-items: baseline;
   margin: 2px 0;
   width: 100%;
+}
+
+.right-float {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
 }
 
 .tags {

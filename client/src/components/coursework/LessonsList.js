@@ -34,7 +34,7 @@ class LessonsList extends Component {
       let id = this.props.match.params.id;
       getDay(id)
         .then(response => {
-          // console.log("these are the day's lessons from DB: ", response);
+          console.log("these are the day's lessons from DB: ", response);
           this.setState({ day: response });
         })
         .catch(err => {

@@ -21,29 +21,25 @@ class SearchResults extends Component {
               <div key={el.id} className="list-item">
                 <div className="title-status">
                   <a href={el.attachments[0]}>{el.name}</a>
-                  <Link
-                    to={`/days/${el.idList}`}
-                    onClick={() =>
-                      this.props.reloadCourseTree(el.idList, el.id)
-                    }
-                  >
-                    <img src="./enter.png" alt="Go to day" width="15px" />
-                  </Link>
-                  <a
-                    onClick={() =>
-                      this.props.reloadCourseTree(el.idList, el.id)
-                    }
-                  >
-                    <img
-                      src="./hide-sidebar.svg"
-                      alt="View in course tree"
-                      width="15px"
+                  <div className="right-float">
+                    <Link
+                      to={`/days/${el.idList}`}
+                      onClick={() => this.props.reloadCourseTree(el.idList)}
+                    >
+                      <img src="./enter.png" alt="Go to day" width="15px" />
+                    </Link>
+                    <a onClick={() => this.props.reloadCourseTree(el.idList)}>
+                      <img
+                        src="./hide-sidebar.svg"
+                        alt="View in course tree"
+                        width="15px"
+                      />
+                    </a>
+                    <CompletionStatus
+                      {...el}
+                      reloadCourseTree={this.props.reloadCourseTree}
                     />
-                  </a>
-                  <CompletionStatus
-                    {...el}
-                    reloadCourseTree={this.props.reloadCourseTree}
-                  />
+                  </div>
                 </div>
                 <Collapsible open={el.name.indexOf("KATA") !== -1}>
                   {el.desc && (

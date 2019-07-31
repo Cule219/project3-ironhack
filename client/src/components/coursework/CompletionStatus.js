@@ -8,7 +8,7 @@ class CompletionStatus extends Component {
   handleCompletion(id, status) {
     setCompletion(id, status).then(lesson => {
       this.setState({ completed: lesson.completionStatus });
-      this.props.reloadCourseTree(lesson.idList, lesson.id);
+      this.props.reloadCourseTree(lesson.idList);
     });
   }
 

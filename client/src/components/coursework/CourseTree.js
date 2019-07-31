@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Collapsible from "./Collapsible";
-import { Button } from "react-bootstrap";
 
 class CourseTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: [], openDay: {}, selectedDay: null };
+    this.state = { open: [] };
   }
 
   toggleWeek = index => {
@@ -15,16 +14,16 @@ class CourseTree extends Component {
     this.setState({ open: nowOpen });
   };
 
-  openWeek = (index, id) => {
+  openWeek = index => {
     let nowOpen = [];
     nowOpen[index] = true;
-    this.setState({ open: nowOpen, selectedDay: id });
+    this.setState({ open: nowOpen });
   };
 
   componentDidUpdate(prevProps) {
     if (this.props.selectedWeek !== prevProps.selectedWeek) {
       console.log(this.props);
-      this.openWeek(this.props.selectedWeek, this.props.selectedDay);
+      this.openWeek(this.props.selectedWeek);
     }
   }
 
@@ -45,11 +44,6 @@ class CourseTree extends Component {
                           pathname: `/days/${element.id}`,
                           state: { day: element }
                         }}
-                        className={
-                          this.state.selectedDay === element.id
-                            ? "is-active"
-                            : ""
-                        }
                       >
                         {element.day ? `Day ${element.day}` : element.name}
                         <br />

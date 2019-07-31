@@ -28,8 +28,7 @@ class App extends React.Component {
       weeks: [],
       filteredResults: [],
       searchOpen: false,
-      selectedWeek: null,
-      selectedDay: null
+      selectedWeek: null
     };
   }
 
@@ -87,15 +86,12 @@ class App extends React.Component {
     });
   };
 
-  reloadCourseTree = (idList, id) => {
+  reloadCourseTree = idList => {
     getWeeks()
       .then(response => {
         response.forEach((week, i) => {
           let d = week.find(el => el.id == idList);
-          if (d) {
-            let l = d.cards.find(el => el.id === id);
-            this.setState({ selectedWeek: i, selectedDay: l });
-          }
+          if (d) this.setState({ selectedWeek: i });
         });
 
         let sorted = response.map(el => {
@@ -118,6 +114,8 @@ class App extends React.Component {
           <div className="row">
             <div className="col-sm-5 col-md-4 col-lg-3 list-group fixed-height">
               <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() =>
                   this.setState({ searchOpen: !this.state.searchOpen })
                 }
@@ -131,7 +129,6 @@ class App extends React.Component {
                 weeks={this.state.weeks}
                 toggleSearch={this.toggleSearch}
                 selectedWeek={this.state.selectedWeek}
-                selectedDay={this.state.selectedDay}
               />
             </div>
             <div className="col-sm-7 col-md-8 col-lg-9 fixed-height">
