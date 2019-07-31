@@ -88,78 +88,92 @@ class App extends React.Component {
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
-          <CourseTree weeks={this.state.weeks} />
-          <Button
-            onClick={() =>
-              this.setState({ searchOpen: !this.state.searchOpen })
-            }
-          >
-            Search / Filter
-          </Button>
-          {this.state.searchOpen && (
-            <SearchFilter searchAndFilter={this.handleSearchFilter} />
-          )}
-          <Switch>
-            <Route
-              exact
-              path="/results"
-              render={props => (
-                <SearchResults
-                  {...props}
-                  results={this.state.filteredResults}
-                />
+          <div className="row">
+            <div className="col-sm-5 col-md-4 col-lg-3 list-group overflow-auto">
+              <Button
+                onClick={() =>
+                  this.setState({ searchOpen: !this.state.searchOpen })
+                }
+              >
+                Search / Filter
+              </Button>
+              {this.state.searchOpen && (
+                <SearchFilter searchAndFilter={this.handleSearchFilter} />
               )}
-              user={this.state.user}
-            />
-            <Route
-              exact
-              path="/days/:id"
-              render={props => <LessonsList {...props} />}
-              user={this.state.user}
-            />
-            <Route
-              exact
-              path="/days"
-              component={DaysList}
-              user={this.state.user}
-            />
-            <Route
-              exact
-              path="/weeks/:num"
-              component={DaysList}
-              user={this.state.user}
-            />
-            <Route
-              exact
-              path="/weeks"
-              component={WeeksList}
-              user={this.state.user}
-            />
-            <Route exact path="/" component={About} user={this.state.user} />
-            <Route
-              exact
-              path="/dashboard"
-              component={Dashboard}
-              user={this.state.user}
-            />
+              <CourseTree
+                weeks={this.state.weeks}
+                toggleSearch={this.toggleSearch}
+              />
+            </div>
+            <div className="col-sm-7 col-md-8 col-lg-9">
+              <Switch>
+                <Route
+                  exact
+                  path="/results"
+                  render={props => (
+                    <SearchResults
+                      {...props}
+                      results={this.state.filteredResults}
+                    />
+                  )}
+                  user={this.state.user}
+                />
+                <Route
+                  exact
+                  path="/days/:id"
+                  render={props => <LessonsList {...props} />}
+                  user={this.state.user}
+                />
+                <Route
+                  exact
+                  path="/days"
+                  component={DaysList}
+                  user={this.state.user}
+                />
+                <Route
+                  exact
+                  path="/weeks/:num"
+                  component={DaysList}
+                  user={this.state.user}
+                />
+                <Route
+                  exact
+                  path="/weeks"
+                  component={WeeksList}
+                  user={this.state.user}
+                />
+                <Route
+                  exact
+                  path="/"
+                  component={About}
+                  user={this.state.user}
+                />
+                <Route
+                  exact
+                  path="/dashboard"
+                  component={Dashboard}
+                  user={this.state.user}
+                />
 
-            <Protected
-              exact
-              path="/signup"
-              redirectPath="/"
-              setUser={this.setUser}
-              user={!this.state.user}
-              component={Signup}
-            />
-            <Protected
-              exact
-              path="/login"
-              redirectPath="/"
-              setUser={this.setUser}
-              user={!this.state.user}
-              component={Login}
-            />
-          </Switch>
+                <Protected
+                  exact
+                  path="/signup"
+                  redirectPath="/"
+                  setUser={this.setUser}
+                  user={!this.state.user}
+                  component={Signup}
+                />
+                <Protected
+                  exact
+                  path="/login"
+                  redirectPath="/"
+                  setUser={this.setUser}
+                  user={!this.state.user}
+                  component={Login}
+                />
+              </Switch>
+            </div>
+          </div>
         </div>
       </div>
     );

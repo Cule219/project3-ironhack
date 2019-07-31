@@ -3,6 +3,7 @@ import CompletionStatus from "./CompletionStatus";
 import Collapsible from "./Collapsible";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { validURL } from "../../services/courseworkService";
 
 class SearchResults extends Component {
   state = { tagsOpen: true };
@@ -32,6 +33,21 @@ class SearchResults extends Component {
                    <Link to={`/weeks/1`}>Go to week</Link> */}
                   <CompletionStatus {...el} />
                 </div>
+                <Collapsible open={el.name.indexOf("KATA") !== -1}>
+                  {el.desc && (
+                    <div
+                      className="lesson-description"
+                      dangerouslySetInnerHTML={{
+                        __html: el.desc
+                          .split(/\n|\s/)
+                          .map(str =>
+                            validURL(str) ? `<a href=${str}>Link</a>` : str
+                          )
+                          .join(" ")
+                      }}
+                    />
+                  )}
+                </Collapsible>
                 <Collapsible open={this.state.tagsOpen}>
                   <div className="tags">
                     {el.tags.map((tag, index) => (

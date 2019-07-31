@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getDay } from "../../services/courseworkService";
+import { getDay, validURL } from "../../services/courseworkService";
 
 import NotesBox from "../notes/NotesBox";
 import CompletionStatus from "./CompletionStatus";
@@ -41,19 +41,6 @@ class LessonsList extends Component {
     }
   }
 
-  validURL(str) {
-    var pattern = new RegExp(
-      "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    ); // fragment locator
-    return !!pattern.test(str);
-  }
-
   render() {
     let day = this.state.day;
     return (
@@ -74,7 +61,7 @@ class LessonsList extends Component {
                       __html: el.desc
                         .split(/\n|\s/)
                         .map(str =>
-                          this.validURL(str) ? `<a href=${str}>Link</a>` : str
+                          validURL(str) ? `<a href=${str}>Link</a>` : str
                         )
                         .join(" ")
                     }}
