@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getDay, validURL } from "../../services/courseworkService";
-
+import getTitleAtUrl from "get-title-at-url";
 import CompletionStatus from "./CompletionStatus";
 
 // this is for testing purposes only
@@ -58,11 +58,21 @@ class LessonsList extends Component {
                     className="lesson-description"
                     dangerouslySetInnerHTML={{
                       __html: el.desc
-                        .split(/\n|\s/)
-                        .map(str =>
-                          validURL(str) ? `<a href=${str}>Link</a>` : str
-                        )
-                        .join(" ")
+                      // .split(/\n|\s/)
+                      // .map(str => {
+                      //   if (validURL(str)) {
+                      //     let title = getTitleAtUrl(str, title => {
+                      //       console.log(title);
+                      //     });
+                      //     return `<a href=${str}>${title}</a>`;
+                      //   } else {
+                      //     return str;
+                      //   }
+                      // })
+                      // .map(str =>
+                      //   validURL(str) ? `<a href=${str}>Link</a>` : str
+                      // )
+                      // .join(" ")
                     }}
                   />
                 )}

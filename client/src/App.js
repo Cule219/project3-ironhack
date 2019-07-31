@@ -63,6 +63,7 @@ class App extends React.Component {
   // };
 
   handleSearchFilter = state => {
+    let regex = new RegExp(state.searchStr, "i");
     getLessons().then(lessons => {
       const filteredLessons = lessons.filter(el => {
         let completionStatusMatches = state.incompleteOnly
@@ -75,7 +76,7 @@ class App extends React.Component {
                 .map(t => t.name)
                 .concat(el.tech)
                 .filter(e => state.selectedTags.includes(e)).length > 0;
-        return completionStatusMatches && tagsMatch;
+        return completionStatusMatches && tagsMatch && el.name.match(regex);
       });
       console.log(filteredLessons);
       this.setState({ filteredResults: filteredLessons });

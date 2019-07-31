@@ -1,4 +1,6 @@
-.App {
+.menu {
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .list-primary {
