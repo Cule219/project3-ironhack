@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .list-primary {
@@ -19,7 +18,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 20px;
 }
 
 .form-group {
@@ -63,7 +61,22 @@ span.technology {
   word-wrap: break-word;
 }
 
-.small {
-  font-size: 0.8em;
-  margin-left: 10px;
+span.small {
+  font-size: 0.2em;
+  border-radius: 5px;
+  border: 1px solid green;
+  margin: 2px;
+}
+
+.dots-container  {
+  margin: -5 0 0 10px;
+  padding: 0px;
+  vertical-align: top;
+  font-size: 0.2em;
+}
+
+.vertical-align-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

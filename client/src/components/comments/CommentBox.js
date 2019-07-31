@@ -58,6 +58,11 @@ export default class CommentBox extends Component {
     this.getComments();
   }
 
+  componentDidUpdate(prevProps){
+    (prevProps.location.pathname!==this.props.location.pathname)&&
+    this.getComments();
+  }
+
   render() {
 
     return (

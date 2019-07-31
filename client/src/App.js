@@ -89,18 +89,25 @@ class App extends React.Component {
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
-          <CourseTree weeks={this.state.weeks} />
-          <Button
-            onClick={() =>
-              this.setState({ searchOpen: !this.state.searchOpen })
-            }
-          >
-            Search / Filter
-          </Button>
-          {this.state.searchOpen && (
-            <SearchFilter searchAndFilter={this.handleSearchFilter} />
-          )}
-          <Switch>
+          <div className="row">
+            <div className="col-sm-5 col-md-4 col-lg-3 list-group overflow-auto">
+              <Button
+                onClick={() =>
+                  this.setState({ searchOpen: !this.state.searchOpen })
+                }
+              >
+                Search / Filter
+              </Button>
+              {this.state.searchOpen && (
+                <SearchFilter searchAndFilter={this.handleSearchFilter} />
+              )}
+              <CourseTree
+                weeks={this.state.weeks}
+                toggleSearch={this.toggleSearch}
+              />
+            </div>
+            <div className="col-sm-7 col-md-8 col-lg-9">
+            <Switch>
             <Route
               exact
               path="/results"
@@ -111,74 +118,76 @@ class App extends React.Component {
                   user={this.state.user}
                 />
               )}
-            />
-            <Route
-              exact
-              path="/days/:id"
-              render={props => <LessonsList 
-                {...props} 
+              />
+              <Route
+                exact
+                path="/days/:id"
+                render={props => <LessonsList 
+                  {...props} 
+                  user={this.state.user}
+                  />}
+              />
+              <Route
+                exact
+                path="/days"
+                render={props => <DaysList 
+                {...props}
                 user={this.state.user}
-                />}
-            />
-            <Route
-              exact
-              path="/days"
-              render={props => <DaysList 
-              {...props}
-              user={this.state.user}
+                />
+                }
               />
-              }
-            />
-            <Route
-              exact
-              path="/weeks/:num"
-              render={props => <DaysList 
-              {...props}
-              user={this.state.user}
+              <Route
+                exact
+                path="/weeks/:num"
+                render={props => <DaysList 
+                {...props}
+                user={this.state.user}
+                />
+                }
               />
-              }
-            />
-            <Route
-              exact
-              path="/weeks"
-              render={props => <WeeksList
-              user={this.state.user}
+              <Route
+                exact
+                path="/weeks"
+                render={props => <WeeksList
+                user={this.state.user}
+                />
+                }
               />
-              }
-            />
-            <Route 
-              exact 
-              path="/" 
-              render={props => <About
-              user={this.state.user}
+              <Route 
+                exact 
+                path="/" 
+                render={props => <About
+                user={this.state.user}
+                />
+                }
               />
-              }
-            />
-            <Route
-              exact
-              path="/dashboard"
-              render={props => <Dashboard
-              user={this.state.user}
+              <Route
+                exact
+                path="/dashboard"
+                render={props => <Dashboard
+                user={this.state.user}
+                />
+                }
               />
-              }
-            />
-            <Protected
-              exact
-              path="/signup"
-              redirectPath="/"
-              setUser={this.setUser}
-              user={!this.state.user}
-              component={Signup}
-            />
-            <Protected
-              exact
-              path="/login"
-              redirectPath="/"
-              setUser={this.setUser}
-              user={!this.state.user}
-              component={Login}
-            />
-          </Switch>
+              <Protected
+                exact
+                path="/signup"
+                redirectPath="/"
+                setUser={this.setUser}
+                user={!this.state.user}
+                component={Signup}
+              />
+              <Protected
+                exact
+                path="/login"
+                redirectPath="/"
+                setUser={this.setUser}
+                user={!this.state.user}
+                component={Login}
+              />
+            </Switch>
+            </div>
+          </div>
         </div>
       </div>
     );
