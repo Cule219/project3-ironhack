@@ -38,6 +38,12 @@ export default class Note extends Component {
       content: value
     })
   }
+  componentDidUpdate(prevProps){
+    if(prevProps.data == null && this.props.data != null)
+    this.setState({
+      content: this.props.data.content
+    })
+  }
   render() {
     return (
       <div>

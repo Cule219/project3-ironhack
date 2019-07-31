@@ -95,4 +95,7 @@ app.use("/api/coursework", courseworkRoutes);
 const notesRoutes = require('./routes/notes');
 app.use('/api/notes', notesRoutes);
 
+const trelloWebhooksRoutes = require('./routes/trelloWebhooks');
+app.use('/', trelloWebhooksRoutes);
+
 module.exports = app;

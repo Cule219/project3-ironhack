@@ -37,9 +37,13 @@ export default class NotesBox extends Component {
 
     this.getNotes();
   };
+  componentDidUpdate(prevProps){
+    if(prevProps.data.location.pathname!==this.props.data.location.pathname) {
+        this.getNotes()
+      }
+  }
 
   render() {
-    // console.log(this.state)
     return (
       <>
         <Note user={this.state.user} label={'Your Notes'} data={this.state.userNote} 

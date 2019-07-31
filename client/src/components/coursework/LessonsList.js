@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { getDay, validURL } from "../../services/courseworkService";
 
-import NotesBox from "../notes/NotesBox";
 import CompletionStatus from "./CompletionStatus";
 
 // this is for testing purposes only
 import CommentBox from "../comments/CommentBox";
+import NotesBox from "../notes/NotesBox";
 
 class LessonsList extends Component {
   state = {
@@ -15,11 +15,10 @@ class LessonsList extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     let id = this.props.match.params.id;
     getDay(id)
       .then(response => {
-        console.log("these are the day's lessons from DB: ", response);
+        // console.log("these are the day's lessons from DB: ", response);
         this.setState({ day: response });
       })
       .catch(err => {
@@ -32,7 +31,7 @@ class LessonsList extends Component {
       let id = this.props.match.params.id;
       getDay(id)
         .then(response => {
-          console.log("these are the day's lessons from DB: ", response);
+          // console.log("these are the day's lessons from DB: ", response);
           this.setState({ day: response });
         })
         .catch(err => {
