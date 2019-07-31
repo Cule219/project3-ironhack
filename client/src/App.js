@@ -17,6 +17,7 @@ import { getWeeks, getLessons } from "./services/courseworkService";
 import LessonsList from "./components/coursework/LessonsList";
 import SearchFilter from "./components/SearchFilter";
 import SearchResults from "./components/coursework/SearchResults";
+import { Button } from "react-bootstrap";
 
 class App extends React.Component {
   constructor(props) {
@@ -24,7 +25,8 @@ class App extends React.Component {
     this.state = {
       user: this.props.user,
       weeks: [],
-      filteredResults: []
+      filteredResults: [],
+      searchOpen: false
     };
   }
 
@@ -62,9 +64,19 @@ class App extends React.Component {
 
   handleSearchFilter = state => {
     getLessons().then(lessons => {
-      const filteredLessons = lessons.filter(el =>
-        state.incompleteOnly ? el.completionStatus === false : el
-      );
+      const filteredLessons = lessons.filter(el => {
+        let completionStatusMatches = state.incompleteOnly
+          ? el.completionStatus === false
+          : true;
+        let tagsMatch =
+          state.selectedTags.length === 0
+            ? true
+            : el.tags
+                .map(t => t.name)
+                .concat(el.tech)
+                .filter(e => state.selectedTags.includes(e)).length > 0;
+        return completionStatusMatches && tagsMatch;
+      });
       console.log(filteredLessons);
       this.setState({ filteredResults: filteredLessons });
       this.props.history.push("/results");
@@ -77,7 +89,16 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <CourseTree weeks={this.state.weeks} />
-          <SearchFilter searchAndFilter={this.handleSearchFilter} />
+          <Button
+            onClick={() =>
+              this.setState({ searchOpen: !this.state.searchOpen })
+            }
+          >
+            Search / Filter
+          </Button>
+          {this.state.searchOpen && (
+            <SearchFilter searchAndFilter={this.handleSearchFilter} />
+          )}
           <Switch>
             <Route
               exact
