@@ -29,10 +29,7 @@ const setCompletion = (id, status) => {
     .post(`/api/coursework/lessons/${id}`, {
       completionStatus: status
     })
-    .then(response => {
-      console.log(response);
-      return response.data;
-    });
+    .then(response => response.data);
 };
 
 function populateCard(card) {

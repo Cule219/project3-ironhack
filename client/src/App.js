@@ -27,7 +27,9 @@ class App extends React.Component {
       user: this.props.user,
       weeks: [],
       filteredResults: [],
-      searchOpen: false
+      searchOpen: false,
+      selectedWeek: null,
+      selectedDay: null
     };
   }
 
@@ -85,13 +87,36 @@ class App extends React.Component {
     });
   };
 
+  reloadCourseTree = (idList, id) => {
+    getWeeks()
+      .then(response => {
+        response.forEach((week, i) => {
+          let d = week.find(el => el.id == idList);
+          if (d) {
+            let l = d.cards.find(el => el.id === id);
+            this.setState({ selectedWeek: i, selectedDay: l });
+          }
+        });
+
+        let sorted = response.map(el => {
+          return el.sort((a, b) => {
+            return parseInt(a.day) - parseInt(b.day);
+          });
+        });
+        this.setState({ weeks: sorted });
+      })
+      .catch(err => {
+        console.log("error getting weeks: ", err);
+      });
+  };
+
   render() {
     return (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <div className="row">
-            <div className="col-sm-5 col-md-4 col-lg-3 list-group overflow-auto">
+            <div className="col-sm-5 col-md-4 col-lg-3 list-group fixed-height">
               <Button
                 onClick={() =>
                   this.setState({ searchOpen: !this.state.searchOpen })
@@ -105,9 +130,11 @@ class App extends React.Component {
               <CourseTree
                 weeks={this.state.weeks}
                 toggleSearch={this.toggleSearch}
+                selectedWeek={this.state.selectedWeek}
+                selectedDay={this.state.selectedDay}
               />
             </div>
-            <div className="col-sm-7 col-md-8 col-lg-9">
+            <div className="col-sm-7 col-md-8 col-lg-9 fixed-height">
               <Switch>
                 <Route
                   exact
@@ -116,6 +143,7 @@ class App extends React.Component {
                     <SearchResults
                       {...props}
                       results={this.state.filteredResults}
+                      reloadCourseTree={this.reloadCourseTree}
                       user={this.state.user}
                     />
                   )}
@@ -124,7 +152,11 @@ class App extends React.Component {
                   exact
                   path="/days/:id"
                   render={props => (
-                    <LessonsList {...props} user={this.state.user} />
+                    <LessonsList
+                      {...props}
+                      user={this.state.user}
+                      reloadCourseTree={this.reloadCourseTree}
+                    />
                   )}
                 />
                 <Route

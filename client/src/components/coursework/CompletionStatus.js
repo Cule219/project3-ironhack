@@ -6,9 +6,9 @@ class CompletionStatus extends Component {
   state = { completed: this.props.completionStatus };
 
   handleCompletion(id, status) {
-    // console.log("in completion handler: ", id, status);
     setCompletion(id, status).then(lesson => {
       this.setState({ completed: lesson.completionStatus });
+      this.props.reloadCourseTree(lesson.idList, lesson.id);
     });
   }
 

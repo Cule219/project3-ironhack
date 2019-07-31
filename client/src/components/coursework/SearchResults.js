@@ -15,23 +15,35 @@ class SearchResults extends Component {
   render() {
     return (
       <div className="list-container">
-        {/* <Form.Check
-          type="checkbox"
-          className="check"
-          label="Show tags"
-          checked={this.state.tagsOpen}
-          onChange={this.toggleTags}
-        /> */}
         <ul className="list-primary">
           {this.props.results &&
             this.props.results.map(el => (
               <div key={el.id} className="list-item">
                 <div className="title-status">
                   <a href={el.attachments[0]}>{el.name}</a>
-                  <Link to={`/days/${el.idList}`}>Go to day</Link>
-                  {/* ADD THIS ONCE THERE'S A WEEK VIEW
-                   <Link to={`/weeks/1`}>Go to week</Link> */}
-                  <CompletionStatus {...el} />
+                  <Link
+                    to={`/days/${el.idList}`}
+                    onClick={() =>
+                      this.props.reloadCourseTree(el.idList, el.id)
+                    }
+                  >
+                    <img src="./enter.png" alt="Go to day" width="15px" />
+                  </Link>
+                  <a
+                    onClick={() =>
+                      this.props.reloadCourseTree(el.idList, el.id)
+                    }
+                  >
+                    <img
+                      src="./hide-sidebar.svg"
+                      alt="View in course tree"
+                      width="15px"
+                    />
+                  </a>
+                  <CompletionStatus
+                    {...el}
+                    reloadCourseTree={this.props.reloadCourseTree}
+                  />
                 </div>
                 <Collapsible open={el.name.indexOf("KATA") !== -1}>
                   {el.desc && (

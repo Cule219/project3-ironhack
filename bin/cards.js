@@ -27,7 +27,7 @@ function updateCardsWithAttachments() {
     .then(cards => {
       // return cards.slice(0, 99)
       // return cards.slice(100, 199)
-      return cards.slice(200, 234).map(card => {
+      return cards.slice(100, 199).map(card => {
         getUrlsFromCard(card.id)
           .then(urls => {
             Card.findByIdAndUpdate(card._id, { attachments: urls })
@@ -60,7 +60,18 @@ function updateDescription() {
   Card.find({ desc: { $ne: "" } })
     .then(cards => {
       cards.forEach(card => {
-        let wordsArray = card.desc.split(/\n|\s/);
+        console.log(card);
+        let regex = new RegExp(/\s*\[(.*?)\)\s*/, "g");
+        let matches = card.desc.match(regex) || [];
+        let links = matches.map(el => {
+          let arr = el.split(/\[|\)|\]|\(/);
+          return `<a href=${arr[3]}>${arr[1]}</a><br>`;
+        });
+        var desc = card.desc;
+        for (let i = 0; i < matches.length; i++) {
+          desc = desc.replace(matches[i], links[i]);
+        }
+        let wordsArray = desc.split(/\n|\s/);
         let titlePromises = wordsArray.map(str => {
           if (validURL(str)) {
             return getTitlePromisified(str);
@@ -68,19 +79,22 @@ function updateDescription() {
             return str;
           }
         });
-        Promise.all(titlePromises).then(data => {
-          let descrip = wordsArray
-            .map((str, index) =>
-              validURL(str) ? `<a href=${str}>${data[index]}</a>` : str
-            )
-            .join(" ");
-          console.log(descrip);
-          Card.findByIdAndUpdate(card._id, { desc: descrip }).then(card =>
-            console.log("hi").catch(err => {
-              console.log(err);
-            })
-          );
-        });
+        Promise.all(titlePromises)
+          .then(data => {
+            let descrip = wordsArray
+              .map((str, index) =>
+                validURL(str) ? `<a href=${str}>${data[index]}</a><br>` : str
+              )
+              .join(" ");
+            Card.findByIdAndUpdate(card._id, { desc: descrip }, { new: true })
+              .then(c => console.log(c))
+              .catch(err => {
+                console.log(err);
+              });
+          })
+          .catch(err => {
+            console.log("error in promises", err);
+          });
       });
     })
     .catch(err => {
@@ -108,8 +122,9 @@ const getTitlePromisified = url =>
     });
   });
 
-//updateCardsWithAttachments();
-updateDescription();
+updateCardsWithAttachments();
+//updateDescription();
+//updateDescriptionCheatSheets();
 
 // let i=0
 // setInterval(() => {

@@ -8,17 +8,20 @@ import CommentBox from "../comments/CommentBox";
 import NotesBox from "../notes/NotesBox";
 
 class LessonsList extends Component {
-  state = {
-    day: {
-      cards: []
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      day: {
+        cards: []
+      }
+    };
+  }
 
   componentDidMount() {
     let id = this.props.match.params.id;
     getDay(id)
       .then(response => {
-        // console.log("these are the day's lessons from DB: ", response);
+        console.log("these are the day's lessons from DB: ", response);
         this.setState({ day: response });
       })
       .catch(err => {
@@ -26,8 +29,8 @@ class LessonsList extends Component {
       });
   }
 
-  componentDidUpdate(prevprops) {
-    if (this.props.match.params.id !== prevprops.match.params.id) {
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
       let id = this.props.match.params.id;
       getDay(id)
         .then(response => {
@@ -41,38 +44,26 @@ class LessonsList extends Component {
   }
 
   render() {
-    let day = this.state.day;
+    // let day = this.state.day;
     return (
       <div className="list-container">
-        <p>{day.name}</p>
+        <p>{this.state.day.name}</p>
         <ul className="list-primary">
-          {day.cards.length > 0 &&
-            day.cards.map(el => (
+          {this.state.day.cards.length > 0 &&
+            this.state.day.cards.map(el => (
               <div key={el.id} className="list-item">
                 <div className="title-status">
                   <a href={el.attachments[0]}>{el.name}</a>
-                  <CompletionStatus {...el} />
+                  <CompletionStatus
+                    {...el}
+                    reloadCourseTree={this.props.reloadCourseTree}
+                  />
                 </div>
                 {el.desc && (
                   <div
                     className="lesson-description"
                     dangerouslySetInnerHTML={{
                       __html: el.desc
-                      // .split(/\n|\s/)
-                      // .map(str => {
-                      //   if (validURL(str)) {
-                      //     let title = getTitleAtUrl(str, title => {
-                      //       console.log(title);
-                      //     });
-                      //     return `<a href=${str}>${title}</a>`;
-                      //   } else {
-                      //     return str;
-                      //   }
-                      // })
-                      // .map(str =>
-                      //   validURL(str) ? `<a href=${str}>Link</a>` : str
-                      // )
-                      // .join(" ")
                     }}
                   />
                 )}
@@ -95,8 +86,8 @@ class LessonsList extends Component {
             ))}
         </ul>
         {/* this is for testing purposes only */}
-        <NotesBox {...this.props}/>
-        <CommentBox {...this.props}/>
+        <NotesBox {...this.props} />
+        <CommentBox {...this.props} />
       </div>
     );
   }

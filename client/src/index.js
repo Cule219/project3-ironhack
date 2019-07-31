@@ -12,7 +12,7 @@ axios
   .then(response => {
     ReactDOM.render(
       <BrowserRouter>
-        <Route render={()=><App user={response.data} />} />
+        <Route render={props => <App {...props} user={response.data} />} />
       </BrowserRouter>,
       document.getElementById("root")
     );

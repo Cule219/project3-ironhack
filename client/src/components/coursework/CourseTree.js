@@ -6,7 +6,7 @@ import { Button } from "react-bootstrap";
 class CourseTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: [], openDay: {} };
+    this.state = { open: [], openDay: {}, selectedDay: null };
   }
 
   toggleWeek = index => {
@@ -15,11 +15,18 @@ class CourseTree extends Component {
     this.setState({ open: nowOpen });
   };
 
-  toggleDay = id => {
-    let daysOpen = { ...this.state.openDay };
-    daysOpen[id] = !daysOpen[id];
-    this.setState({ openDay: daysOpen });
+  openWeek = (index, id) => {
+    let nowOpen = [];
+    nowOpen[index] = true;
+    this.setState({ open: nowOpen, selectedDay: id });
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedWeek !== prevProps.selectedWeek) {
+      console.log(this.props);
+      this.openWeek(this.props.selectedWeek, this.props.selectedDay);
+    }
+  }
 
   render() {
     return (
@@ -30,17 +37,22 @@ class CourseTree extends Component {
             <li key={index}>
               <a onClick={() => this.toggleWeek(index)}>Week {index + 1}</a>
               <Collapsible open={this.state.open[index]}>
-                <ul>
+                <ul style={{ fontSize: "0.9em" }}>
                   {el.map(element => (
-                    <li key={element.id}>
+                    <li key={element.id} className="vertical-align-center">
                       <Link
                         to={{
                           pathname: `/days/${element.id}`,
                           state: { day: element }
                         }}
-                        className="vertical-align-center"
+                        className={
+                          this.state.selectedDay === element.id
+                            ? "is-active"
+                            : ""
+                        }
                       >
                         {element.day ? `Day ${element.day}` : element.name}
+                        <br />
                         {element.cards.map((card, cardi) => (
                           <span
                             className="small"

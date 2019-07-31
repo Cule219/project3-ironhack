@@ -45,59 +45,41 @@ class SearchFilter extends React.Component {
   }
 
   render() {
-    console.log(this.state.tags);
     return (
-      <>
-        <Form>
-          <Form.Group controlId="search">
-            <Form.Control
-              type="text"
-              name="searchStr"
-              value={this.state.searchStr}
-              onChange={this.handleChange}
-              placeholder="Search by Lesson Name"
-            />
-          </Form.Group>
-          <Form.Group>
-            {this.state.tags.length > 0 && (
-              <Select
-                isMulti
-                name="tags"
-                placeholder="Filter by tags"
-                options={this.state.tags.map(tag => ({
-                  label: tag.name,
-                  value: tag.name
-                }))}
-                onChange={this.filterByTagsSelect}
-              />
-            )}
-          </Form.Group>
-          <Form.Group>
-            <Form.Check
-              type="checkbox"
-              name="incompleteOnly"
-              checked={this.state.incompleteOnly}
-              onChange={this.handleChange}
-              label="Incomplete items only"
-            />
-          </Form.Group>
-        </Form>
-        <div>
-          {/* <input
+      <Form>
+        <Form.Group controlId="search">
+          <Form.Control
             type="text"
             name="searchStr"
             value={this.state.searchStr}
             onChange={this.handleChange}
-          /> */}
-          {/* <input
+            placeholder="Search by Lesson Name"
+          />
+        </Form.Group>
+        <Form.Group>
+          {this.state.tags.length > 0 && (
+            <Select
+              isMulti
+              name="tags"
+              placeholder="Filter by tags"
+              options={this.state.tags.map(tag => ({
+                label: tag.name,
+                value: tag.name
+              }))}
+              onChange={this.filterByTagsSelect}
+            />
+          )}
+        </Form.Group>
+        <Form.Group>
+          <Form.Check
             type="checkbox"
             name="incompleteOnly"
             checked={this.state.incompleteOnly}
             onChange={this.handleChange}
+            label="Incomplete items only"
           />
-          <label>Incomplete</label> */}
-        </div>
-      </>
+        </Form.Group>
+      </Form>
     );
   }
 }
