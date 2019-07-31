@@ -16,4 +16,5 @@ const logout = () =>
 const islogged = () =>
 axios.get("/api/auth/loggedin").then(response => response.data);
 
+
 export { login, logout, signup, islogged };

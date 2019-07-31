@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-import { islogged } from "../../services/api";
 
 export default class CommentBox extends Component {
   state = {
     comments: [],
-    user: '',
     commentForm: false,
     commentButton: 'New',
     classButton: "fas fa-plus"
@@ -15,7 +13,7 @@ export default class CommentBox extends Component {
 
   getComments = () => {
     axios
-      .get(`/api/comments/${this.props.data.match.params.id}`)
+      .get(`/api/comments/${this.props.match.params.id}`)
       .then(response => {
         if(response.data){
         this.setState({
@@ -48,23 +46,25 @@ export default class CommentBox extends Component {
     axios.post(`/api/comments/`,
     {
       content: e, 
-      user: this.state.user._id,
-      list: this.props.data.match.params.id
+      user: this.props.user._id,
+      list: this.props.match.params.id
     }).then(response => {
       this.getComments();
       this.onShowComments();
     });
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getComments();
-    let user = await islogged();
-    this.setState({
-      user: user
-    });
+  }
+
+  componentDidUpdate(prevProps){
+    (prevProps.location.pathname!==this.props.location.pathname)&&
+    this.getComments();
   }
 
   render() {
+
     return (
 <>
 <div className="row justify-content-between">
@@ -90,14 +90,14 @@ export default class CommentBox extends Component {
           <Comment
           deleteClickHandler={this.deleteComment.bind(this, x._id)}
           data={x}
-          user={this.state.user}
+          user={this.props.user}
           />
         </tr>)
       })}
       {this.state.commentForm&&<tr>
         <CommentForm 
         postCommentHandler={this.postComment}
-        user={this.state.user} 
+        user={this.props.user} 
         id="comment-form"
         />
       </tr>}

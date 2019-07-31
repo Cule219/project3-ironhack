@@ -95,8 +95,8 @@ class LessonsList extends Component {
             ))}
         </ul>
         {/* this is for testing purposes only */}
-        <NotesBox data={this.props} user={this.props.user} />
-        <CommentBox data={this.props} user={this.props.user} />
+        <NotesBox {...this.props}/>
+        <CommentBox {...this.props}/>
       </div>
     );
   }

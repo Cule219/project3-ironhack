@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
 
 export default class Note extends Component {
-  state = {
-    content:  '',
-    data: this.props.data,
-    user: this.props.user, 
+  state = { 
     disabled: true
-  }
-
-  onChangeHandler = e => {
-    this.setState({
-      content: e.target.value
-    });
   }
 
   onDoubleClickHandler = e => {
@@ -19,43 +10,33 @@ export default class Note extends Component {
     this.setState({
       disabled: !this.state.disabled
     })
-    if(!this.state.disabled) {
-      this.onClickHandler(e);
+    console.log(this.props.data.content, this.props.data._id)
+    if(!this.state.disabled) {  
+      this.props.postNoteHandler(this.props.data.content, this.props.data._id);
     }
   }
 
-  onClickHandler = e => {
-    this.props.postNoteHandler(this.state.content, this.props.data._id);
-  }
-
-  componentDidMount(){
-    let value =''
-    if(this.props.data) {
-      value = this.props.data.content
-    }
-    this.setState({
-      data: this.props.data,
-      content: value
-    })
-  }
-  componentDidUpdate(prevProps){
-    if(prevProps.data == null && this.props.data != null)
-    this.setState({
-      content: this.props.data.content
-    })
-  }
   render() {
+    let value = this.props.data?this.props.data.content:'';
     return (
       <div>
        <label>{this.props.label}</label>
-       <i onClick={this.onDoubleClickHandler} className="fas fa-pencil-alt" style={{
-         float: "right"
-       }} ></i>
+       <i onClick={this.onDoubleClickHandler} className="fas fa-pencil-alt" 
+       style={{float: "right"}} ></i>
        <br/>
-      <textarea id="story" name="story"
-      rows="5" cols="50" className="block"
-      value = {this.state.content}
-      onChange={this.onChangeHandler}
+
+
+       {/* <div 
+       name={this.props.name}
+       contentEditable="true"
+       onChange={this.onChangeHandler}
+       >{value}</div> */}
+
+
+      <textarea id={this.props.name} name={this.props.name}
+      rows="5" cols="50"
+      value = {value}
+      onChange={e=>this.props.onChangeHandler(e)}
       onDoubleClick={this.onDoubleClickHandler}
       disabled={this.state.disabled}
       />
