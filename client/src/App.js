@@ -18,6 +18,7 @@ import LessonsList from "./components/coursework/LessonsList";
 import SearchFilter from "./components/SearchFilter";
 import SearchResults from "./components/coursework/SearchResults";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -107,42 +108,60 @@ class App extends React.Component {
                 <SearchResults
                   {...props}
                   results={this.state.filteredResults}
+                  user={this.state.user}
                 />
               )}
-              user={this.state.user}
             />
             <Route
               exact
               path="/days/:id"
-              render={props => <LessonsList {...props} />}
-              user={this.state.user}
+              render={props => <LessonsList 
+                {...props} 
+                user={this.state.user}
+                />}
             />
             <Route
               exact
               path="/days"
-              component={DaysList}
+              render={props => <DaysList 
+              {...props}
               user={this.state.user}
+              />
+              }
             />
             <Route
               exact
               path="/weeks/:num"
-              component={DaysList}
+              render={props => <DaysList 
+              {...props}
               user={this.state.user}
+              />
+              }
             />
             <Route
               exact
               path="/weeks"
-              component={WeeksList}
+              render={props => <WeeksList
               user={this.state.user}
+              />
+              }
             />
-            <Route exact path="/" component={About} user={this.state.user} />
+            <Route 
+              exact 
+              path="/" 
+              render={props => <About
+              user={this.state.user}
+              />
+              }
+            />
             <Route
               exact
               path="/dashboard"
-              component={Dashboard}
+              render={props => <Dashboard
               user={this.state.user}
+              />
+              }
             />
-
             <Protected
               exact
               path="/signup"
