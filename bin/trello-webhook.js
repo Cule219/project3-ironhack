@@ -15,11 +15,11 @@ const APIKey    = 'eb627225b1977b30f088094e7b793383';//a9428dfb03a4ad31c80bf8b78
 var Trello = require("node-trello");
 var t = new Trello(APIKey, APIToken);
 
-t.post(`https://api.trello.com/1/tokens/31cb1def85d708d56c1c1244d61890c37726cc164a5bf87f313cf0db101944ac/webhooks/`, 
+t.post(`https://api.trello.com/1/tokens/31cb1def85d708d56c1c1244d61890c37726cc164a5bf87f313cf0db101944ac/webhooks/?key=${APIKey}`, 
  {
   key: APIKey,
-  description: "Project 3 Webhook",
-  callbackURL: "https://ironhack-berlin.herokuapp.com/trelloCallback",
+  description: "Project 3 local Webhook",
+  callbackURL: "http://localhost:3000/trelloCallback",
   idModel: boardId
 }, (err, att) => {
   console.log(err)
@@ -32,7 +32,7 @@ t.post(`https://api.trello.com/1/tokens/31cb1def85d708d56c1c1244d61890c37726cc16
 // https://api.trello.com/1/tokens/596e22c5d280793a5bd98c6883d6e1014fe4cc18b549f4fafbdd3a5947ed07ac/webhooks/ \
 // -d '{
 //   "key": "eb627225b1977b30f088094e7b793383",
-//   "callbackURL": "https://ironhack-berlin.herokuapp.com/trelloCallback",
+//   "callbackURL": "http://localhost:3000/trelloCallback",
 //   "idModel":"5cf11e44887a4b72fbd8787b",
-//   "description": "Project 3 Webhook"  
+//   "description": "Project 3 local Webhook"  
 // }'
