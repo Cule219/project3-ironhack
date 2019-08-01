@@ -70,7 +70,7 @@ export default class Signup extends Component {
         <Form.Group>
           <Form.Label htmlFor="profileImg">Profile Image:</Form.Label>
           <Form.Control
-            type="password"
+            type="text"
             name="profileImg"
             id="profileImg"
             value={this.state.profileImg}
