@@ -17,9 +17,9 @@ const cardSchema = Schema(
     shortUrl: String,
     url: String,
     attachments: [String],
-    completionStatus: {
+    completable: {
       type: Boolean,
-      default: false
+      default: true
     },
     tech: [String],
     tags: [{ name: String, color: String }]

@@ -23,7 +23,6 @@ import EditUser from "./components/users/EditUser";
 import Users from "./components/users/Users";
 import ModulesList from "./components/coursework/ModulesList";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -88,6 +87,7 @@ class App extends React.Component {
   reloadCourseTree = idList => {
     getWeeks()
       .then(response => {
+        console.log(response);
         this.setState({ selectedDay: null, selectedWeek: null });
         response.forEach((week, i) => {
           let d = week.find(el => el.id === idList);
@@ -209,7 +209,9 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/users/add"
-                  render={props => <AddUser {...props} user={this.state.user} />}
+                  render={props => (
+                    <AddUser {...props} user={this.state.user} />
+                  )}
                 />
                 <Protected
                   exact

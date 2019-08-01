@@ -12,7 +12,16 @@ const userSchema = new Schema(
       type: String,
       enum: ["student", "TA", "teacher"],
       default: "student"
-    }
+    },
+    completedItems: [
+      {
+        card: {
+          type: Schema.Types.ObjectId,
+          ref: "Card"
+        },
+        trelloId: String
+      }
+    ]
   },
   {
     timestamps: {

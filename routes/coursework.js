@@ -115,19 +115,19 @@ router.get("/tags", (req, res, next) => {
     });
 });
 
-router.post("/lessons/:id", (req, res, next) => {
-  Card.findOneAndUpdate(
-    { id: req.params.id },
-    { completionStatus: req.body.completionStatus },
-    { new: true }
-  )
-    .then(card => {
-      console.log(card);
-      res.json(card);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-});
+// router.post("/lessons/:id/:userid", (req, res, next) => {
+//   Card.findOneAndUpdate(
+//     { id: req.params.id },
+//     { completionStatus: req.body.completionStatus },
+//     { new: true }
+//   )
+//     .then(card => {
+//       console.log(card);
+//       res.json(card);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
 
 module.exports = router;

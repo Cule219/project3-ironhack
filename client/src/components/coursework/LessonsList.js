@@ -63,6 +63,7 @@ class LessonsList extends Component {
                     <CompletionStatus
                       {...el}
                       reloadCourseTree={this.props.reloadCourseTree}
+                      user={this.props.user}
                     />
                   </div>
                   {el.desc && (
