@@ -18,7 +18,11 @@ import LessonsList from "./components/coursework/LessonsList";
 import SearchFilter from "./components/SearchFilter";
 import SearchResults from "./components/coursework/SearchResults";
 import { Button } from "react-bootstrap";
-import axios from "axios";
+import AddUser from "./components/users/AddUser";
+import EditUser from "./components/users/AddUser";
+import Users from "./components/users/AddUser";
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -165,6 +169,30 @@ class App extends React.Component {
                 exact
                 path="/dashboard"
                 render={props => <Dashboard
+                user={this.state.user}
+                />
+                }
+              />
+              <Route
+                exact
+                path="/users"
+                render={props => <Users 
+                user={this.state.user}
+                />
+                }
+              />
+              <Route
+                exact
+                path="/users/:id"
+                render={props => <EditUser 
+                user={this.state.user}
+                />
+                }
+              />
+              <Route
+                exact
+                path="/users/add"
+                render={props => <AddUser 
                 user={this.state.user}
                 />
                 }

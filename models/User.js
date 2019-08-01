@@ -7,6 +7,7 @@ const userSchema = new Schema(
     password: String,
     profileImg: String,
     githubId: String,
+    githubLink: String,
     role: {
       type: String,
       enum: ["student", "TA", "Teacher"],
