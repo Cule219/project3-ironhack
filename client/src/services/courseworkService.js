@@ -37,7 +37,10 @@ const setCompletion = (id, userId, status) => {
     .post(`/api/users/lessons/${id}/${userId}`, {
       completionStatus: status
     })
-    .then(response => response.data);
+    .then(response => {
+      console.log(response);
+      return response.data;
+    });
 };
 
 function populateCard(card) {

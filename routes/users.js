@@ -30,35 +30,25 @@ router.put("/:id", (req, res) => {
 });
 
 router.post("/lessons/:id/:userid", (req, res, next) => {
-  let status = req.body;
+  let status = req.body.completionStatus;
   User.findById(req.params.userid)
     .then(user => {
       let completedItems = user.completedItems;
-      console.log(completedItems, req.params.id, status);
-      let index = completedItems.findIndex(el => el.trelloId === req.params.id);
-      if (index !== -1) {
+      if (status === false) {
+        let index = user.completedItems.findIndex(el => el === req.params.id);
         completedItems.splice(index, 1);
       } else {
-        Card.find({ id: req.params.id })
-          .then(card => {
-            completedItems.push({ card: card.id, trelloId: req.params.id });
-            User.findByIdAndUpdate(
-              req.params.userid,
-              { completedItems: completedItems },
-              { new: true }
-            )
-              .then(user => {
-                console.log(user, card);
-                res.json(card);
-              })
-              .catch(err => {
-                console.log("error updating user: ", err);
-              });
-          })
-          .catch(err => {
-            console.log("error finding card to update completed items: ", err);
-          });
+        completedItems.push(req.params.id);
       }
+      User.findByIdAndUpdate(
+        req.params.userid,
+        { completedItems: completedItems },
+        { new: true }
+      )
+        .then(user => res.json(user))
+        .catch(err => {
+          console.log("error updating user: ", err);
+        });
     })
     .catch(err => {
       console.log(

@@ -87,7 +87,6 @@ class App extends React.Component {
   reloadCourseTree = idList => {
     getWeeks()
       .then(response => {
-        console.log(response);
         this.setState({ selectedDay: null, selectedWeek: null });
         response.forEach((week, i) => {
           let d = week.find(el => el.id === idList);
@@ -150,6 +149,7 @@ class App extends React.Component {
                       reloadCourseTree={this.reloadCourseTree}
                       user={this.state.user}
                       closeSearch={this.closeSearch}
+                      setUser={this.setUser}
                     />
                   )}
                 />
@@ -166,6 +166,7 @@ class App extends React.Component {
                       {...props}
                       user={this.state.user}
                       reloadCourseTree={this.reloadCourseTree}
+                      setUser={this.setUser}
                     />
                   )}
                 />

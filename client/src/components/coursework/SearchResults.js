@@ -39,6 +39,7 @@ class SearchResults extends Component {
                         {...el}
                         reloadCourseTree={this.props.reloadCourseTree}
                         user={this.props.user}
+                        setUser={this.props.setUser}
                       />
                     </div>
                   </div>
