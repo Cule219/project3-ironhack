@@ -36,10 +36,15 @@ class ModulesList extends Component {
         <ul className="list-primary">
           {this.state.modules.map((el, index) => (
             <div key={index}>
-              <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
+              <a>
+                <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
+              </a>
               <Collapsible open={this.state.open[index]}>
                 {console.log(el.description)}
-                <div dangerouslySetInnerHTML={{ __html: el.description }} />
+                <div
+                  className="content"
+                  dangerouslySetInnerHTML={{ __html: el.description }}
+                />
               </Collapsible>
             </div>
           ))}
