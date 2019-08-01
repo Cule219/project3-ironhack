@@ -22,10 +22,8 @@ class CourseTree extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      (this.props.selectedWeek !== null &&
-        this.props.selectedWeek !== prevProps.selectedWeek) ||
-      (this.props.selectedDay !== null &&
-        this.props.selectedDay !== prevProps.selectedDay)
+      this.props.selectedWeek !== prevProps.selectedWeek ||
+      this.props.selectedDay !== prevProps.selectedDay
     ) {
       console.log(this.props);
       this.openWeek(this.props.selectedWeek, this.props.selectedDay);

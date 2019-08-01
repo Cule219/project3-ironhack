@@ -30,7 +30,8 @@ class App extends React.Component {
       filteredResults: [],
       searchOpen: false,
       selectedWeek: null,
-      selectedDay: null
+      selectedDay: null,
+      treeClosed: false
     };
   }
 
@@ -83,7 +84,10 @@ class App extends React.Component {
         return completionStatusMatches && tagsMatch && el.name.match(regex);
       });
       console.log(filteredLessons);
-      this.setState({ filteredResults: filteredLessons });
+      this.setState({
+        filteredResults: filteredLessons
+      });
+      this.reloadCourseTree("nothing selected");
       this.props.history.push("/results");
     });
   };
@@ -95,7 +99,6 @@ class App extends React.Component {
           let d = week.find(el => el.id === idList);
           if (d) this.setState({ selectedWeek: i, selectedDay: d.id });
         });
-
         let sorted = response.map(el => {
           return el.sort((a, b) => {
             return parseInt(a.day) - parseInt(b.day);
@@ -106,6 +109,10 @@ class App extends React.Component {
       .catch(err => {
         console.log("error getting weeks: ", err);
       });
+  };
+
+  closeSearch = () => {
+    this.setState({ searchOpen: false });
   };
 
   render() {
@@ -132,6 +139,7 @@ class App extends React.Component {
                 toggleSearch={this.toggleSearch}
                 selectedWeek={this.state.selectedWeek}
                 selectedDay={this.state.selectedDay}
+                treeClosed={this.state.treeClosed}
               />
             </div>
             <div className="col-xs-7 col-sm-7 col-md-8 col-lg-9 fixed-height">
@@ -145,6 +153,7 @@ class App extends React.Component {
                       results={this.state.filteredResults}
                       reloadCourseTree={this.reloadCourseTree}
                       user={this.state.user}
+                      closeSearch={this.closeSearch}
                     />
                   )}
                 />

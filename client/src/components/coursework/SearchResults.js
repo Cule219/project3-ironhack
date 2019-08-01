@@ -6,10 +6,9 @@ import { Link } from "react-router-dom";
 import { validURL } from "../../services/courseworkService";
 
 class SearchResults extends Component {
-  state = { tagsOpen: true };
-
-  toggleTags = () => {
-    this.setState({ tagsOpen: !this.state.tagsOpen });
+  goToDay = idList => {
+    this.props.reloadCourseTree(idList);
+    this.props.closeSearch();
   };
 
   render() {
@@ -24,7 +23,7 @@ class SearchResults extends Component {
                   <div className="right-float">
                     <Link
                       to={`/days/${el.idList}`}
-                      onClick={() => this.props.reloadCourseTree(el.idList)}
+                      onClick={() => this.goToDay(el.idList)}
                     >
                       <img src="./enter.png" alt="Go to day" width="15px" />
                     </Link>
@@ -56,23 +55,21 @@ class SearchResults extends Component {
                     />
                   )}
                 </Collapsible>
-                <Collapsible open={this.state.tagsOpen}>
-                  <div className="tags">
-                    {el.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        style={{ backgroundColor: `${tag.color}` }}
-                      >
-                        {tag.name}
-                      </span>
-                    ))}
-                    {el.tech.map((e, i) => (
-                      <span key={i} className="technology">
-                        {e}
-                      </span>
-                    ))}
-                  </div>
-                </Collapsible>
+                <div className="tags">
+                  {el.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      style={{ backgroundColor: `${tag.color}` }}
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
+                  {el.tech.map((e, i) => (
+                    <span key={i} className="technology">
+                      {e}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
         </ul>
