@@ -17,12 +17,7 @@ const cardSchema = Schema(
     shortUrl: String,
     url: String,
     attachments: [String],
-<<<<<<< HEAD
-    attachmentName: String,
-    completionStatus: {
-=======
     completable: {
->>>>>>> development
       type: Boolean,
       default: true
     },
