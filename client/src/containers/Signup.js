@@ -4,8 +4,11 @@ import { signup } from "../services/api";
 
 export default class Signup extends Component {
   state = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
+    githubLink: '',
+    profileImg: '',
+    role: 'student',
     error: ""
   };
 
@@ -54,7 +57,40 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-
+        <Form.Group>
+          <Form.Label htmlFor="githubLink">githubLink:</Form.Label>
+          <Form.Control
+            type="password"
+            name="githubLink"
+            id="githubLink"
+            value={this.state.githubLink}
+            onChange={this.handleChange}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="role">Role:</Form.Label>
+          <Form.Control
+            as="select"
+            name="role"
+            id="role"
+            value={this.state.role}
+            onChange={this.handleChange}
+          >
+            <option value="student">Student</option>
+            <option value="TA">TA</option>
+            <option value="teacher">Teacher</option>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="githubLink">githubLink:</Form.Label>
+          <Form.Control
+            type="password"
+            name="githubLink"
+            id="githubLink"
+            value={this.state.githubLink}
+            onChange={this.handleChange}
+          />
+        </Form.Group>
         {this.state.error && (
           <Alert variant="warning">{this.state.error}</Alert>
         )}

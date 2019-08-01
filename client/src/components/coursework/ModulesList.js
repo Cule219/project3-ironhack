@@ -7,11 +7,11 @@ class ModulesList extends Component {
   constructor(props) {
     super(props);
     this.state = { modules: [], open: [false, false, false] };
-    console.log("here I am");
+    // console.log("here I am");
   }
 
   componentDidMount() {
-    console.log("here mounting");
+    // console.log("here mounting");
     getModules()
       .then(response => {
         let sorted = response.sort((a, b) => {

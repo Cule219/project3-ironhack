@@ -66,7 +66,9 @@ router.post("/signup", (req, res) => {
 
 router.post("/logout", (req, res) => {
   req.logout()
-  res.status(200);
+  res.json({message: 'done'})
+  //this needs to be checked out
+  // res.status(200);
 });
 
 router.get("/loggedin", (req, res) => {
