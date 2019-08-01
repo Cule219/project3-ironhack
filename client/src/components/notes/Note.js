@@ -16,7 +16,6 @@ export default class Note extends Component {
   // }
 
   onDoubleClickHandler = e => {
-
     if(this.props.data &&(
       (this.props.user.role === 'TA' || this.props.user.role === 'teacher') || 
       this.props.user._id === this.props.data.user))
@@ -24,7 +23,7 @@ export default class Note extends Component {
       disabled: !this.state.disabled
     })
     if(!this.state.disabled) {  
-      this.props.postNoteHandler(this.props.data.content, this.props.data._id);
+      this.props.postNoteHandler(e.target.innerHTML, this.props.data._id);
     }
   }
 
@@ -33,12 +32,12 @@ export default class Note extends Component {
     return (
       <div>
        <label>{this.props.label}</label>
-       <i onClick={this.onDoubleClickHandler} className="fas fa-pencil-alt" 
-       style={{float: "right"}} ></i>
+       {(this.props.user.role === 'TA' || this.props.name == 'userNote')&&<i onClick={this.onDoubleClickHandler} className="fas fa-pencil-alt" 
+       style={{float: "right"}} ></i>}
        <br/>
 
-
        <div 
+       className="card mb-1"
        name={this.props.name}
        contentEditable={this.state.disabled}
        onChange={e=>this.props.onChangeHandler(e)}
@@ -46,7 +45,6 @@ export default class Note extends Component {
        suppressContentEditableWarning={true}
        style={{width: '100%', height: '10vh'}}
        >{value}</div>
-
 
       {/* <textarea id={this.props.name} name={this.props.name}
       rows="5" cols="50"
