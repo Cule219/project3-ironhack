@@ -27,7 +27,10 @@ export default class Users extends Component {
             <div className="col-md-6">
               <h2>
                 <i className="fas fa-users"/>Users
-                </h2>
+                <Link to={`/users/add`}>
+                  <button className="btn btn-success" style={{float: 'right'}}>Add New User</button>
+                </Link>
+              </h2>
             </div>
           </div>
           <table className="table table-striped">

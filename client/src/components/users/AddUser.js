@@ -20,25 +20,21 @@ export default class AddUser extends Component {
     });
   }
 
-  onSubmit = e => {
-    axios.post('/api/auth/signup', {...this.state})
+  onSubmit = async e => {
+    await axios.post('/api/auth/signup', {...this.state})
     .then(response => {
       console.log(response)
-      this.setState({
-        username: '',
-        password: '',
-        githubLink: '',
-        profileImg: '',
-        role: 'student',
-        submitUser: true,
-        error: `User ${response.data.username} added`
-      })
+      
     }).catch(err=> this.setState({
       error: err.message
     }));
 
+    this.setState({
+      error: `User added`
+    })
+    // this.context.history.push('/users/');
+    this.props.history.push('/users/');
   }
-
 
   render() {
     return (

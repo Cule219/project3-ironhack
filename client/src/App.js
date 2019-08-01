@@ -193,17 +193,17 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/users"
-                  render={props => <Users user={this.state.user} />}
+                  render={props => <Users {...props} user={this.state.user} />}
                 />
                 <Route
                   exact
                   path="/users/:id"
-                  render={props => <EditUser user={this.state.user} />}
+                  render={props => <EditUser {...props} user={this.state.user} />}
                 />
                 <Route
                   exact
                   path="/users/add"
-                  render={props => <AddUser user={this.state.user} />}
+                  render={props => <EditUser {...props} user={this.state.user} />}
                 />
                 <Protected
                   exact

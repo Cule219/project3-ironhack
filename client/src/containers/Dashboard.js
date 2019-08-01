@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Sidebar              from "../components/Sidebar";
-import AddUser from '../components/users/AddUser';
 import Users from '../components/users/Users';
 
 export default class Dashboard extends Component {
@@ -8,12 +7,11 @@ export default class Dashboard extends Component {
     size: "100%"
   };
   render() {
+    console.log(this.props)
     return (
       <div className="row"> 
         <div className="col-md-10">
-          <Users {...this.props}/>
-          <AddUser {...this.props}/>
-
+          <Users {...this.props}/>  
           
         </div>
         <div className="col-md-2">

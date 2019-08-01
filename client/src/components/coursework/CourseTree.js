@@ -82,7 +82,8 @@ class CourseTree extends Component {
         <p className="menu-label">Classmates</p>
         <ul className="menu-list">
           <li>
-            <a>My profile</a>
+            {/*Change once protected implemented */}
+            {this.props.user&&<Link to={`/users/${this.props.user._id}`}>My profile</Link>}
           </li>
         </ul>
         <p className="menu-label">Course Info</p>
