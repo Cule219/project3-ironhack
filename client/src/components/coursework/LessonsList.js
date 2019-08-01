@@ -22,6 +22,7 @@ class LessonsList extends Component {
       .then(response => {
         console.log("these are the day's lessons from DB: ", response);
         this.setState({ day: response });
+        this.props.reloadCourseTree(id);
       })
       .catch(err => {
         console.log(err);
@@ -38,6 +39,7 @@ class LessonsList extends Component {
             response
           );
           this.setState({ day: response });
+          this.props.reloadCourseTree(id);
         })
         .catch(err => {
           console.log(err);

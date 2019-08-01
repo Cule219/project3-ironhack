@@ -5,7 +5,7 @@ import Collapsible from "./Collapsible";
 class CourseTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: [] };
+    this.state = { open: [], selectedDay: null };
   }
 
   toggleWeek = index => {
@@ -14,10 +14,10 @@ class CourseTree extends Component {
     this.setState({ open: nowOpen });
   };
 
-  openWeek = index => {
+  openWeek = (index, id) => {
     let nowOpen = [];
     nowOpen[index] = true;
-    this.setState({ open: nowOpen });
+    this.setState({ open: nowOpen, selectedDay: id });
   };
 
   componentDidUpdate(prevProps) {
@@ -26,7 +26,7 @@ class CourseTree extends Component {
       this.props.selectedWeek !== prevProps.selectedWeek
     ) {
       console.log(this.props);
-      this.openWeek(this.props.selectedWeek);
+      this.openWeek(this.props.selectedWeek, this.props.selectedDay);
     }
   }
 
@@ -47,6 +47,11 @@ class CourseTree extends Component {
                           pathname: `/days/${element.id}`,
                           state: { day: element }
                         }}
+                        className={
+                          this.state.selectedDay === element.id
+                            ? "is-active"
+                            : ""
+                        }
                       >
                         {element.day ? `Day ${element.day}` : element.name}
                         <br />

@@ -29,7 +29,8 @@ class App extends React.Component {
       weeks: [],
       filteredResults: [],
       searchOpen: false,
-      selectedWeek: null
+      selectedWeek: null,
+      selectedDay: null
     };
   }
 
@@ -92,7 +93,7 @@ class App extends React.Component {
       .then(response => {
         response.forEach((week, i) => {
           let d = week.find(el => el.id === idList);
-          if (d) this.setState({ selectedWeek: i });
+          if (d) this.setState({ selectedWeek: i, selectedDay: d.id });
         });
 
         let sorted = response.map(el => {
@@ -130,6 +131,7 @@ class App extends React.Component {
                 weeks={this.state.weeks}
                 toggleSearch={this.toggleSearch}
                 selectedWeek={this.state.selectedWeek}
+                selectedDay={this.state.selectedDay}
               />
             </div>
             <div className="col-xs-7 col-sm-7 col-md-8 col-lg-9 fixed-height">
