@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+
 import "./App.scss";
 
 import Navbar from "./components/Navbar";
@@ -18,9 +19,10 @@ import SearchFilter from "./components/SearchFilter";
 import SearchResults from "./components/coursework/SearchResults";
 import { Button } from "react-bootstrap";
 import AddUser from "./components/users/AddUser";
-import EditUser from "./components/users/AddUser";
-import Users from "./components/users/AddUser";
+import EditUser from "./components/users/EditUser";
+import Users from "./components/users/Users";
 import ModulesList from "./components/coursework/ModulesList";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -207,9 +209,7 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/users/add"
-                  render={props => (
-                    <EditUser {...props} user={this.state.user} />
-                  )}
+                  render={props => <AddUser {...props} user={this.state.user} />}
                 />
                 <Protected
                   exact

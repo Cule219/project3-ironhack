@@ -12,7 +12,8 @@ export default class EditUser extends Component {
     profileImg: '',
     role: 'student',
     submitUser: true,
-    error: ''
+    error: '',
+    disabled: true
   }
 
   componentDidMount() {
@@ -35,17 +36,19 @@ export default class EditUser extends Component {
 
   onSubmit = async e => {
     const {username, githubLink, profileImg, role} = {...this.state}
-    await axios.put(`/api/user/${this.state.id}`, {username, githubLink, profileImg, role})
+    await axios.put(`/api/users/${this.state.id}`, {username, githubLink, profileImg, role})
     .then(response => {
+      console.log(response);
     }).catch(err=> this.setState({
       error: err.message
     }));
 
     this.setState({
+      disabled: !this.state.disabled,
       error: `User edited`
     })
-    // this.context.history.push('/users/');
-    this.props.history.push('/users/');
+    this.context.history.push('/users/');
+    // this.props.history.push('/users/');
   }
 
   render() {
@@ -54,17 +57,55 @@ export default class EditUser extends Component {
          <div>
         <div className="row">
           <div className="col-md-6">
-            <Link to="/" className="btn btn-link">
-              <i className="fas fa-arrow-circle-left" />Back to Users
+            <Link to="/users/" className="btn btn-link">
+              <i className="fas fa-arrow-circle-left" />View All
             </Link>
+          </div>
+          <div className="col-md-6">
+            <div className="input-group-appent">
+
+              {(this.props.user.role === 'TA' || this.props.user.role === 'teacher')&&
+              <>
+                {this.state.disabled?
+                <input type="submit" value="Edit"
+                onClick={() => this.setState({disabled: !this.state.disabled})}
+                className="btn btn-outline-dark" 
+                style={{float: "right"}}/>
+                :
+                <input type="submit" value="Confirm"
+                onClick={this.onSubmit}
+                className="btn btn-outline-danger"
+                style={{float: "right"}}
+                />}
+              </>}
+
+            </div>
           </div>
         </div>
         <div className="card">
           <div className="card-header">Add User</div>
           <div className="card-body">
+          <form>
+              <div className="form-group">
+                {/* <input 
+                type="text"
+                className="form-control"
+                name="username"
+                minLength="2"
+                required
+                onChange={this.onChange}
+                value={this.state.username}
+                disabled={this.state.disabled}
+                /> */}
+                <img 
+                src={this.props.user.profileImg || 
+          'https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQkzn0OPjcr3XQY7UkMt85y2o6HubSMaDYiYQSA_2xvqTwZeUzV7kCvKb0apdC5SmPE&_nc_ht=scontent-vie1-1.xx&oh=16ae35aaabc5b997ec4d338b775d98f7&oe=5DE21BE9'} 
+          alt="Users profile img" style={{height: '100%'}} className="form-control"/>
+              </div>
+            </form>
             <form>
               <div className="form-group">
-                <label htmlFor="firstName">Username:</label>
+                <label htmlFor="username">Username:</label>
                 <input 
                 type="text"
                 className="form-control"
@@ -72,10 +113,13 @@ export default class EditUser extends Component {
                 minLength="2"
                 required
                 onChange={this.onChange}
-                value={this.state.firstName}
+                value={this.state.username}
+                disabled={this.state.disabled}
                 />
               </div>
             </form>
+
+            {!this.state.disabled&&
             <form>
               <div className="form-group">
                 <label htmlFor="password">Password:</label>
@@ -85,10 +129,11 @@ export default class EditUser extends Component {
                 name="password"
                 required
                 onChange={this.onChange}
-                value={this.state.lastName}
+                value={this.state.password}
+                // no point in filling this but to lazy too change now  
                 />
               </div>
-            </form>
+            </form>}
             <form>
               <div className="form-group">
                 <label htmlFor="githubLink">Github:</label>
@@ -98,6 +143,7 @@ export default class EditUser extends Component {
                 name="githubLink"
                 onChange={this.onChange}
                 value={this.state.githubLink}
+                disabled={this.state.disabled}
                 />
               </div>
             </form>
@@ -110,6 +156,7 @@ export default class EditUser extends Component {
                 name="profileImg"
                 onChange={this.onChange}
                 value={this.state.profileImg}
+                disabled={this.state.disabled}
                 />
               </div>
             </form>
@@ -120,6 +167,8 @@ export default class EditUser extends Component {
                   name="role"
                   onChange={this.onChange}
                   value={this.state.role}
+                  disabled={this.state.disabled}
+                  className="form-control"
                   >
                     <option value="student">Student</option>
                     <option value="TA">TA</option>
@@ -131,12 +180,12 @@ export default class EditUser extends Component {
             {this.state.error && (
               <Alert variant="warning">{this.state.error}</Alert>
             )}
-            <input 
+            {/* <input 
               type="submit" 
               value="Submit"
               className="btn mt-4 btn-primary btn-block"
               onClick={this.onSubmit}
-            />  
+            />   */}
           </div>
         </div>
       </div>

@@ -1,0 +1,120 @@
+.list-primary {
+  list-style-type: none;
+  text-align: left;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
+.menu {
+  margin-top: 30px;
+}
+
+.list-container {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.form-group {
+  margin: 0px;
+}
+
+.fixed-height {
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.title-status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 2px 0;
+  width: 100%;
+}
+
+.right-float {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+}
+
+.tags {
+  margin-bottom: 5px;
+}
+
+.tags span {
+  margin: 0 2px;
+  padding: 4px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8em;
+  border-radius: 5px;
+  background-color: mediumslateblue;
+}
+
+span.technology {
+  background-color: navy;
+  color: white;
+}
+
+.check {
+  margin: 0px 10px;
+}
+
+.course-tree {
+  text-align: left;
+}
+
+.lesson-description {
+  font-size: 0.8em;
+  word-wrap: break-word;
+}
+
+span.small {
+  font-size: 0.2em;
+  border-radius: 5px;
+  border: 1px solid green;
+  margin: 2px;
+}
+
+.dots-container  {
+  margin: -5 0 0 10px;
+  padding: 0px;
+  vertical-align: top;
+  font-size: 0.2em;
+}
+
+.vertical-align-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, blue 60%),
+    linear-gradient(135deg, blue 40%, transparent 50%) !important;
+  background-position:
+    calc(100% - 30px) 14px,
+    calc(100% - 20px) 14px,
+    100% 0;
+  background-size:
+    10px 10px,
+    10px 10px;
+  background-repeat: no-repeat;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.bg-primary {
+  background-color: #7Fb7be !important;
+}
