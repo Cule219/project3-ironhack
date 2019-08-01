@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { login } from "../services/api";
 import { Form, Button, Alert } from "react-bootstrap";
-import { Redirect } from 'react-router-dom';
 
 export default class Login extends Component {
   state = {

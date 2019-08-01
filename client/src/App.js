@@ -94,7 +94,7 @@ class App extends React.Component {
     getWeeks()
       .then(response => {
         response.forEach((week, i) => {
-          let d = week.find(el => el.id == idList);
+          let d = week.find(el => el.id === idList);
           if (d) this.setState({ selectedWeek: i });
         });
 
