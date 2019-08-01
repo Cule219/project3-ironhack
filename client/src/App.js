@@ -135,6 +135,7 @@ class App extends React.Component {
                 selectedWeek={this.state.selectedWeek}
                 selectedDay={this.state.selectedDay}
                 treeClosed={this.state.treeClosed}
+                user={this.state.user}
               />
             </div>
             <div className="col-xs-7 col-sm-7 col-md-8 col-lg-9 fixed-height">

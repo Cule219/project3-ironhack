@@ -67,10 +67,14 @@ class CourseTree extends Component {
                                 className="small"
                                 key={cardi}
                                 style={{
-                                  backgroundColor: card.completionStatus
+                                  backgroundColor: this.props.user.completedItems.includes(
+                                    card.id
+                                  )
                                     ? "navy"
                                     : "white",
-                                  color: card.completionStatus
+                                  color: this.props.user.completedItems.includes(
+                                    card.id
+                                  )
                                     ? "navy"
                                     : "white"
                                 }}
