@@ -38,7 +38,7 @@ class ModulesList extends Component {
             <div key={index}>
               <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
               <Collapsible open={this.state.open[index]}>
-                {console.log(el.description)}
+                {/* {console.log(el.description)} */}
                 <div dangerouslySetInnerHTML={{ __html: el.description }} />
               </Collapsible>
             </div>

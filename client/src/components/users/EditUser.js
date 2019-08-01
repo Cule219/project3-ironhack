@@ -12,7 +12,8 @@ export default class EditUser extends Component {
     profileImg: '',
     role: 'student',
     submitUser: true,
-    error: ''
+    error: '',
+    disabled: true
   }
 
   componentDidMount() {
@@ -54,8 +55,8 @@ export default class EditUser extends Component {
          <div>
         <div className="row">
           <div className="col-md-6">
-            <Link to="/" className="btn btn-link">
-              <i className="fas fa-arrow-circle-left" />Back to Users
+            <Link to="/users/" className="btn btn-link">
+              <i className="fas fa-arrow-circle-left" />View All
             </Link>
           </div>
         </div>
@@ -64,7 +65,7 @@ export default class EditUser extends Component {
           <div className="card-body">
             <form>
               <div className="form-group">
-                <label htmlFor="firstName">Username:</label>
+                <label htmlFor="username">Username:</label>
                 <input 
                 type="text"
                 className="form-control"
@@ -72,10 +73,13 @@ export default class EditUser extends Component {
                 minLength="2"
                 required
                 onChange={this.onChange}
-                value={this.state.firstName}
+                value={this.state.username}
+                disabled={this.state.disabled}
                 />
               </div>
             </form>
+
+            {!this.state.disabled&&
             <form>
               <div className="form-group">
                 <label htmlFor="password">Password:</label>
@@ -85,10 +89,11 @@ export default class EditUser extends Component {
                 name="password"
                 required
                 onChange={this.onChange}
-                value={this.state.lastName}
+                value={this.state.password}
+                // no point in filling this but to lazy too change now  
                 />
               </div>
-            </form>
+            </form>}
             <form>
               <div className="form-group">
                 <label htmlFor="githubLink">Github:</label>
@@ -98,6 +103,7 @@ export default class EditUser extends Component {
                 name="githubLink"
                 onChange={this.onChange}
                 value={this.state.githubLink}
+                disabled={this.state.disabled}
                 />
               </div>
             </form>
@@ -110,6 +116,7 @@ export default class EditUser extends Component {
                 name="profileImg"
                 onChange={this.onChange}
                 value={this.state.profileImg}
+                disabled={this.state.disabled}
                 />
               </div>
             </form>
@@ -120,6 +127,8 @@ export default class EditUser extends Component {
                   name="role"
                   onChange={this.onChange}
                   value={this.state.role}
+                  disabled={this.state.disabled}
+                  className="form-control"
                   >
                     <option value="student">Student</option>
                     <option value="TA">TA</option>

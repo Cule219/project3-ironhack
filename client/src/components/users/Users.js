@@ -49,7 +49,7 @@ export default class Users extends Component {
                   <td>{user.githubLink}</td>
                   <td>
                     <Link to={`/users/${user._id}`} className="btn btn-secondary btn-sm">
-                      <i className="fas fa-arrow-circle-right"/>Edit
+                      <i className="fas fa-arrow-circle-right"/>View
                     </Link>
                   </td>
                 </tr>

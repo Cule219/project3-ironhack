@@ -28,13 +28,18 @@ const CustomNavbar = props => {
     </div>
     <div className="">
       <Navbar.Brand to="/">
-      {props.user&&<Link className="text-white" to="/">Home</Link>}
       </Navbar.Brand>
       {props.user ? (
-        <>
+        <> 
           <Navbar.Brand>
+            <Link className="text-white" to={`/users/${props.user._id}`} >
+              {props.user.username}
+            </Link>
             <Link className="text-white" onClick={() => handleLogout(props)} to="/">
-              Logout
+              {' '}Logout{' '}
+            </Link>
+            <Link className="text-white" to="/">
+              Home
             </Link>
           </Navbar.Brand>
         </>

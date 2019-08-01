@@ -32,7 +32,7 @@ export default class Note extends Component {
     return (
       <div>
        <label>{this.props.label}</label>
-       {(this.props.user.role === 'TA' || this.props.name == 'userNote')&&<i onClick={this.onDoubleClickHandler} className="fas fa-pencil-alt" 
+       {(this.props.user.role === 'TA' || this.props.name === 'userNote')&&<i onClick={this.onDoubleClickHandler} className="fas fa-pencil-alt" 
        style={{float: "right"}} ></i>}
        <br/>
 
