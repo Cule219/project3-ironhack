@@ -5,7 +5,6 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
-//import Home from "./containers/Home";
 import Signup from "./containers/Signup";
 import Login from "./containers/Login";
 import Dashboard from "./containers/Dashboard";
@@ -18,7 +17,9 @@ import LessonsList from "./components/coursework/LessonsList";
 import SearchFilter from "./components/SearchFilter";
 import SearchResults from "./components/coursework/SearchResults";
 import { Button } from "react-bootstrap";
-import axios from "axios";
+import AddUser from "./components/users/AddUser";
+import EditUser from "./components/users/AddUser";
+import Users from "./components/users/AddUser";
 
 class App extends React.Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class App extends React.Component {
     getWeeks()
       .then(response => {
         response.forEach((week, i) => {
-          let d = week.find(el => el.id == idList);
+          let d = week.find(el => el.id === idList);
           if (d) this.setState({ selectedWeek: i });
         });
 
@@ -180,10 +181,21 @@ class App extends React.Component {
                   path="/"
                   render={props => <About user={this.state.user} />}
                 />
+                } />
                 <Route
                   exact
-                  path="/dashboard"
-                  render={props => <Dashboard user={this.state.user} />}
+                  path="/users"
+                  render={props => <Users user={this.state.user} />}
+                />
+                <Route
+                  exact
+                  path="/users/:id"
+                  render={props => <EditUser user={this.state.user} />}
+                />
+                <Route
+                  exact
+                  path="/users/add"
+                  render={props => <AddUser user={this.state.user} />}
                 />
                 <Protected
                   exact
@@ -200,6 +212,14 @@ class App extends React.Component {
                   setUser={this.setUser}
                   user={!this.state.user}
                   component={Login}
+                />
+                {/* Testing */}
+                <Route
+                  exact
+                  path="/dashboard"
+                  render={props => (
+                    <Dashboard {...props} user={this.state.user} />
+                  )}
                 />
               </Switch>
             </div>

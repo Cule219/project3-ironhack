@@ -32,9 +32,9 @@ class CourseTree extends Component {
 
   render() {
     return (
-      <aside class="menu">
-        <p class="menu-label">Course Calendar</p>
-        <ul class="menu-list">
+      <aside className="menu">
+        <p className="menu-label">Course Calendar</p>
+        <ul className="menu-list">
           {this.props.weeks.map((el, index) => (
             <li key={index}>
               <a onClick={() => this.toggleWeek(index)}>Week {index + 1}</a>
@@ -74,8 +74,8 @@ class CourseTree extends Component {
             </li>
           ))}
         </ul>
-        <p class="menu-label">Classmates</p>
-        <ul class="menu-list">
+        <p className="menu-label">Classmates</p>
+        <ul className="menu-list">
           <li>
             <a>My profile</a>
           </li>

@@ -60,7 +60,11 @@ export default class Login extends Component {
           <Alert variant="warning">{this.state.error}</Alert>
         )}
 
-        <Button type="submit">Login</Button>
+        <Button 
+        type="submit"
+
+        className="btn mt-4 btn-primary btn-block"
+        >Login</Button>
       </Form>
     );
   }

@@ -24,8 +24,7 @@ router.post("/login", (req, res)=>{
 });
 
 router.post("/signup", (req, res) => {
-  const {username, password, profileImg, role} = req.body;
-
+  const {username, password, profileImg, githubLink, role, submitUser} = req.body;
   if (username === "" || password === "") {
     res.status(400).json({ message: "Indicate username and password" });
     return;
@@ -34,7 +33,7 @@ router.post("/signup", (req, res) => {
   User.findOne({ username }, "username", (err, user) => {
     if (user !== null) {
       res.status(409).json({ message: "The username already exists" });
-      return;
+      return; 
     }
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -44,11 +43,12 @@ router.post("/signup", (req, res) => {
       username,
       password: hashPass,
       profileImg,
+      githubLink,
       role
     });
-
     newUser.save()
     .then(newUser => {
+      if(!submitUser){
       req.login(newUser, err => {
         if (err) {
           return res
@@ -56,7 +56,7 @@ router.post("/signup", (req, res) => {
             .json({ message: "Error while attempting to login" });
         }
         res.status(200).json(newUser);
-      })
+      });}
     })
     .catch(err => {
       res.status(500).json({ message: "Something went wrong" });

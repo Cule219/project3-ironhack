@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import CommentBox           from "../components/comments/CommentBox";
 import Sidebar              from "../components/Sidebar";
+import AddUser from '../components/users/AddUser';
+import Users from '../components/users/Users';
 
 export default class Dashboard extends Component {
   state = {
@@ -8,9 +9,12 @@ export default class Dashboard extends Component {
   };
   render() {
     return (
-      <div className="row">
+      <div className="row"> 
         <div className="col-md-10">
-          <CommentBox />
+          <Users {...this.props}/>
+          <AddUser {...this.props}/>
+
+          
         </div>
         <div className="col-md-2">
           <Sidebar />

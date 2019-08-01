@@ -28,6 +28,7 @@ export default class NotesBox extends Component {
   }
 
   onChangeHandler = event =>{
+    console.log(event)
     let newVal = Object.assign({...this.state[event.target.name], content: event.target.value }) 
     this.setState({
       [event.target.name]: newVal
