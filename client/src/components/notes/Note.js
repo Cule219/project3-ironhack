@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import Linkify from 'react-linkify';  
 
 export default class Note extends Component {
   state = { 
@@ -28,7 +29,7 @@ export default class Note extends Component {
   }
 
   render() {
-    let value = this.props.data?this.props.data.content:'';
+    let value = this.props.data?<Linkify>{this.props.data.content}</Linkify>:'';
     return (
       <div>
        <label>{this.props.label}</label>
