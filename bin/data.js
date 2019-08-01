@@ -53,15 +53,12 @@ const lists = board =>
           parseInt(name.split("Day ")[name.split("Day ").length - 1]) || null;
         if (name.indexOf("MODULE I") !== -1) {
           week = 3;
-          day = "extra";
         }
         if (name.indexOf("MODULE II") !== -1) {
           week = 6;
-          day = "extra";
         }
         if (name.indexOf("MODULE III") !== -1) {
           week = 9;
-          day = "extra";
         }
         if (name.indexOf("Resources") !== -1) {
           week = 0;

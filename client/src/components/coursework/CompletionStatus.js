@@ -16,17 +16,20 @@ class CompletionStatus extends Component {
     // console.log(this.props);
     return (
       <Form>
-        <Form.Group controlId="statusCheckbox">
-          <Form.Check
-            className="check"
-            type="checkbox"
-            label=""
-            checked={this.state.completed}
-            onChange={() =>
-              this.handleCompletion(this.props.id, !this.state.completed)
-            }
-          />
-        </Form.Group>
+        {!this.props.tags.map(tag => tag.name).includes("Events") &&
+          !this.props.tags.map(tag => tag.name).includes("Additional info") && (
+            <Form.Group controlId="statusCheckbox">
+              <Form.Check
+                className="check"
+                type="checkbox"
+                label=""
+                checked={this.state.completed}
+                onChange={() =>
+                  this.handleCompletion(this.props.id, !this.state.completed)
+                }
+              />
+            </Form.Group>
+          )}
       </Form>
     );
   }
