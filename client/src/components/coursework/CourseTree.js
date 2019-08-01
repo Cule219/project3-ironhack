@@ -5,7 +5,7 @@ import Collapsible from "./Collapsible";
 class CourseTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: [], openDay: {} };
+    this.state = { open: [], selectedDay: null };
   }
 
   toggleWeek = index => {
@@ -14,15 +14,96 @@ class CourseTree extends Component {
     this.setState({ open: nowOpen });
   };
 
-  toggleDay = id => {
-    let daysOpen = { ...this.state.openDay };
-    daysOpen[id] = !daysOpen[id];
-    this.setState({ openDay: daysOpen });
+  openWeek = (index, id) => {
+    let nowOpen = [];
+    nowOpen[index] = true;
+    this.setState({ open: nowOpen, selectedDay: id });
   };
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.selectedWeek !== prevProps.selectedWeek ||
+      this.props.selectedDay !== prevProps.selectedDay
+    ) {
+      console.log("in the coursetree update", this.props);
+      this.openWeek(this.props.selectedWeek, this.props.selectedDay);
+    }
+  }
 
   render() {
     return (
-      <div className="course-tree">
+      <aside className="menu">
+        <p className="menu-label">Course Calendar</p>
+        <ul className="menu-list">
+          {this.props.weeks.map((el, index) => (
+            <li key={index}>
+              <a onClick={() => this.toggleWeek(index)}>Week {index + 1}</a>
+              <Collapsible open={this.state.open[index]}>
+                <ul style={{ fontSize: "0.9em" }}>
+                  {el.map(element => (
+                    <li key={element.id} className="vertical-align-center">
+                      <Link
+                        to={{
+                          pathname: `/days/${element.id}`,
+                          state: { day: element }
+                        }}
+                        className={
+                          this.state.selectedDay === element.id
+                            ? "is-active"
+                            : ""
+                        }
+                      >
+                        {element.day ? `Day ${element.day}` : element.name}
+                        <br />
+                        {element.cards.map((card, cardi) => (
+                          <span
+                            className="small"
+                            key={cardi}
+                            style={{
+                              backgroundColor: card.completionStatus
+                                ? "navy"
+                                : "white",
+                              color: card.completionStatus ? "navy" : "white"
+                            }}
+                          >
+                            --
+                          </span>
+                        ))}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </Collapsible>
+            </li>
+          ))}
+        </ul>
+        <p className="menu-label">Classmates</p>
+        <ul className="menu-list">
+          <li>
+            {/*Change once protected implemented */}
+            {this.props.user && (
+              <Link to={`/users/${this.props.user._id}`}>My profile</Link>
+            )}
+          </li>
+        </ul>
+        <p className="menu-label">Course Info</p>
+        <ul className="menu-list">
+          <li>
+            <Link to={"/modules"}>Modules</Link>
+          </li>
+        </ul>
+        <p className="menu-label">Resources</p>
+        <ul className="menu-list">
+          <li>{/* HIIIII I NEED TO GET RESOURCES HERE */}</li>
+        </ul>
+      </aside>
+    );
+  }
+}
+
+export default CourseTree;
+
+/* <div className="course-tree">
         {this.props.weeks.map((el, index) => (
           <div key={index}>
             <h6>
@@ -61,9 +142,4 @@ class CourseTree extends Component {
             </Collapsible>
           </div>
         ))}
-      </div>
-    );
-  }
-}
-
-export default CourseTree;
+      </div> */

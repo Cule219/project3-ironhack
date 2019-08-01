@@ -7,9 +7,11 @@ class ModulesList extends Component {
   constructor(props) {
     super(props);
     this.state = { modules: [], open: [false, false, false] };
+    // console.log("here I am");
   }
 
   componentDidMount() {
+    // console.log("here mounting");
     getModules()
       .then(response => {
         let sorted = response.sort((a, b) => {
@@ -34,10 +36,15 @@ class ModulesList extends Component {
         <ul className="list-primary">
           {this.state.modules.map((el, index) => (
             <div key={index}>
-              <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
+              <a>
+                <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
+              </a>
               <Collapsible open={this.state.open[index]}>
-                <div dangerouslySetInnerHTML={{ __html: el.description }} />
-                {/* <Link to={`/weeks/${index + 1}`}>Week {index + 1}</Link> */}
+                {console.log(el.description)}
+                <div
+                  className="content"
+                  dangerouslySetInnerHTML={{ __html: el.description }}
+                />
               </Collapsible>
             </div>
           ))}

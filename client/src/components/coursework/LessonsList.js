@@ -1,39 +1,45 @@
 import React, { Component } from "react";
 import { getDay } from "../../services/courseworkService";
-
-import NotesBox from "../notes/NotesBox";
 import CompletionStatus from "./CompletionStatus";
 
 // this is for testing purposes only
 import CommentBox from "../comments/CommentBox";
+import NotesBox from "../notes/NotesBox";
 
 class LessonsList extends Component {
-  state = {
-    day: {
-      cards: []
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      day: {
+        cards: []
+      }
+    };
+  }
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     let id = this.props.match.params.id;
     getDay(id)
       .then(response => {
-        console.log("these are the day's lessons from DB: ", response);
+        // console.log("these are the day's lessons from DB: ", response);
         this.setState({ day: response });
+        this.props.reloadCourseTree(id);
       })
       .catch(err => {
         console.log(err);
       });
   }
 
-  componentDidUpdate(prevprops) {
-    if (this.props.match.params.id != prevprops.match.params.id) {
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
       let id = this.props.match.params.id;
       getDay(id)
         .then(response => {
-          console.log("these are the day's lessons from DB: ", response);
+          console.log(
+            "Here in an update! these are the day's lessons from DB: ",
+            response
+          );
           this.setState({ day: response });
+          this.props.reloadCourseTree(id);
         })
         .catch(err => {
           console.log(err);
@@ -41,67 +47,55 @@ class LessonsList extends Component {
     }
   }
 
-  validURL(str) {
-    var pattern = new RegExp(
-      "^(https?:\\/\\/)?" + // protocol
-      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-        "(\\#[-a-z\\d_]*)?$",
-      "i"
-    ); // fragment locator
-    return !!pattern.test(str);
-  }
-
   render() {
-    let day = this.state.day;
+    // console.log("here in the render", this.state.day);
     return (
-      <div className="list-container">
-        <p>{day.name}</p>
-        <ul className="list-primary">
-          {day.cards.length > 0 &&
-            day.cards.map(el => (
-              <div key={el.id} className="list-item">
-                <div className="title-status">
-                  <a href={el.attachments[0]}>{el.name}</a>
-                  <CompletionStatus {...el} />
+      <>
+        <h2>{this.state.day.name}</h2>
+        <div className="list-container">
+          <ul className="list-primary">
+            {this.state.day.cards &&
+              this.state.day.cards.length > 0 &&
+              this.state.day.cards.map(el => (
+                <div key={el.id} className="list-item">
+                  <div className="title-status">
+                    <a href={el.attachments[0]}>{el.name}</a>
+                    <CompletionStatus
+                      {...el}
+                      reloadCourseTree={this.props.reloadCourseTree}
+                    />
+                  </div>
+                  {el.desc && (
+                    <div
+                      className="lesson-description"
+                      dangerouslySetInnerHTML={{
+                        __html: el.desc
+                      }}
+                    />
+                  )}
+                  <div className="tags-special">
+                    {el.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        style={{ backgroundColor: `${tag.color}` }}
+                      >
+                        {tag.name}
+                      </span>
+                    ))}
+                    {el.tech.map((e, i) => (
+                      <span key={i} className="technology">
+                        {e}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                {el.desc && (
-                  <div
-                    className="lesson-description"
-                    dangerouslySetInnerHTML={{
-                      __html: el.desc
-                        .split(/\n|\s/)
-                        .map(str =>
-                          this.validURL(str) ? `<a href=${str}>Link</a>` : str
-                        )
-                        .join(" ")
-                    }}
-                  />
-                )}
-                <div className="tags">
-                  {el.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      style={{ backgroundColor: `${tag.color}` }}
-                    >
-                      {tag.name}
-                    </span>
-                  ))}
-                  {el.tech.map((e, i) => (
-                    <span key={i} className="technology">
-                      {e}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-        </ul>
-        {/* this is for testing purposes only */}
-        <NotesBox data={this.props} user={this.props.user} />
-        <CommentBox data={this.props} user={this.props.user} />
-      </div>
+              ))}
+          </ul>
+          {/* this is for testing purposes only */}
+          <NotesBox {...this.props} />
+          <CommentBox {...this.props} />
+        </div>
+      </>
     );
   }
 }

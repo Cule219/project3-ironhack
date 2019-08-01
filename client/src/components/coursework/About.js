@@ -17,13 +17,14 @@ class About extends Component {
   }
 
   render() {
+    let title = this.state.board&&this.state.board.name.toUpperCase();
     return (
       <div>
+        {title && <h2>{title}</h2>}
+        <ModulesList />
         <h1>
           <Link to="/dashboard">Dashboard</Link>
         </h1>
-        {this.state.board && <h2>{this.state.board.name}</h2>}
-        <ModulesList />
       </div>
     );
   }

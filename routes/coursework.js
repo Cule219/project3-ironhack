@@ -90,12 +90,32 @@ router.get("/modules", (req, res, next) => {
     });
 });
 
+router.get("/tags", (req, res, next) => {
+  let tagNames = new Set();
+  let tags = [];
+  Card.find({})
+    .then(cards => {
+      cards.forEach(card => {
+        card.tags.forEach(tag => {
+          let oldSize = tagNames.size;
+          if (tagNames.add(tag.name).size !== oldSize)
+            tags.push({ name: tag.name, color: tag.color, type: 0 });
+        });
+        card.tech.forEach(technology => {
+          let oldSize = tagNames.size;
+          if (tagNames.add(technology).size !== oldSize)
+            tags.push({ name: technology, color: "navy", type: 1 });
+        });
+      });
+      console.log(tags);
+      res.json(tags.sort((a, b) => a.type - b.type));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 router.post("/lessons/:id", (req, res, next) => {
-  console.log(
-    "here I am in the routes: ",
-    req.params.id,
-    req.body.completionStatus
-  );
   Card.findOneAndUpdate(
     { id: req.params.id },
     { completionStatus: req.body.completionStatus },

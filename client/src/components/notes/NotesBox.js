@@ -1,22 +1,20 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import Note from './Note';
-import { islogged } from "../../services/api";
 
 export default class NotesBox extends Component {
   state = {
-    user: null,
     userNote: null,
-    listNote: null
+    listNote: null,
   }
 
-  getNotes = async () => {
-    await axios.get(`/api/notes/prot/${this.props.data.match.params.id}`).then(response => {
+  getNotes = () => {
+    axios.get(`/api/notes/prot/${this.props.match.params.id}`).then(response => {
       this.setState({
-        listNote: response.data
+        listNote: response.data,
       });
     })
-    await axios.get(`/api/notes/${this.props.data.match.params.id}`).then(response => {
+    axios.get(`/api/notes/${this.props.match.params.id}`).then(response => {
       this.setState({
         userNote: response.data
       });
@@ -29,25 +27,40 @@ export default class NotesBox extends Component {
     });
   }
 
-  async componentDidMount(){
-    let user = await islogged();
+  onChangeHandler = event =>{
+    let newVal = Object.assign({...this.state[event.target.name], content: event.target.value }) 
     this.setState({
-      user: user
+      [event.target.name]: newVal
     });
+  } 
 
+  componentDidMount(){
     this.getNotes();
   };
 
+  componentDidUpdate(prevProps){
+    (prevProps.location.pathname!==this.props.location.pathname)&&
+    this.getNotes();
+  }
+
   render() {
-    // console.log(this.state)
     return (
       <>
-        <Note user={this.state.user} label={'Your Notes'} data={this.state.userNote} 
-        postNoteHandler = { this.updateNote }
+        <Note 
+          name={'userNote'}
+          onChangeHandler = {this.onChangeHandler}
+          user={this.props.user}
+          label={'Your Notes'} 
+          data={this.state.userNote}   
+          postNoteHandler = { this.updateNote }
         />
-        {/* This needs to check for user role to allow modification */}
-        <Note user={this.state.user} label={'Lists Notes'} data={this.state.listNote} 
-        postNoteHandler = { this.updateNote }
+        <Note 
+          name={'listNote'}
+          onChangeHandler = {this.onChangeHandler}
+          user={this.props.user} 
+          label={'Lists Notes'} 
+          data={this.state.listNote}   
+          postNoteHandler = { this.updateNote }
         />
       </>
     )

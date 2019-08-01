@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./index.scss";
+import "bulma/css/bulma.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 import axios from "axios";
 
@@ -12,7 +13,7 @@ axios
     console.log('got here')
     ReactDOM.render(
       <BrowserRouter>
-        <App user={response.data} />
+        <Route render={props => <App {...props} user={response.data} />} />
       </BrowserRouter>,
       document.getElementById("root")
     );

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import { logout } from "../services/api";
 
+
+
+
 const handleLogout = props => {
   logout().then(() => {
     props.setUser(null);
@@ -11,7 +14,7 @@ const handleLogout = props => {
 
 const CustomNavbar = props => {
   return (
-<nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4 justify-content-space-between">
+<Navbar className="navbar navbar-expand-md navbar-dark bg-primary mb-4 justify-content-space-between">
   
   <div className="container">
 
@@ -28,13 +31,18 @@ const CustomNavbar = props => {
     </div>
     <div className="">
       <Navbar.Brand to="/">
-      <Link className="text-white" to="/">Home</Link>
       </Navbar.Brand>
       {props.user ? (
-        <>
+        <> 
           <Navbar.Brand>
+            <Link className="text-white" to={`/users/${props.user._id}`} >
+              {props.user.username}
+            </Link>
             <Link className="text-white" onClick={() => handleLogout(props)} to="/">
-              Logout
+              {' '}Logout{' '}
+            </Link>
+            <Link className="text-white" to="/">
+              Home
             </Link>
           </Navbar.Brand>
         </>
@@ -43,6 +51,7 @@ const CustomNavbar = props => {
           <Navbar.Brand>
             <Link className="text-white" to="/signup">Signup</Link>
           </Navbar.Brand>
+          {' '}
           <Navbar.Brand>
             <Link className="text-white" to="/login">Login</Link>
           </Navbar.Brand>
@@ -50,7 +59,7 @@ const CustomNavbar = props => {
       )}
     </div>
   </div>
-</nav>
+</Navbar>
   );
 };
 

@@ -4,12 +4,7 @@ const getBoard = () =>
   axios.get("/api/coursework/").then(response => response.data);
 
 const getLessons = () =>
-  axios.get("/api/coursework/lessons").then(response => {
-    return response.data.map(el => {
-      console.log(el);
-      return el;
-    });
-  });
+  axios.get("/api/coursework/lessons").then(response => response.data);
 
 const getDays = () =>
   axios.get("/api/coursework/days").then(response => response.data);
@@ -24,18 +19,17 @@ const getWeek = num =>
   axios.get(`/api/coursework/weeks/${num}`).then(response => response.data);
 
 const getModules = () =>
-  axios.get("api/coursework/modules").then(response => response.data);
+  axios.get("/api/coursework/modules").then(response => response.data);
+
+const getTags = () =>
+  axios.get("/api/coursework/tags").then(response => response.data);
 
 const setCompletion = (id, status) => {
-  console.log("here I'm in the coursework service: ", id, status);
   return axios
     .post(`/api/coursework/lessons/${id}`, {
       completionStatus: status
     })
-    .then(response => {
-      console.log(response);
-      return response.data;
-    });
+    .then(response => response.data);
 };
 
 function populateCard(card) {
@@ -68,7 +62,21 @@ function getUrlsFromCard(cardId) {
     .then(resp => resp.data.map(el => el.url));
 }
 
+function validURL(str) {
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
+  return !!pattern.test(str);
+}
+
 export {
+  validURL,
   getCards,
   getLessons,
   getBoard,
@@ -77,5 +85,6 @@ export {
   getWeeks,
   getWeek,
   getModules,
-  setCompletion
+  setCompletion,
+  getTags
 };

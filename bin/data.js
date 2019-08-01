@@ -4,6 +4,7 @@ const axios = require("axios");
 const Board = require("../models/Board");
 const List = require("../models/List");
 const Card = require("../models/Card");
+const getTitleAtUrl = require("get-title-at-url");
 
 const technologies = [
   "React",
@@ -50,6 +51,21 @@ const lists = board =>
         let week = parseInt(name.split("Week ")[1]) || null;
         let day =
           parseInt(name.split("Day ")[name.split("Day ").length - 1]) || null;
+        if (name.indexOf("MODULE I") !== -1) {
+          week = 3;
+          day = "extra";
+        }
+        if (name.indexOf("MODULE II") !== -1) {
+          week = 6;
+          day = "extra";
+        }
+        if (name.indexOf("MODULE III") !== -1) {
+          week = 9;
+          day = "extra";
+        }
+        if (name.indexOf("Resources") !== -1) {
+          week = 0;
+        }
         List.create({
           id,
           name,
@@ -120,15 +136,11 @@ const cards = list =>
         technologies.forEach(el => {
           if (name.match(new RegExp(el, "i"))) tech.push(el);
         });
-        let descrip = desc
-          .split(" ")
-          .map(str => (validURL(str) ? `<a href=${str}>Link</a>` : str))
-          .join(" ");
         Card.create({
           id,
           name,
           dataLastActivity,
-          desc: descrip,
+          desc,
           descData,
           idBoard,
           idList,
@@ -155,16 +167,3 @@ const cards = list =>
 board("JIVynIm1");
 
 lists("JIVynIm1");
-
-function validURL(str) {
-  var pattern = new RegExp(
-    "^(https?:\\/\\/)?" + // protocol
-    "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
-    "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
-    "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
-    "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
-      "(\\#[-a-z\\d_]*)?$",
-    "i"
-  ); // fragment locator
-  return !!pattern.test(str);
-}
