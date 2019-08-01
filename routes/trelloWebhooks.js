@@ -19,12 +19,12 @@ router.post('/trelloCallback', (req, res) => {
         shortLink: req.body.action.data.card.shortLink,
         idList: req.body.action.data.list.id
     }, {upsert: true}).then(card => {
-        console.log(card);
+        console.log(card._id, card.id);
     }) 
   }
   // action.type = updateCard
   else if(req.body.action.display.translationKey === "action_archived_card") {
-    Card.deleteMany({id: req.body.action.data.card.id}).then(data => 
+    Card.findOneAndDelete({id: req.body.action.data.card.id}).then(data => 
         console.log(data));
   }
   // action.type = addAttachmentToCard

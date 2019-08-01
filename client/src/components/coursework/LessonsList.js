@@ -61,7 +61,7 @@ class LessonsList extends Component {
                   <div className="title-status">
                     <a href={el.attachments[0]}>{el.name}</a>
                     <CompletionStatus
-                      {...el}
+                      {...el} {...this.props}
                       reloadCourseTree={this.props.reloadCourseTree}
                     />
                   </div>

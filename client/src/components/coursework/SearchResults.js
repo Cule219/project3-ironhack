@@ -36,7 +36,7 @@ class SearchResults extends Component {
                         />
                       </a>
                       <CompletionStatus
-                        {...el}
+                        {...el} {...this.props}
                         reloadCourseTree={this.props.reloadCourseTree}
                       />
                     </div>

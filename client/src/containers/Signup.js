@@ -67,7 +67,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
-        <Form.Group>
+        {/* <Form.Group>
           <Form.Label htmlFor="role">Role:</Form.Label>
           <Form.Control
             as="select"
@@ -80,7 +80,7 @@ export default class Signup extends Component {
             <option value="TA">TA</option>
             <option value="teacher">Teacher</option>
           </Form.Control>
-        </Form.Group>
+        </Form.Group> */}
         <Form.Group>
           <Form.Label htmlFor="githubLink">githubLink:</Form.Label>
           <Form.Control
