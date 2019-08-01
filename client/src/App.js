@@ -112,7 +112,7 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <div className="row">
-            <div className="col-sm-5 col-md-4 col-lg-3 list-group fixed-height">
+            <div className="col-xs-4 col-sm-5 col-md-4 col-lg-3 list-group fixed-height">
               <Button
                 variant="outline-primary"
                 size="sm"
@@ -131,7 +131,7 @@ class App extends React.Component {
                 selectedWeek={this.state.selectedWeek}
               />
             </div>
-            <div className="col-sm-7 col-md-8 col-lg-9 fixed-height">
+            <div className="col-xs-7 col-sm-7 col-md-8 col-lg-9 fixed-height">
               <Switch>
                 <Route
                   exact

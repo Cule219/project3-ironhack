@@ -27,7 +27,7 @@ function updateCardsWithAttachments() {
     .then(cards => {
       // return cards.slice(0, 99)
       // return cards.slice(100, 199)
-      return cards.slice(100, 199).map(card => {
+      return cards.slice(200, 234).map(card => {
         getUrlsFromCard(card.id)
           .then(urls => {
             Card.findByIdAndUpdate(card._id, { attachments: urls })
@@ -123,7 +123,7 @@ const getTitlePromisified = url =>
   });
 
 updateCardsWithAttachments();
-//updateDescription();
+updateDescription();
 //updateDescriptionCheatSheets();
 
 // let i=0

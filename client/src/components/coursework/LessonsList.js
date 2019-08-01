@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { getDay, validURL } from "../../services/courseworkService";
-import getTitleAtUrl from "get-title-at-url";
+import { getDay } from "../../services/courseworkService";
 import CompletionStatus from "./CompletionStatus";
 
 // this is for testing purposes only
@@ -34,7 +33,10 @@ class LessonsList extends Component {
       let id = this.props.match.params.id;
       getDay(id)
         .then(response => {
-          console.log("these are the day's lessons from DB: ", response);
+          console.log(
+            "Here in an update! these are the day's lessons from DB: ",
+            response
+          );
           this.setState({ day: response });
         })
         .catch(err => {
@@ -44,12 +46,13 @@ class LessonsList extends Component {
   }
 
   render() {
-    // let day = this.state.day;
+    console.log("here in the render", this.state.day);
     return (
       <div className="list-container">
         <p>{this.state.day.name}</p>
         <ul className="list-primary">
-          {this.state.day.cards.length > 0 &&
+          {this.state.day.cards &&
+            this.state.day.cards.length > 0 &&
             this.state.day.cards.map(el => (
               <div key={el.id} className="list-item">
                 <div className="title-status">
