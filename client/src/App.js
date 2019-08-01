@@ -19,7 +19,7 @@ import SearchFilter from "./components/SearchFilter";
 import SearchResults from "./components/coursework/SearchResults";
 import { Button } from "react-bootstrap";
 import AddUser from "./components/users/AddUser";
-import EditUser from "./components/users/EditUser";
+import UserProfile from "./components/users/UserProfile";
 import Users from "./components/users/Users";
 import ModulesList from "./components/coursework/ModulesList";
 
@@ -204,7 +204,7 @@ class App extends React.Component {
                   exact
                   path="/users/:id"
                   render={props => (
-                    <EditUser {...props} user={this.state.user} />
+                    <UserProfile {...props} user={this.state.user} />
                   )}
                 />
                 <Route

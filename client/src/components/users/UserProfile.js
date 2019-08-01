@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Alert } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-export default class EditUser extends Component {
+export default class UserProfile extends Component {
   state = {
     id: '',
     username: '',
@@ -64,7 +64,7 @@ export default class EditUser extends Component {
           <div className="col-md-6">
             <div className="input-group-appent">
 
-              {(this.props.user.role === 'TA' || this.props.user.role === 'teacher')&&
+              {(this.props.user.role === 'TA' || this.props.user._id === this.state.id || this.props.user.role === 'teacher')&&
               <>
                 {this.state.disabled?
                 <input type="submit" value="Edit"
@@ -87,18 +87,8 @@ export default class EditUser extends Component {
           <div className="card-body">
           <form>
               <div className="form-group">
-                {/* <input 
-                type="text"
-                className="form-control"
-                name="username"
-                minLength="2"
-                required
-                onChange={this.onChange}
-                value={this.state.username}
-                disabled={this.state.disabled}
-                /> */}
                 <img 
-                src={this.props.user.profileImg || 
+                src={this.state.profileImg || 
           'https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQkzn0OPjcr3XQY7UkMt85y2o6HubSMaDYiYQSA_2xvqTwZeUzV7kCvKb0apdC5SmPE&_nc_ht=scontent-vie1-1.xx&oh=16ae35aaabc5b997ec4d338b775d98f7&oe=5DE21BE9'} 
           alt="Users profile img" style={{height: '100%'}} className="form-control"/>
               </div>
@@ -118,7 +108,7 @@ export default class EditUser extends Component {
                 />
               </div>
             </form>
-
+{/* 
             {!this.state.disabled&&
             <form>
               <div className="form-group">
@@ -133,7 +123,7 @@ export default class EditUser extends Component {
                 // no point in filling this but to lazy too change now  
                 />
               </div>
-            </form>}
+            </form>} */}
             <form>
               <div className="form-group">
                 <label htmlFor="githubLink">Github:</label>
@@ -160,6 +150,7 @@ export default class EditUser extends Component {
                 />
               </div>
             </form>
+            {!this.props.user.role === 'student'&&
             <form>
               <div className="form-group">
                 <label htmlFor="role">Role:</label>
@@ -176,7 +167,7 @@ export default class EditUser extends Component {
 
                   </select>
               </div>
-            </form>
+            </form>}
             {this.state.error && (
               <Alert variant="warning">{this.state.error}</Alert>
             )}

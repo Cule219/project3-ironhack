@@ -68,26 +68,12 @@ export default class Signup extends Component {
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor="role">Role:</Form.Label>
-          <Form.Control
-            as="select"
-            name="role"
-            id="role"
-            value={this.state.role}
-            onChange={this.handleChange}
-          >
-            <option value="student">Student</option>
-            <option value="TA">TA</option>
-            <option value="teacher">Teacher</option>
-          </Form.Control>
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor="githubLink">githubLink:</Form.Label>
+          <Form.Label htmlFor="profileImg">Profile Image:</Form.Label>
           <Form.Control
             type="password"
-            name="githubLink"
-            id="githubLink"
-            value={this.state.githubLink}
+            name="profileImg"
+            id="profileImg"
+            value={this.state.profileImg}
             onChange={this.handleChange}
           />
         </Form.Group>
