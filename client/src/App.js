@@ -1,7 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import "./App.css";
+
+import "./App.scss";
 
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
@@ -21,6 +22,7 @@ import AddUser from "./components/users/AddUser";
 import EditUser from "./components/users/EditUser";
 import Users from "./components/users/Users";
 import ModulesList from "./components/coursework/ModulesList";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -115,15 +117,17 @@ class App extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-xs-4 col-sm-5 col-md-4 col-lg-3 list-group fixed-height">
-              <Button
-                variant="outline-primary"
-                size="sm"
-                onClick={() =>
-                  this.setState({ searchOpen: !this.state.searchOpen })
-                }
-              >
-                Search / Filter
-              </Button>
+              <div className="button-wrapper">
+                <Button
+                  variant="outline-primary"
+                  // size="sm"
+                  onClick={() =>
+                    this.setState({ searchOpen: !this.state.searchOpen })
+                  }
+                >
+                  Search / Filter
+                </Button>
+              </div>
               {this.state.searchOpen && (
                 <SearchFilter searchAndFilter={this.handleSearchFilter} />
               )}
@@ -199,7 +203,9 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/users/:id"
-                  render={props => <EditUser {...props} user={this.state.user} />}
+                  render={props => (
+                    <EditUser {...props} user={this.state.user} />
+                  )}
                 />
                 <Route
                   exact

@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
 import { logout } from "../services/api";
 
+
+
+
 const handleLogout = props => {
   logout().then(() => {
     props.setUser(null);
@@ -11,7 +14,7 @@ const handleLogout = props => {
 
 const CustomNavbar = props => {
   return (
-<nav className="navbar navbar-expand-md navbar-dark bg-primary mb-4 justify-content-space-between">
+<Navbar className="navbar navbar-expand-md navbar-dark bg-primary mb-4 justify-content-space-between">
   
   <div className="container">
 
@@ -56,7 +59,7 @@ const CustomNavbar = props => {
       )}
     </div>
   </div>
-</nav>
+</Navbar>
   );
 };
 

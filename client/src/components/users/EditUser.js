@@ -36,17 +36,19 @@ export default class EditUser extends Component {
 
   onSubmit = async e => {
     const {username, githubLink, profileImg, role} = {...this.state}
-    await axios.put(`/api/user/${this.state.id}`, {username, githubLink, profileImg, role})
+    await axios.put(`/api/users/${this.state.id}`, {username, githubLink, profileImg, role})
     .then(response => {
+      console.log(response);
     }).catch(err=> this.setState({
       error: err.message
     }));
 
     this.setState({
+      disabled: !this.state.disabled,
       error: `User edited`
     })
-    // this.context.history.push('/users/');
-    this.props.history.push('/users/');
+    this.context.history.push('/users/');
+    // this.props.history.push('/users/');
   }
 
   render() {
@@ -59,10 +61,48 @@ export default class EditUser extends Component {
               <i className="fas fa-arrow-circle-left" />View All
             </Link>
           </div>
+          <div className="col-md-6">
+            <div className="input-group-appent">
+
+              {(this.props.user.role === 'TA' || this.props.user.role === 'teacher')&&
+              <>
+                {this.state.disabled?
+                <input type="submit" value="Edit"
+                onClick={() => this.setState({disabled: !this.state.disabled})}
+                className="btn btn-outline-dark" 
+                style={{float: "right"}}/>
+                :
+                <input type="submit" value="Confirm"
+                onClick={this.onSubmit}
+                className="btn btn-outline-danger"
+                style={{float: "right"}}
+                />}
+              </>}
+
+            </div>
+          </div>
         </div>
         <div className="card">
           <div className="card-header">Add User</div>
           <div className="card-body">
+          <form>
+              <div className="form-group">
+                {/* <input 
+                type="text"
+                className="form-control"
+                name="username"
+                minLength="2"
+                required
+                onChange={this.onChange}
+                value={this.state.username}
+                disabled={this.state.disabled}
+                /> */}
+                <img 
+                src={this.props.user.profileImg || 
+          'https://scontent-vie1-1.xx.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQkzn0OPjcr3XQY7UkMt85y2o6HubSMaDYiYQSA_2xvqTwZeUzV7kCvKb0apdC5SmPE&_nc_ht=scontent-vie1-1.xx&oh=16ae35aaabc5b997ec4d338b775d98f7&oe=5DE21BE9'} 
+          alt="Users profile img" style={{height: '100%'}} className="form-control"/>
+              </div>
+            </form>
             <form>
               <div className="form-group">
                 <label htmlFor="username">Username:</label>
@@ -140,12 +180,12 @@ export default class EditUser extends Component {
             {this.state.error && (
               <Alert variant="warning">{this.state.error}</Alert>
             )}
-            <input 
+            {/* <input 
               type="submit" 
               value="Submit"
               className="btn mt-4 btn-primary btn-block"
               onClick={this.onSubmit}
-            />  
+            />   */}
           </div>
         </div>
       </div>

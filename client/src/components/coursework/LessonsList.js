@@ -50,50 +50,52 @@ class LessonsList extends Component {
   render() {
     // console.log("here in the render", this.state.day);
     return (
-      <div className="list-container">
-        <p>{this.state.day.name}</p>
-        <ul className="list-primary">
-          {this.state.day.cards &&
-            this.state.day.cards.length > 0 &&
-            this.state.day.cards.map(el => (
-              <div key={el.id} className="list-item">
-                <div className="title-status">
-                  <a href={el.attachments[0]}>{el.name}</a>
-                  <CompletionStatus
-                    {...el}
-                    reloadCourseTree={this.props.reloadCourseTree}
-                  />
+      <>
+        <h2>{this.state.day.name}</h2>
+        <div className="list-container">
+          <ul className="list-primary">
+            {this.state.day.cards &&
+              this.state.day.cards.length > 0 &&
+              this.state.day.cards.map(el => (
+                <div key={el.id} className="list-item">
+                  <div className="title-status">
+                    <a href={el.attachments[0]}>{el.name}</a>
+                    <CompletionStatus
+                      {...el}
+                      reloadCourseTree={this.props.reloadCourseTree}
+                    />
+                  </div>
+                  {el.desc && (
+                    <div
+                      className="lesson-description"
+                      dangerouslySetInnerHTML={{
+                        __html: el.desc
+                      }}
+                    />
+                  )}
+                  <div className="tags-special">
+                    {el.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        style={{ backgroundColor: `${tag.color}` }}
+                      >
+                        {tag.name}
+                      </span>
+                    ))}
+                    {el.tech.map((e, i) => (
+                      <span key={i} className="technology">
+                        {e}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                {el.desc && (
-                  <div
-                    className="lesson-description"
-                    dangerouslySetInnerHTML={{
-                      __html: el.desc
-                    }}
-                  />
-                )}
-                <div className="tags">
-                  {el.tags.map((tag, index) => (
-                    <span
-                      key={index}
-                      style={{ backgroundColor: `${tag.color}` }}
-                    >
-                      {tag.name}
-                    </span>
-                  ))}
-                  {el.tech.map((e, i) => (
-                    <span key={i} className="technology">
-                      {e}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-        </ul>
-        {/* this is for testing purposes only */}
-        <NotesBox {...this.props} />
-        <CommentBox {...this.props} />
-      </div>
+              ))}
+          </ul>
+          {/* this is for testing purposes only */}
+          <NotesBox {...this.props} />
+          <CommentBox {...this.props} />
+        </div>
+      </>
     );
   }
 }
