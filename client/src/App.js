@@ -31,7 +31,8 @@ class App extends React.Component {
       user: this.props.user,
       weeks: [],
       filteredResults: [],
-      searchOpen: false
+      searchOpen: false,
+      selectedWeek: null
     };
   }
 
@@ -68,6 +69,7 @@ class App extends React.Component {
   // };
 
   handleSearchFilter = state => {
+    let regex = new RegExp(state.searchStr, "i");
     getLessons().then(lessons => {
       const filteredLessons = lessons.filter(el => {
         let completionStatusMatches = state.incompleteOnly
@@ -80,12 +82,32 @@ class App extends React.Component {
                 .map(t => t.name)
                 .concat(el.tech)
                 .filter(e => state.selectedTags.includes(e)).length > 0;
-        return completionStatusMatches && tagsMatch;
+        return completionStatusMatches && tagsMatch && el.name.match(regex);
       });
       console.log(filteredLessons);
       this.setState({ filteredResults: filteredLessons });
       this.props.history.push("/results");
     });
+  };
+
+  reloadCourseTree = idList => {
+    getWeeks()
+      .then(response => {
+        response.forEach((week, i) => {
+          let d = week.find(el => el.id == idList);
+          if (d) this.setState({ selectedWeek: i });
+        });
+
+        let sorted = response.map(el => {
+          return el.sort((a, b) => {
+            return parseInt(a.day) - parseInt(b.day);
+          });
+        });
+        this.setState({ weeks: sorted });
+      })
+      .catch(err => {
+        console.log("error getting weeks: ", err);
+      });
   };
 
   render() {
@@ -94,8 +116,10 @@ class App extends React.Component {
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
           <div className="row">
-            <div className="col-sm-5 col-md-4 col-lg-3 list-group overflow-auto">
+            <div className="col-sm-5 col-md-4 col-lg-3 list-group fixed-height">
               <Button
+                variant="outline-primary"
+                size="sm"
                 onClick={() =>
                   this.setState({ searchOpen: !this.state.searchOpen })
                 }
@@ -108,10 +132,11 @@ class App extends React.Component {
               <CourseTree
                 weeks={this.state.weeks}
                 toggleSearch={this.toggleSearch}
+                selectedWeek={this.state.selectedWeek}
               />
             </div>
-            <div className="col-sm-7 col-md-8 col-lg-9">
-            <Switch>
+            <div className="col-sm-7 col-md-8 col-lg-9 fixed-height">
+          <Switch>
             <Route
               exact
               path="/results"
@@ -119,59 +144,47 @@ class App extends React.Component {
                 <SearchResults
                   {...props}
                   results={this.state.filteredResults}
+                  reloadCourseTree={this.reloadCourseTree}
                   user={this.state.user}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/days/:id"
+              render={props => (
+                <LessonsList
+                  {...props}
+                  user={this.state.user}
+                  reloadCourseTree={this.reloadCourseTree}
                 />
               )}
               />
               <Route
                 exact
-                path="/days/:id"
-                render={props => <LessonsList 
-                  {...props} 
-                  user={this.state.user}
-                  />}
-              />
-              <Route
-                exact
                 path="/days"
-                render={props => <DaysList 
-                {...props}
-                user={this.state.user}
-                />
-                }
+                render={props => (
+                  <DaysList {...props} user={this.state.user} />
+                )}
               />
               <Route
                 exact
                 path="/weeks/:num"
-                render={props => <DaysList 
-                {...props}
-                user={this.state.user}
-                />
-                }
+                render={props => (
+                  <DaysList {...props} user={this.state.user} />
+                )}
               />
               <Route
                 exact
                 path="/weeks"
-                render={props => <WeeksList
-                user={this.state.user}
-                />
-                }
-              />
-              <Route 
-                exact 
-                path="/" 
-                render={props => <About
-                user={this.state.user}
-                />
-                }
+                render={props => <WeeksList user={this.state.user} />}
               />
               <Route
                 exact
-                path="/dashboard"
-                render={props => <Dashboard
-                user={this.state.user}
-                />
-                }
+                path="/"
+                render={props => <About user={this.state.user} />}
+              />
+              }
               />
               <Route
                 exact
@@ -212,6 +225,17 @@ class App extends React.Component {
                 setUser={this.setUser}
                 user={!this.state.user}
                 component={Login}
+              />
+
+              {/* Testing */}
+              <Route
+                exact
+                path="/dashboard"
+                render={props => <Dashboard 
+                {...props}
+                user={this.state.user}
+                />
+                }
               />
             </Switch>
             </div>

@@ -10,7 +10,7 @@ const userSchema = new Schema(
     githubLink: String,
     role: {
       type: String,
-      enum: ["student", "TA", "Teacher"],
+      enum: ["student", "TA", "teacher"],
       default: "student"
     }
   },

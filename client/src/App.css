@@ -1,11 +1,12 @@
-.App {
-}
-
 .list-primary {
   list-style-type: none;
   text-align: left;
   padding-left: 0px;
   margin-left: 0px;
+}
+
+.menu {
+  margin-top: 30px;
 }
 
 .list-container {
@@ -24,6 +25,11 @@
   margin: 0px;
 }
 
+.fixed-height {
+  height: 90vh;
+  overflow-y: scroll;
+}
+
 .title-status {
   display: flex;
   flex-direction: row;
@@ -31,6 +37,18 @@
   align-items: baseline;
   margin: 2px 0;
   width: 100%;
+}
+
+.right-float {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 20%;
+}
+
+.tags {
+  margin-bottom: 5px;
 }
 
 .tags span {

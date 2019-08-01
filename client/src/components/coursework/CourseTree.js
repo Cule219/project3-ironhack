@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Collapsible from "./Collapsible";
-import { Button } from "react-bootstrap";
 
 class CourseTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: [], openDay: {} };
+    this.state = { open: [] };
   }
 
   toggleWeek = index => {
@@ -15,11 +14,18 @@ class CourseTree extends Component {
     this.setState({ open: nowOpen });
   };
 
-  toggleDay = id => {
-    let daysOpen = { ...this.state.openDay };
-    daysOpen[id] = !daysOpen[id];
-    this.setState({ openDay: daysOpen });
+  openWeek = index => {
+    let nowOpen = [];
+    nowOpen[index] = true;
+    this.setState({ open: nowOpen });
   };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedWeek !== prevProps.selectedWeek) {
+      console.log(this.props);
+      this.openWeek(this.props.selectedWeek);
+    }
+  }
 
   render() {
     return (
@@ -30,17 +36,17 @@ class CourseTree extends Component {
             <li key={index}>
               <a onClick={() => this.toggleWeek(index)}>Week {index + 1}</a>
               <Collapsible open={this.state.open[index]}>
-                <ul>
+                <ul style={{ fontSize: "0.9em" }}>
                   {el.map(element => (
-                    <li key={element.id}>
+                    <li key={element.id} className="vertical-align-center">
                       <Link
                         to={{
                           pathname: `/days/${element.id}`,
                           state: { day: element }
                         }}
-                        className="vertical-align-center"
                       >
                         {element.day ? `Day ${element.day}` : element.name}
+                        <br />
                         {element.cards.map((card, cardi) => (
                           <span
                             className="small"
@@ -65,8 +71,8 @@ class CourseTree extends Component {
             </li>
           ))}
         </ul>
-        <p class="menu-label">Classmates</p>
-        <ul class="menu-list">
+        <p className="menu-label">Classmates</p>
+        <ul className="menu-list">
           <li>
             <a>My profile</a>
           </li>

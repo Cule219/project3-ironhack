@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Alert } from "react-bootstrap";
 import { signup } from "../services/api";
 
 export default class Signup extends Component {
@@ -59,7 +59,12 @@ export default class Signup extends Component {
           <Alert variant="warning">{this.state.error}</Alert>
         )}
 
-        <Button type="submit">Signup</Button>
+        <input 
+          type="submit" 
+          value="Submit"
+          className="btn mt-4 btn-primary btn-block"
+          onClick={this.onSubmit}
+        />  
       </Form>
     );
   }

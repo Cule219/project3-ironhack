@@ -14,8 +14,12 @@ export default class Note extends Component {
   //     this.props.postNoteHandler(this.props.data.content, this.props.data._id);
   //   }
   // }
+
   onDoubleClickHandler = e => {
-    if( this.props.user.role === 'TA' || this.props.user._id === this.props.data.user)
+
+    if(this.props.data &&(
+      (this.props.user.role === 'TA' || this.props.user.role === 'teacher') || 
+      this.props.user._id === this.props.data.user))
     this.setState({
       disabled: !this.state.disabled
     })

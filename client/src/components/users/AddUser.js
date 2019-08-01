@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Alert } from "react-bootstrap";
+import axios from 'axios';
 
 export default class AddUser extends Component {
   state = {
     username: '',
     password: '',
     githubLink: '',
-    profileImg: ''
+    profileImg: '',
+    role: 'student',
+    submitUser: true,
+    error: ''
   }
 
   onChange = e => {
@@ -14,6 +19,26 @@ export default class AddUser extends Component {
       [e.target.name]: e.target.value
     });
   }
+
+  onSubmit = e => {
+    axios.post('/api/auth/signup', {...this.state})
+    .then(response => {
+      console.log(response)
+      this.setState({
+        username: '',
+        password: '',
+        githubLink: '',
+        profileImg: '',
+        role: 'student',
+        submitUser: true,
+        error: `User ${response.data.username} added`
+      })
+    }).catch(err=> this.setState({
+      error: err.message
+    }));
+
+  }
+
 
   render() {
     return (
@@ -49,7 +74,6 @@ export default class AddUser extends Component {
                 type="password"
                 className="form-control"
                 name="password"
-                minLength="2"
                 required
                 onChange={this.onChange}
                 value={this.state.lastName}
@@ -70,16 +94,40 @@ export default class AddUser extends Component {
             </form>
             <form>
               <div className="form-group">
-                <label htmlFor="imageUrl">Profile Image:</label>
+                <label htmlFor="profileImg">Profile Image:</label>
                 <input 
                 type="text"
                 className="form-control"
-                name="imageUrl"
+                name="profileImg"
                 onChange={this.onChange}
-                value={this.state.imageUrl}
+                value={this.state.profileImg}
                 />
               </div>
             </form>
+            <form>
+              <div className="form-group">
+                <label htmlFor="role">Role:</label>
+                <select 
+                  name="role"
+                  onChange={this.onChange}
+                  value={this.state.role}
+                  >
+                    <option value="student">Student</option>
+                    <option value="TA">TA</option>
+                    <option value="teacher">Teacher</option>
+
+                  </select>
+              </div>
+            </form>
+            {this.state.error && (
+              <Alert variant="warning">{this.state.error}</Alert>
+            )}
+            <input 
+              type="submit" 
+              value="Submit"
+              className="btn mt-4 btn-primary btn-block"
+              onClick={this.onSubmit}
+            />  
           </div>
         </div>
       </div>

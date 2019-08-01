@@ -1,6 +1,7 @@
 import React from "react";
 import { getTags } from "../services/courseworkService";
 import Select from "react-select";
+import { Form } from "react-bootstrap";
 
 class SearchFilter extends React.Component {
   constructor() {
@@ -27,8 +28,8 @@ class SearchFilter extends React.Component {
     );
   };
 
-  filterByTagsSelect = (tags = []) => {
-    console.log(tags, tags.map(el => el.name));
+  filterByTagsSelect = originalTags => {
+    const tags = originalTags || [];
     this.setState(
       {
         selectedTags: tags.map(el => el.value)
@@ -44,35 +45,41 @@ class SearchFilter extends React.Component {
   }
 
   render() {
-    console.log(this.state.tags);
     return (
-      <div>
-        <input
-          type="text"
-          name="searchStr"
-          value={this.state.searchStr}
-          onChange={this.handleChange}
-        />
-        <input
-          type="checkbox"
-          name="incompleteOnly"
-          checked={this.state.incompleteOnly}
-          onChange={this.handleChange}
-        />
-        <label>Incomplete</label>
-        {this.state.tags.length > 0 && (
-          <Select
-            isMulti
-            name="tags"
-            placeholder="Filter by tags"
-            options={this.state.tags.map(tag => ({
-              label: tag.name,
-              value: tag.name
-            }))}
-            onChange={this.filterByTagsSelect}
+      <Form>
+        <Form.Group controlId="search">
+          <Form.Control
+            type="text"
+            name="searchStr"
+            value={this.state.searchStr}
+            onChange={this.handleChange}
+            placeholder="Search by Lesson Name"
           />
-        )}
-      </div>
+        </Form.Group>
+        <Form.Group>
+          {this.state.tags.length > 0 && (
+            <Select
+              isMulti
+              name="tags"
+              placeholder="Filter by tags"
+              options={this.state.tags.map(tag => ({
+                label: tag.name,
+                value: tag.name
+              }))}
+              onChange={this.filterByTagsSelect}
+            />
+          )}
+        </Form.Group>
+        <Form.Group>
+          <Form.Check
+            type="checkbox"
+            name="incompleteOnly"
+            checked={this.state.incompleteOnly}
+            onChange={this.handleChange}
+            label="Incomplete items only"
+          />
+        </Form.Group>
+      </Form>
     );
   }
 }
