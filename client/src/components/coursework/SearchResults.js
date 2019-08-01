@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CompletionStatus from "./CompletionStatus";
 import Collapsible from "./Collapsible";
-import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { validURL } from "../../services/courseworkService";
 

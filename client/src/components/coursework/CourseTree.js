@@ -25,7 +25,7 @@ class CourseTree extends Component {
       this.props.selectedWeek !== prevProps.selectedWeek ||
       this.props.selectedDay !== prevProps.selectedDay
     ) {
-      console.log(this.props);
+      console.log("in the coursetree update", this.props);
       this.openWeek(this.props.selectedWeek, this.props.selectedDay);
     }
   }
@@ -85,6 +85,16 @@ class CourseTree extends Component {
             <a>My profile</a>
           </li>
         </ul>
+        <p className="menu-label">Course Info</p>
+        <ul className="menu-list">
+          <li>
+            <Link to={"/modules"}>Modules</Link>
+          </li>
+        </ul>
+        <p className="menu-label">Resources</p>
+        <ul className="menu-list">
+          <li>{/* HIIIII I NEED TO GET RESOURCES HERE */}</li>
+        </ul>
       </aside>
     );
   }
@@ -92,8 +102,7 @@ class CourseTree extends Component {
 
 export default CourseTree;
 
-{
-  /* <div className="course-tree">
+/* <div className="course-tree">
         {this.props.weeks.map((el, index) => (
           <div key={index}>
             <h6>
@@ -133,4 +142,3 @@ export default CourseTree;
           </div>
         ))}
       </div> */
-}

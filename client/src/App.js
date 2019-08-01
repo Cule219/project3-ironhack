@@ -20,6 +20,7 @@ import { Button } from "react-bootstrap";
 import AddUser from "./components/users/AddUser";
 import EditUser from "./components/users/AddUser";
 import Users from "./components/users/AddUser";
+import ModulesList from "./components/coursework/ModulesList";
 
 class App extends React.Component {
   constructor(props) {
@@ -56,17 +57,6 @@ class App extends React.Component {
       });
   }
 
-  // setView = id => {
-  //   getDay(id)
-  //     .then(response => {
-  //       console.log(response);
-  //       this.setState({ day: response });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-
   handleSearchFilter = state => {
     let regex = new RegExp(state.searchStr, "i");
     getLessons().then(lessons => {
@@ -85,7 +75,8 @@ class App extends React.Component {
       });
       console.log(filteredLessons);
       this.setState({
-        filteredResults: filteredLessons
+        filteredResults: filteredLessons,
+        treeClosed: true
       });
       this.reloadCourseTree("nothing selected");
       this.props.history.push("/results");
@@ -95,6 +86,7 @@ class App extends React.Component {
   reloadCourseTree = idList => {
     getWeeks()
       .then(response => {
+        this.setState({ selectedDay: null, selectedWeek: null });
         response.forEach((week, i) => {
           let d = week.find(el => el.id === idList);
           if (d) this.setState({ selectedWeek: i, selectedDay: d.id });
@@ -156,6 +148,11 @@ class App extends React.Component {
                       closeSearch={this.closeSearch}
                     />
                   )}
+                />
+                <Route
+                  exact
+                  path="/modules"
+                  render={props => <ModulesList {...props} />}
                 />
                 <Route
                   exact
