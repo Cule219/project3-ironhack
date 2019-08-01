@@ -108,7 +108,8 @@ class App extends React.Component {
   };
 
   render() {
-    return (
+    return (this.state.user)?
+      (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
@@ -240,7 +241,40 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-    );
+      ):(
+        <div>
+          <Navbar setUser={this.setUser} user={this.state.user} />
+          <div className="row"> 
+          <div className="col-md-2">
+
+          </div>
+          <div className="col-md-8">
+            <Switch>
+            <Protected
+              exact
+              path="/(|login)/"
+              redirectPath="/"
+              setUser={this.setUser}
+              user={!this.state.user}
+              component={Login}
+            />
+            <Protected
+              exact
+              path="/signup"
+              redirectPath="/"
+              setUser={this.setUser}
+              user={!this.state.user}
+              component={Signup}
+            />
+            
+            </Switch>
+          </div>
+          <div className="col-md-2">
+          </div>
+        </div>
+          
+        </div>
+      )
   }
 }
 

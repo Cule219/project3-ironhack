@@ -28,7 +28,7 @@ const CustomNavbar = props => {
     </div>
     <div className="">
       <Navbar.Brand to="/">
-      <Link className="text-white" to="/">Home</Link>
+      {props.user&&<Link className="text-white" to="/">Home</Link>}
       </Navbar.Brand>
       {props.user ? (
         <>
@@ -43,6 +43,7 @@ const CustomNavbar = props => {
           <Navbar.Brand>
             <Link className="text-white" to="/signup">Signup</Link>
           </Navbar.Brand>
+          {' '}
           <Navbar.Brand>
             <Link className="text-white" to="/login">Login</Link>
           </Navbar.Brand>

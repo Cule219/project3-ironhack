@@ -23,8 +23,6 @@ export default class AddUser extends Component {
   onSubmit = async e => {
     await axios.post('/api/auth/signup', {...this.state})
     .then(response => {
-      console.log(response)
-      
     }).catch(err=> this.setState({
       error: err.message
     }));

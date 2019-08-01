@@ -20,7 +20,7 @@ class LessonsList extends Component {
     let id = this.props.match.params.id;
     getDay(id)
       .then(response => {
-        console.log("these are the day's lessons from DB: ", response);
+        // console.log("these are the day's lessons from DB: ", response);
         this.setState({ day: response });
         this.props.reloadCourseTree(id);
       })
@@ -48,7 +48,7 @@ class LessonsList extends Component {
   }
 
   render() {
-    console.log("here in the render", this.state.day);
+    // console.log("here in the render", this.state.day);
     return (
       <>
         <h2>{this.state.day.name}</h2>
