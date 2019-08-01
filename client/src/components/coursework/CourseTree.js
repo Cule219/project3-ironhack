@@ -55,6 +55,10 @@ class CourseTree extends Component {
                       >
                         {element.day ? `Day ${element.day}` : element.name}
                         <br />
+                        {console.log(
+                          this.props.user,
+                          this.props.user.completedItems
+                        )}
                         {element.cards.map(
                           (card, cardi) =>
                             !card.tags
@@ -67,16 +71,20 @@ class CourseTree extends Component {
                                 className="small"
                                 key={cardi}
                                 style={{
-                                  backgroundColor: this.props.user.completedItems.includes(
-                                    card.id
-                                  )
-                                    ? "navy"
-                                    : "white",
-                                  color: this.props.user.completedItems.includes(
-                                    card.id
-                                  )
-                                    ? "navy"
-                                    : "white"
+                                  backgroundColor:
+                                    this.props.user.completedItems &&
+                                    this.props.user.completedItems.includes(
+                                      card.id
+                                    )
+                                      ? "navy"
+                                      : "white",
+                                  color:
+                                    this.props.user.completedItems &&
+                                    this.props.user.completedItems.includes(
+                                      card.id
+                                    )
+                                      ? "navy"
+                                      : "white"
                                 }}
                               >
                                 --
