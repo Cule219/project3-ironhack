@@ -63,9 +63,8 @@ const lists = board =>
           week = 9;
           day = "extra";
         }
-        if (name.indexOf("Guidelines") !== -1) {
+        if (name.indexOf("Resources") !== -1) {
           week = 0;
-          day = "extra";
         }
         List.create({
           id,

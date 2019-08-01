@@ -7,9 +7,11 @@ class ModulesList extends Component {
   constructor(props) {
     super(props);
     this.state = { modules: [], open: [false, false, false] };
+    console.log("here I am");
   }
 
   componentDidMount() {
+    console.log("here mounting");
     getModules()
       .then(response => {
         let sorted = response.sort((a, b) => {
@@ -36,8 +38,8 @@ class ModulesList extends Component {
             <div key={index}>
               <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
               <Collapsible open={this.state.open[index]}>
+                {console.log(el.description)}
                 <div dangerouslySetInnerHTML={{ __html: el.description }} />
-                {/* <Link to={`/weeks/${index + 1}`}>Week {index + 1}</Link> */}
               </Collapsible>
             </div>
           ))}

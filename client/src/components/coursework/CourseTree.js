@@ -5,7 +5,7 @@ import Collapsible from "./Collapsible";
 class CourseTree extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: [] };
+    this.state = { open: [], selectedDay: null };
   }
 
   toggleWeek = index => {
@@ -14,19 +14,19 @@ class CourseTree extends Component {
     this.setState({ open: nowOpen });
   };
 
-  openWeek = index => {
+  openWeek = (index, id) => {
     let nowOpen = [];
     nowOpen[index] = true;
-    this.setState({ open: nowOpen });
+    this.setState({ open: nowOpen, selectedDay: id });
   };
 
   componentDidUpdate(prevProps) {
     if (
-      this.props.selectedWeek !== null &&
-      this.props.selectedWeek !== prevProps.selectedWeek
+      this.props.selectedWeek !== prevProps.selectedWeek ||
+      this.props.selectedDay !== prevProps.selectedDay
     ) {
-      console.log(this.props);
-      this.openWeek(this.props.selectedWeek);
+      console.log("in the coursetree update", this.props);
+      this.openWeek(this.props.selectedWeek, this.props.selectedDay);
     }
   }
 
@@ -47,6 +47,11 @@ class CourseTree extends Component {
                           pathname: `/days/${element.id}`,
                           state: { day: element }
                         }}
+                        className={
+                          this.state.selectedDay === element.id
+                            ? "is-active"
+                            : ""
+                        }
                       >
                         {element.day ? `Day ${element.day}` : element.name}
                         <br />
@@ -81,6 +86,16 @@ class CourseTree extends Component {
             {this.props.user&&<Link to={`/users/${this.props.user._id}`}>My profile</Link>}
           </li>
         </ul>
+        <p className="menu-label">Course Info</p>
+        <ul className="menu-list">
+          <li>
+            <Link to={"/modules"}>Modules</Link>
+          </li>
+        </ul>
+        <p className="menu-label">Resources</p>
+        <ul className="menu-list">
+          <li>{/* HIIIII I NEED TO GET RESOURCES HERE */}</li>
+        </ul>
       </aside>
     );
   }
@@ -88,8 +103,7 @@ class CourseTree extends Component {
 
 export default CourseTree;
 
-{
-  /* <div className="course-tree">
+/* <div className="course-tree">
         {this.props.weeks.map((el, index) => (
           <div key={index}>
             <h6>
@@ -129,4 +143,3 @@ export default CourseTree;
           </div>
         ))}
       </div> */
-}

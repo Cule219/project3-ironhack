@@ -20,6 +20,7 @@ import { Button } from "react-bootstrap";
 import AddUser from "./components/users/AddUser";
 import EditUser from "./components/users/AddUser";
 import Users from "./components/users/AddUser";
+import ModulesList from "./components/coursework/ModulesList";
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ class App extends React.Component {
       weeks: [],
       filteredResults: [],
       searchOpen: false,
-      selectedWeek: null
+      selectedWeek: null,
+      selectedDay: null,
+      treeClosed: false
     };
   }
 
@@ -54,17 +57,6 @@ class App extends React.Component {
       });
   }
 
-  // setView = id => {
-  //   getDay(id)
-  //     .then(response => {
-  //       console.log(response);
-  //       this.setState({ day: response });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-
   handleSearchFilter = state => {
     let regex = new RegExp(state.searchStr, "i");
     getLessons().then(lessons => {
@@ -82,7 +74,11 @@ class App extends React.Component {
         return completionStatusMatches && tagsMatch && el.name.match(regex);
       });
       console.log(filteredLessons);
-      this.setState({ filteredResults: filteredLessons });
+      this.setState({
+        filteredResults: filteredLessons,
+        treeClosed: true
+      });
+      this.reloadCourseTree("nothing selected");
       this.props.history.push("/results");
     });
   };
@@ -90,11 +86,11 @@ class App extends React.Component {
   reloadCourseTree = idList => {
     getWeeks()
       .then(response => {
+        this.setState({ selectedDay: null, selectedWeek: null });
         response.forEach((week, i) => {
           let d = week.find(el => el.id === idList);
-          if (d) this.setState({ selectedWeek: i });
+          if (d) this.setState({ selectedWeek: i, selectedDay: d.id });
         });
-
         let sorted = response.map(el => {
           return el.sort((a, b) => {
             return parseInt(a.day) - parseInt(b.day);
@@ -105,6 +101,10 @@ class App extends React.Component {
       .catch(err => {
         console.log("error getting weeks: ", err);
       });
+  };
+
+  closeSearch = () => {
+    this.setState({ searchOpen: false });
   };
 
   render() {
@@ -130,6 +130,8 @@ class App extends React.Component {
                 weeks={this.state.weeks}
                 toggleSearch={this.toggleSearch}
                 selectedWeek={this.state.selectedWeek}
+                selectedDay={this.state.selectedDay}
+                treeClosed={this.state.treeClosed}
               />
             </div>
             <div className="col-xs-7 col-sm-7 col-md-8 col-lg-9 fixed-height">
@@ -143,8 +145,14 @@ class App extends React.Component {
                       results={this.state.filteredResults}
                       reloadCourseTree={this.reloadCourseTree}
                       user={this.state.user}
+                      closeSearch={this.closeSearch}
                     />
                   )}
+                />
+                <Route
+                  exact
+                  path="/modules"
+                  render={props => <ModulesList {...props} />}
                 />
                 <Route
                   exact
