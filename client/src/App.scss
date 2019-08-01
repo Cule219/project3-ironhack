@@ -1,3 +1,8 @@
+@charset "utf-8";
+//@import "../node_modules/bulma/bulma.sass";
+
+$menu-item-active-background-color: #dacc3e;
+
 .list-primary {
   list-style-type: none;
   text-align: left;
@@ -6,7 +11,7 @@
 }
 
 .menu {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .list-container {
@@ -19,10 +24,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-}
-
-.form-group {
-  margin: 0px;
 }
 
 .fixed-height {
@@ -47,11 +48,11 @@
   width: 20%;
 }
 
-.tags {
-  margin-bottom: 5px;
+.tags-special {
+  margin: 5px 0;
 }
 
-.tags span {
+.tags-special span {
   margin: 0 2px;
   padding: 4px;
   color: white;
@@ -80,9 +81,9 @@ span.technology {
 }
 
 span.small {
-  font-size: 0.2em;
-  border-radius: 5px;
-  border: 1px solid green;
+  font-size: 0.4em;
+  border-radius: 10px;
+  border: 0.5px solid navy;
   margin: 2px;
 }
 
@@ -99,3 +100,13 @@ span.small {
   align-items: center;
 }
 
+.button-wrapper {
+  width: 80%;
+}
+
+.form-group,
+.form-control {
+  padding-top: 10px;
+  font-size: 0.9rem;
+  margin: 0 10px 0 0;
+}

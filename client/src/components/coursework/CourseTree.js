@@ -61,11 +61,9 @@ class CourseTree extends Component {
                             key={cardi}
                             style={{
                               backgroundColor: card.completionStatus
-                                ? "green"
+                                ? "navy"
                                 : "white",
-                              width: "5px",
-                              height: "5px",
-                              color: card.completionStatus ? "green" : "white"
+                              color: card.completionStatus ? "navy" : "white"
                             }}
                           >
                             --
@@ -83,7 +81,9 @@ class CourseTree extends Component {
         <ul className="menu-list">
           <li>
             {/*Change once protected implemented */}
-            {this.props.user&&<Link to={`/users/${this.props.user._id}`}>My profile</Link>}
+            {this.props.user && (
+              <Link to={`/users/${this.props.user._id}`}>My profile</Link>
+            )}
           </li>
         </ul>
         <p className="menu-label">Course Info</p>

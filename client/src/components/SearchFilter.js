@@ -79,6 +79,7 @@ class SearchFilter extends React.Component {
             label="Incomplete items only"
           />
         </Form.Group>
+        <hr />
       </Form>
     );
   }
