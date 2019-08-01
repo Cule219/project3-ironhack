@@ -67,6 +67,7 @@ export default class Signup extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
+<<<<<<< HEAD
         {/* <Form.Group>
           <Form.Label htmlFor="role">Role:</Form.Label>
           <Form.Control
@@ -83,11 +84,15 @@ export default class Signup extends Component {
         </Form.Group> */}
         <Form.Group>
           <Form.Label htmlFor="githubLink">githubLink:</Form.Label>
+=======
+        <Form.Group>
+          <Form.Label htmlFor="profileImg">Profile Image:</Form.Label>
+>>>>>>> development
           <Form.Control
             type="password"
-            name="githubLink"
-            id="githubLink"
-            value={this.state.githubLink}
+            name="profileImg"
+            id="profileImg"
+            value={this.state.profileImg}
             onChange={this.handleChange}
           />
         </Form.Group>

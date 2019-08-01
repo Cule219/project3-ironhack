@@ -53,27 +53,22 @@ const lists = board =>
           parseInt(name.split("Day ")[name.split("Day ").length - 1]) || null;
         if (name.indexOf("MODULE I") !== -1) {
           week = 3;
-          day = "extra";
         }
-        if (name.indexOf("MODULE II") !== -1) {
-          week = 6;
-          day = "extra";
+        if (name.indexOf("MODULE II") !== -1) week = 6;
+        if (name.indexOf("MODULE III") !== -1) week = 9;
+        if (name.indexOf("Resources") !== -1) week = 0;
+        if (name.indexOf("Guidelines") !== -1) {
+          // skip this list
+        } else {
+          List.create({
+            id,
+            name,
+            closed,
+            idBoard,
+            week,
+            day
+          }).then(data => cards(data.id));
         }
-        if (name.indexOf("MODULE III") !== -1) {
-          week = 9;
-          day = "extra";
-        }
-        if (name.indexOf("Resources") !== -1) {
-          week = 0;
-        }
-        List.create({
-          id,
-          name,
-          closed,
-          idBoard,
-          week,
-          day
-        }).then(data => cards(data.id));
       });
     });
 
@@ -136,6 +131,18 @@ const cards = list =>
         technologies.forEach(el => {
           if (name.match(new RegExp(el, "i"))) tech.push(el);
         });
+
+        // manually picking out which types of cards shouldn't be 'completable'
+        let completable = true;
+        let tn = tags.map(tag => tag.name);
+        if (
+          tn.includes("Events") ||
+          tn.includes("Additional info") ||
+          ((tn.includes("LAB") && tn.includes("Review")) ||
+            tn.includes("Career Services"))
+        ) {
+          completable = false;
+        }
         Card.create({
           id,
           name,
@@ -146,6 +153,7 @@ const cards = list =>
           idList,
           idLabels,
           shortUrl,
+          completable,
           tech,
           tags,
           url

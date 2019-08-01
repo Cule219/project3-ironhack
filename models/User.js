@@ -12,7 +12,8 @@ const userSchema = new Schema(
       type: String,
       enum: ["student", "TA", "teacher"],
       default: "student"
-    }
+    },
+    completedItems: [String]
   },
   {
     timestamps: {

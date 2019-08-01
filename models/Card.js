@@ -17,10 +17,14 @@ const cardSchema = Schema(
     shortUrl: String,
     url: String,
     attachments: [String],
+<<<<<<< HEAD
     attachmentName: String,
     completionStatus: {
+=======
+    completable: {
+>>>>>>> development
       type: Boolean,
-      default: false
+      default: true
     },
     tech: [String],
     tags: [{ name: String, color: String }]

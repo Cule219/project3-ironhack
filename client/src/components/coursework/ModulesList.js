@@ -36,9 +36,13 @@ class ModulesList extends Component {
         <ul className="list-primary">
           {this.state.modules.map((el, index) => (
             <div key={index}>
-              <a>
-                <h2 onClick={() => this.toggleModule(index)}>{el.name}</h2>
-              </a>
+              {/* <a> */}
+              <div >
+                <h2 className={
+                  "bg-primary text-center dashboard text-light"
+                  } onClick={() => this.toggleModule(index)}>{el.name}</h2>
+              </div>
+              {/* </a> */}
               <Collapsible open={this.state.open[index]}>
                 {console.log(el.description)}
                 <div

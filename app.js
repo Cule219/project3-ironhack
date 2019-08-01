@@ -94,9 +94,10 @@ app.use("/api/auth", authRoutes);
 const courseworkRoutes = require("./routes/coursework");
 app.use("/api/coursework", courseworkRoutes);
 
-const notesRoutes = require('./routes/notes');
-app.use('/api/notes', notesRoutes);
+const notesRoutes = require("./routes/notes");
+app.use("/api/notes", notesRoutes);
 
+<<<<<<< HEAD
 const trelloCollback = require('./routes/trelloWebhooks');
 app.use('/', trelloCollback);
 
@@ -104,5 +105,12 @@ app.use((req, res) => {
   // If no routes match, send them the React HTML.
   res.sendFile(__dirname + "/client/build/index.html");
 });
+=======
+const trelloWebhooksRoutes = require("./routes/trelloWebhooks");
+app.use("/", trelloWebhooksRoutes);
+
+const userRoutes = require("./routes/users");
+app.use("/api/users", userRoutes);
+>>>>>>> development
 
 module.exports = app;
