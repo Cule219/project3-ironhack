@@ -23,7 +23,6 @@ import UserProfile from "./components/users/UserProfile";
 import Users from "./components/users/Users";
 import ModulesList from "./components/coursework/ModulesList";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -110,8 +109,7 @@ class App extends React.Component {
   };
 
   render() {
-    return (this.state.user)?
-      (
+    return this.state.user ? (
       <div className="App">
         <Navbar setUser={this.setUser} user={this.state.user} />
         <div className="container">
@@ -137,6 +135,7 @@ class App extends React.Component {
                 selectedWeek={this.state.selectedWeek}
                 selectedDay={this.state.selectedDay}
                 treeClosed={this.state.treeClosed}
+                user={this.state.user}
               />
             </div>
             <div className="col-xs-7 col-sm-7 col-md-8 col-lg-9 fixed-height">
@@ -151,6 +150,7 @@ class App extends React.Component {
                       reloadCourseTree={this.reloadCourseTree}
                       user={this.state.user}
                       closeSearch={this.closeSearch}
+                      setUser={this.setUser}
                     />
                   )}
                 />
@@ -167,6 +167,7 @@ class App extends React.Component {
                       {...props}
                       user={this.state.user}
                       reloadCourseTree={this.reloadCourseTree}
+                      setUser={this.setUser}
                     />
                   )}
                 />
@@ -210,7 +211,9 @@ class App extends React.Component {
                 <Route
                   exact
                   path="/users/add"
-                  render={props => <AddUser {...props} user={this.state.user} />}
+                  render={props => (
+                    <AddUser {...props} user={this.state.user} />
+                  )}
                 />
                 <Protected
                   exact
@@ -241,40 +244,35 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-      ):(
-        <div>
-          <Navbar setUser={this.setUser} user={this.state.user} />
-          <div className="row"> 
-          <div className="col-md-2">
-
-          </div>
+    ) : (
+      <div>
+        <Navbar setUser={this.setUser} user={this.state.user} />
+        <div className="row">
+          <div className="col-md-2" />
           <div className="col-md-8">
             <Switch>
-            <Protected
-              exact
-              path="/(|login)/"
-              redirectPath="/"
-              setUser={this.setUser}
-              user={!this.state.user}
-              component={Login}
-            />
-            <Protected
-              exact
-              path="/signup"
-              redirectPath="/"
-              setUser={this.setUser}
-              user={!this.state.user}
-              component={Signup}
-            />
-            
+              <Protected
+                exact
+                path="/(|login)/"
+                redirectPath="/"
+                setUser={this.setUser}
+                user={!this.state.user}
+                component={Login}
+              />
+              <Protected
+                exact
+                path="/signup"
+                redirectPath="/"
+                setUser={this.setUser}
+                user={!this.state.user}
+                component={Signup}
+              />
             </Switch>
           </div>
-          <div className="col-md-2">
-          </div>
+          <div className="col-md-2" />
         </div>
-          
-        </div>
-      )
+      </div>
+    );
   }
 }
 

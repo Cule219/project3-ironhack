@@ -24,12 +24,23 @@ const getModules = () =>
 const getTags = () =>
   axios.get("/api/coursework/tags").then(response => response.data);
 
-const setCompletion = (id, status) => {
+// const setCompletion = (id, status) => {
+//   return axios
+//     .post(`/api/coursework/lessons/${id}`, {
+//       completionStatus: status
+//     })
+//     .then(response => response.data);
+// };
+
+const setCompletion = (id, userId, status) => {
   return axios
-    .post(`/api/coursework/lessons/${id}`, {
+    .post(`/api/users/lessons/${id}/${userId}`, {
       completionStatus: status
     })
-    .then(response => response.data);
+    .then(response => {
+      console.log(response);
+      return response.data;
+    });
 };
 
 function populateCard(card) {

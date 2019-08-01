@@ -55,20 +55,34 @@ class CourseTree extends Component {
                       >
                         {element.day ? `Day ${element.day}` : element.name}
                         <br />
-                        {element.cards.map((card, cardi) => (
-                          <span
-                            className="small"
-                            key={cardi}
-                            style={{
-                              backgroundColor: card.completionStatus
-                                ? "navy"
-                                : "white",
-                              color: card.completionStatus ? "navy" : "white"
-                            }}
-                          >
-                            --
-                          </span>
-                        ))}
+                        {element.cards.map(
+                          (card, cardi) =>
+                            !card.tags
+                              .map(tag => tag.name)
+                              .includes("Events") &&
+                            !card.tags
+                              .map(tag => tag.name)
+                              .includes("Additional info") && (
+                              <span
+                                className="small"
+                                key={cardi}
+                                style={{
+                                  backgroundColor: this.props.user.completedItems.includes(
+                                    card.id
+                                  )
+                                    ? "navy"
+                                    : "white",
+                                  color: this.props.user.completedItems.includes(
+                                    card.id
+                                  )
+                                    ? "navy"
+                                    : "white"
+                                }}
+                              >
+                                --
+                              </span>
+                            )
+                        )}
                       </Link>
                     </li>
                   ))}
