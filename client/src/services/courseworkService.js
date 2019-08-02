@@ -38,7 +38,7 @@ const setCompletion = (id, userId, status) => {
       completionStatus: status
     })
     .then(response => {
-      console.log(response);
+      console.log("here I'm in the problematic call: ", response.data);
       return response.data;
     });
 };

@@ -71,7 +71,7 @@ router.get("/weeks", (req, res, next) => {
     .populate("cards")
     .then(days => {
       let weeks = [];
-      for (var i = 1; i < 10; i++) {
+      for (var i = 0; i < 10; i++) {
         let week = days.filter(el => el.week === i.toString());
         weeks.push(week);
       }
