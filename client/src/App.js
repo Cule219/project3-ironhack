@@ -63,7 +63,7 @@ class App extends React.Component {
     getLessons().then(lessons => {
       const filteredLessons = lessons.filter(el => {
         let completionStatusMatches = state.incompleteOnly
-          ? el.completionStatus === false
+          ? this.state.user.completedItems.includes(el.id) === false
           : true;
         let tagsMatch =
           state.selectedTags.length === 0

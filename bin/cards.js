@@ -123,10 +123,10 @@ const getTitlePromisified = url =>
     });
   });
 
-//updateCardsWithAttachments();
+updateCardsWithAttachments();
 updateDescription();
 //updateDescriptionCheatSheets();
-formatLinks(otherLinks);
+//formatLinks(otherLinks);
 
 // let i=0
 // setInterval(() => {
