@@ -15,7 +15,8 @@ const flash = require("connect-flash");
 
 mongoose
   .connect(
-    "mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865" || "mongodb://127.0.0.1/final-project-ironhack",
+    "mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865" ||
+      "mongodb://127.0.0.1/final-project-ironhack",
     { useNewUrlParser: true }
   )
   .then(x => {
@@ -49,8 +50,6 @@ app.use(
     sourceMap: true
   })
 );
-
-
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -97,8 +96,11 @@ app.use("/api/coursework", courseworkRoutes);
 const notesRoutes = require("./routes/notes");
 app.use("/api/notes", notesRoutes);
 
-const trelloCollback = require('./routes/trelloWebhooks');
-app.use('/', trelloCollback);
+const trelloCollback = require("./routes/trelloWebhooks");
+app.use("/", trelloCollback);
+
+const userRoutes = require("./routes/users");
+app.use("/api/users", userRoutes);
 
 app.use((req, res) => {
   // If no routes match, send them the React HTML.
