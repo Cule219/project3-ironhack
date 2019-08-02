@@ -151,7 +151,7 @@ export default class UserProfile extends Component {
                 />
               </div>
             </form>
-            {!this.props.user.role === 'student'&&
+            {this.props.user.role === 'TA'&&
             <form>
               <div className="form-group">
                 <label htmlFor="role">Role:</label>
