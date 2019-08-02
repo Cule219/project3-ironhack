@@ -40,6 +40,9 @@ const setCompletion = (id, userId, status) => {
     .then(response => {
       console.log("here I'm in the problematic call: ", response.data);
       return response.data;
+    })
+    .catch(err => {
+      console.log("hi this is what's being set to user ", err);
     });
 };
 
