@@ -22,9 +22,9 @@ class About extends Component {
       <div>
         {title && <h2>{title}</h2>}
         <ModulesList />
-        <h1>
+        {/* <h1>
           <Link to="/dashboard">Dashboard</Link>
-        </h1>
+        </h1> */}
       </div>
     );
   }
