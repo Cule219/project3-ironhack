@@ -27,10 +27,13 @@ const technologies = [
   "Google Maps"
 ];
 
-mongoose//mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865
-  .connect("mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865", {
-    useNewUrlParser: true
-  })
+mongoose //mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865
+  .connect(
+    "mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865",
+    {
+      useNewUrlParser: true
+    }
+  )
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -139,7 +142,8 @@ const cards = list =>
           tn.includes("Events") ||
           tn.includes("Additional info") ||
           ((tn.includes("LAB") && tn.includes("Review")) ||
-            tn.includes("Career Services"))
+            tn.includes("Career Services") ||
+            name === "Resources")
         ) {
           completable = false;
         }

@@ -37,7 +37,9 @@ class CourseTree extends Component {
         <ul className="menu-list">
           {this.props.weeks.map((el, index) => (
             <li key={index}>
-              <a onClick={() => this.toggleWeek(index)}>Week {index + 1}</a>
+              <a onClick={() => this.toggleWeek(index)}>
+                {index === 0 ? "Resources" : `Week ${index}`}
+              </a>
               <Collapsible open={this.state.open[index]}>
                 <ul style={{ fontSize: "0.9em" }}>
                   {el.map(element => (
@@ -55,10 +57,6 @@ class CourseTree extends Component {
                       >
                         {element.day ? `Day ${element.day}` : element.name}
                         <br />
-                        {console.log(
-                          this.props.user,
-                          this.props.user.completedItems
-                        )}
                         {element.cards.map(
                           (card, cardi) =>
                             !card.tags
@@ -113,10 +111,6 @@ class CourseTree extends Component {
           <li>
             <Link to={"/modules"}>Modules</Link>
           </li>
-        </ul>
-        <p className="menu-label">Resources</p>
-        <ul className="menu-list">
-          <li>{/* HIIIII I NEED TO GET RESOURCES HERE */}</li>
         </ul>
       </aside>
     );

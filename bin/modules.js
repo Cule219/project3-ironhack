@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Module = require("../models/Module");
 
 mongoose
-  .connect("mongodb://127.0.0.1/final-project-ironhack", {
+  .connect("mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865", {
     useNewUrlParser: true
   })
   .then(x => {
