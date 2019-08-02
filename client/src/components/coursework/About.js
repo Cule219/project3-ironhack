@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { getBoard } from "../../services/courseworkService";
-import { Link } from "react-router-dom";
 import ModulesList from "./ModulesList";
 
 
@@ -22,9 +21,6 @@ class About extends Component {
       <div>
         {title && <h2>{title}</h2>}
         <ModulesList />
-        {/* <h1>
-          <Link to="/dashboard">Dashboard</Link>
-        </h1> */}
       </div>
     );
   }
