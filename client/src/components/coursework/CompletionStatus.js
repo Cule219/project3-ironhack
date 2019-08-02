@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { setCompletion } from "../../services/courseworkService";
 
 class CompletionStatus extends Component {
-  state = { completed: this.props.user.completedItems.includes(this.props.id) };
+  state = { completed: this.props.user&&this.props.user.completedItems.includes(this.props.id) };
 
   handleCompletion(id, status) {
     setCompletion(id, this.props.user._id, status).then(user => {
