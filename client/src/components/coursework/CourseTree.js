@@ -59,12 +59,7 @@ class CourseTree extends Component {
                         <br />
                         {element.cards.map(
                           (card, cardi) =>
-                            !card.tags
-                              .map(tag => tag.name)
-                              .includes("Events") &&
-                            !card.tags
-                              .map(tag => tag.name)
-                              .includes("Additional info") && (
+                            card.completable && (
                               <span
                                 className="small"
                                 key={cardi}

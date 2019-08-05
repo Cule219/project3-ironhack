@@ -84,7 +84,7 @@ export default class CommentBox extends Component {
     <thead className="thear-inverse">
     </thead>
     <tbody>
-      {this.state.comments.map(x => {
+      {this.state.comments && this.state.comments.map(x => {
         return (
         <tr key={x._id}>
           <Comment
