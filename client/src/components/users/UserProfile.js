@@ -17,7 +17,8 @@ export default class UserProfile extends Component {
   }
 
   componentDidMount() {
-    axios.get(`/api/users/${this.props.user._id}`).then(response => {
+    console.log(this.props)
+    axios.get(`/api/users/${this.props.match.params.id}`).then(response => {
       this.setState({
         id: response.data._id,
         username: response.data.username,
@@ -150,7 +151,7 @@ export default class UserProfile extends Component {
                 />
               </div>
             </form>
-            {!this.props.user.role === 'student'&&
+            {(this.props.user.role === 'TA' || this.props.user.role === 'teacher')&&
             <form>
               <div className="form-group">
                 <label htmlFor="role">Role:</label>

@@ -60,7 +60,7 @@ export default class Signup extends Component {
         <Form.Group>
           <Form.Label htmlFor="githubLink">githubLink:</Form.Label>
           <Form.Control
-            type="password"
+            type="text"
             name="githubLink"
             id="githubLink"
             value={this.state.githubLink}
