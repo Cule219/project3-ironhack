@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const express = require("express");
 const favicon = require("serve-favicon");
-const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
@@ -15,8 +14,7 @@ const flash = require("connect-flash");
 
 mongoose
   .connect(
-    "mongodb://heroku_chsmp865:f6rjf7odat3pdah70k8jpt0iab@ds153947.mlab.com:53947/heroku_chsmp865" ||
-      "mongodb://127.0.0.1/final-project-ironhack",
+    process.env.MONGODB_URI,
     { useNewUrlParser: true }
   )
   .then(x => {
@@ -51,23 +49,9 @@ app.use(
   })
 );
 
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "/client/build")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
-hbs.registerHelper("ifUndefined", (value, options) => {
-  if (arguments.length < 2)
-    throw new Error("Handlebars Helper ifUndefined needs 1 parameter");
-  if (typeof value !== undefined) {
-    return options.inverse(this);
-  } else {
-    return options.fn(this);
-  }
-});
-
-// default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
 
 // Enable authentication using session + passport
 app.use(
@@ -78,6 +62,7 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
+
 app.use(flash());
 require("./passport")(app);
 
