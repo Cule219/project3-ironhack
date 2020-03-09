@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Card = require("../models/Card");
 //these should probably be targeted at one point
-const List = require("../models/List");
-const Board = require("../models/Board");
-const Module = require("../models/Module");
+// const List = require("../models/List");
+// const Board = require("../models/Board");
+// const Module = require("../models/Module");
 
 const TrelloResponse = require("../models/TrelloResponse");
 
